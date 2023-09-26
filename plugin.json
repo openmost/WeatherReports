@@ -1,0 +1,29 @@
+{
+    "name": "WeatherReports",
+    "description": "Track weather informations from your visitors",
+    "version": "0.0.1",
+    "theme": false,
+    "require": {
+        "matomo": ">=5.0.0-rc3,<6.0.0-b1"
+    },
+    "authors": [
+        {
+            "name": "Matomo",
+            "email": "",
+            "homepage": ""
+        }
+    ],
+    "support": {
+        "email": "",
+        "issues": "",
+        "forum": "",
+        "irc": "",
+        "wiki": "",
+        "source": "",
+        "docs": "",
+        "rss": ""
+    },
+    "homepage": "",
+    "license": "GPL v3+",
+    "keywords": []
+}
