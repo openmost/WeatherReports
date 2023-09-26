@@ -31,7 +31,7 @@ class GetWeather extends Base
         $this->order = 1;
 
         // By default standard metrics are defined but you can customize them by defining an array of metric names
-        $this->metrics = array('nb_visits');
+        //$this->metrics = array('nb_visits', '');
 
         // Uncomment the next line if your report does not contain any processed metrics, otherwise default
         // processed metrics will be assigned
