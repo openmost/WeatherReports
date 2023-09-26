@@ -21,7 +21,7 @@ class WeatherReports extends \Piwik\Plugin
     public function getArchivingAPIMethodForPlugin(&$method, $plugin)
     {
         if ($plugin == 'WeatherReports') {
-            $method = 'WeatherReports.getExampleArchivedMetric';
+            $method = 'WeatherReports.getWeather';
         }
     }
 }
