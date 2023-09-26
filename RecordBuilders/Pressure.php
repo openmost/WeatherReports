@@ -17,7 +17,7 @@ use Piwik\DataTable;
 use Piwik\Metrics;
 use Piwik\Plugins\WeatherReports\Archiver;
 
-class Weather extends RecordBuilder
+class Pressure extends RecordBuilder
 {
     public function __construct()
     {
@@ -30,7 +30,7 @@ class Weather extends RecordBuilder
     public function getRecordMetadata(ArchiveProcessor $archiveProcessor): array
     {
         return [
-            Record::make(Record::TYPE_BLOB, Archiver::WEATHER_RECORD_NAME),
+            Record::make(Record::TYPE_BLOB, Archiver::PRESSURE_RECORD_NAME),
         ];
     }
 
@@ -38,7 +38,7 @@ class Weather extends RecordBuilder
     {
         $record = new DataTable();
 
-        $cursor = $archiveProcessor->getLogAggregator()->queryVisitsByDimension(['label' => Archiver::WEATHER_DIMENSION]);
+        $cursor = $archiveProcessor->getLogAggregator()->queryVisitsByDimension(['label' => Archiver::PRESSURE_DIMENSION]);
         while ($row = $cursor->fetch()) {
             $columns = [
                 Metrics::INDEX_NB_UNIQ_VISITORS => $row[Metrics::INDEX_NB_UNIQ_VISITORS],
@@ -54,6 +54,10 @@ class Weather extends RecordBuilder
             $record->sumRowWithLabel($row['label'], $columns);
         }
 
-        return [Archiver::WEATHER_RECORD_NAME => $record];
+        $record->filter(DataTable\Filter\ColumnCallbackDeleteRow::class, ['label', function ($value) {
+            return strlen($value) <= 0;
+        }]);
+
+        return [Archiver::PRESSURE_RECORD_NAME => $record];
     }
 }

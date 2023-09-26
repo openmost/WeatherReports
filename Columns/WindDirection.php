@@ -23,13 +23,13 @@ use Piwik\Tracker\Action;
  *
  * See {@link http://developer.piwik.org/api-reference/Piwik/Plugin\Dimension\VisitDimension} for more information.
  */
-class Weather extends VisitDimension
+class WindDirection extends VisitDimension
 {
     /**
      * This will be the name of the column in the log_visit table if a $columnType is specified.
      * @var string
      */
-    protected $columnName = 'weather';
+    protected $columnName = 'weather_wind_direction';
 
     /**
      * If a columnType is defined, we will create this a column in the MySQL table having this type. Please make sure
@@ -37,7 +37,7 @@ class Weather extends VisitDimension
      * perform an update which can sometimes take a long time so be careful when choosing the correct column type.
      * @var string
      */
-    protected $columnType = 'VARCHAR(255) NULL';
+    protected $columnType = 'INT(3) NULL';
 
     /**
      * The type of the dimension is automatically detected by the columnType. If the type of the dimension is not
@@ -51,16 +51,16 @@ class Weather extends VisitDimension
      * The name of the dimension which will be visible for instance in the UI of a related report and in the mobile app.
      * @return string
      */
-    protected $nameSingular = 'WeatherReports_Weather';
+    protected $nameSingular = 'WeatherReports_WindDirection';
 
     /**
      * By defining a segment a user will be able to filter their visitors by this column. For instance
      * show all reports only considering users having more than 10 achievement points. If you do not want to define a
      * segment for this dimension, simply leave the name empty.
      */
-    protected $segmentName = 'weather';
+    protected $segmentName = 'weatherWindDirection';
 
-    protected $acceptValues = "rainy, cloudy, sunny";
+    protected $acceptValues = 'Here you should explain which values are accepted/useful for segments: Any number, for instance 1, 2, 3 , 99';
 
     /**
      * The onNewVisit method is triggered when a new visitor is detected. This means here you can define an initial
@@ -75,7 +75,7 @@ class Weather extends VisitDimension
      */
     public function onNewVisit(Request $request, Visitor $visitor, $action)
     {
-        $paramValue = Common::getRequestVar('weather', '', 'string', $request->getParams());
+        $paramValue = Common::getRequestVar('weather_wind_direction', '', 'string', $request->getParams());
         if (!empty($paramValue)) {
             return $paramValue;
         }
@@ -104,7 +104,7 @@ class Weather extends VisitDimension
      */
     public function onExistingVisit(Request $request, Visitor $visitor, $action)
     {
-        $paramValue = Common::getRequestVar('weather', '', 'string', $request->getParams());
+        $paramValue = Common::getRequestVar('weather_wind_direction', '', 'string', $request->getParams());
         if (!empty($paramValue)) {
             return $paramValue;
         }
@@ -115,7 +115,6 @@ class Weather extends VisitDimension
 
         return $visitor->getVisitorColumn($this->columnName) + 1;
     }
-
 
     /**
      * This event is executed shortly after "onNewVisit" or "onExistingVisit" in case the visitor converted a goal.
@@ -128,6 +127,7 @@ class Weather extends VisitDimension
      * @param Action|null $action
      *
      * @return mixed|false
+     *
     public function onConvertedVisit(Request $request, Visitor $visitor, $action)
     {
         return $visitor->getVisitorColumn($this->columnName) + 5;  // give this visitor 5 extra achievement points

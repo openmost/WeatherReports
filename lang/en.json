@@ -1,5 +1,15 @@
 {
-    "WeatherReports": {
-        "Weather": "Weather"
-    }
+  "WeatherReports": {
+    "Weather": "Weather",
+    "Clouds": "Clouds",
+    "DewPoint": "Dew point",
+    "FeltTemperature": "Felt temperature",
+    "Humidity": "Humidity",
+    "Pressure": "Pressure",
+    "Temperature": "Temperature",
+    "Uv": "UV",
+    "Visibility": "Visibility",
+    "WindSpeed": "Wind speed",
+    "WindDirection": "Wind direction"
+  }
 }
