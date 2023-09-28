@@ -88,18 +88,19 @@ class GetCloud extends Base
      * make it work . Usually you should NOT have to overwrite this render method .
      *
      * @return string
-     * public function render()
-     * {
-     *
-     * $view = new View('@WeatherReports/getWeatherduringvisits');
-     *
-     * $view->myData = array();
-     *
-     *
-     * return $view->render();
-     *
-     * }
-     */
+     * /
+      public function render()
+      {
+
+      $view = new View('@WeatherReports/getCloud');
+
+      $view->myData = array();
+
+
+      return $view->render();
+
+      }
+     /
 
     /**
      * By default your report is available to all users having at least view access. If you do not want this, you can

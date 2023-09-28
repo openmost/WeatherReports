@@ -34,6 +34,7 @@ class API extends \Piwik\Plugin\API
     {
         return $this->getDataTable('WeatherReports_Condition', $idSite, $period, $date, $segment);
     }
+
     public function getCloud($idSite, $period, $date, $segment = false)
     {
         return $this->getDataTable('WeatherReports_Cloud', $idSite, $period, $date, $segment);
@@ -41,12 +42,20 @@ class API extends \Piwik\Plugin\API
 
     public function getTemperature($idSite, $period, $date, $segment = false)
     {
-        return $this->getDataTable('WeatherReports_Temperature', $idSite, $period, $date, $segment);
+        $table = $this->getDataTable('WeatherReports_Temperature', $idSite, $period, $date, $segment);
+        $table->filter('GroupBy', array('label', function ($label) {
+            return round($label);
+        }));
+        return $table;
     }
 
     public function getFeltTemperature($idSite, $period, $date, $segment = false)
     {
-        return $this->getDataTable('WeatherReports_FeltTemperature', $idSite, $period, $date, $segment);
+        $table = $this->getDataTable('WeatherReports_FeltTemperature', $idSite, $period, $date, $segment);
+        $table->filter('GroupBy', array('label', function ($label) {
+            return round($label);
+        }));
+        return $table;
     }
 
     public function getPressure($idSite, $period, $date, $segment = false)
@@ -61,22 +70,38 @@ class API extends \Piwik\Plugin\API
 
     public function getPrecipitation($idSite, $period, $date, $segment = false)
     {
-        return $this->getDataTable('WeatherReports_Precipitation', $idSite, $period, $date, $segment);
+        $table = $this->getDataTable('WeatherReports_Precipitation', $idSite, $period, $date, $segment);
+        $table->filter('GroupBy', array('label', function ($label) {
+            return round($label);
+        }));
+        return $table;
     }
 
     public function getUv($idSite, $period, $date, $segment = false)
     {
-        return $this->getDataTable('WeatherReports_Uv', $idSite, $period, $date, $segment);
+        $table = $this->getDataTable('WeatherReports_Uv', $idSite, $period, $date, $segment);
+        $table->filter('GroupBy', array('label', function ($label) {
+            return round($label);
+        }));
+        return $table;
     }
 
     public function getVisibility($idSite, $period, $date, $segment = false)
     {
-        return $this->getDataTable('WeatherReports_Visibility', $idSite, $period, $date, $segment);
+        $table = $this->getDataTable('WeatherReports_Visibility', $idSite, $period, $date, $segment);
+        $table->filter('GroupBy', array('label', function ($label) {
+            return round($label);
+        }));
+        return $table;
     }
 
     public function getWindSpeed($idSite, $period, $date, $segment = false)
     {
-        return $this->getDataTable('WeatherReports_WindSpeed', $idSite, $period, $date, $segment);
+        $table = $this->getDataTable('WeatherReports_WindSpeed', $idSite, $period, $date, $segment);
+        $table->filter('GroupBy', array('label', function ($label) {
+            return round($label);
+        }));
+        return $table;
     }
 
     public function getWindDirection($idSite, $period, $date, $segment = false)

@@ -60,7 +60,7 @@ class Visibility extends VisitDimension
      */
     protected $segmentName = 'weatherVisibility';
 
-    protected $acceptValues = 'Here you should explain which values are accepted/useful for segments: Any number, for instance 1, 2, 3 , 99';
+    protected $acceptValues = 'The horizontal visibility distance';
 
     /**
      * The onNewVisit method is triggered when a new visitor is detected. This means here you can define an initial

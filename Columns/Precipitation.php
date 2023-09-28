@@ -61,7 +61,7 @@ class Precipitation extends VisitDimension
      */
     protected $segmentName = 'weatherPrecipitation';
 
-    protected $acceptValues = 'Here you should explain which values are accepted/useful for segments: Any number, for instance 1, 2, 3 , 99';
+    protected $acceptValues = 'Value in decimal';
 
     /**
      * The onNewVisit method is triggered when a new visitor is detected. This means here you can define an initial

@@ -61,7 +61,7 @@ class Cloud extends VisitDimension
      */
     protected $segmentName = 'weatherCloud';
 
-    protected $acceptValues = "0 to 8";
+    protected $acceptValues = "Number between 0 and 8";
 
     /**
      * The onNewVisit method is triggered when a new visitor is detected. This means here you can define an initial

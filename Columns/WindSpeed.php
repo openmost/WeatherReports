@@ -61,7 +61,7 @@ class WindSpeed extends VisitDimension
      */
     protected $segmentName = 'weatherWindSpeed';
 
-    protected $acceptValues = 'Here you should explain which values are accepted/useful for segments: Any number, for instance 1, 2, 3 , 99';
+    protected $acceptValues = 'Wind speed value in decimals';
 
     /**
      * The onNewVisit method is triggered when a new visitor is detected. This means here you can define an initial

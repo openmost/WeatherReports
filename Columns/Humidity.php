@@ -60,7 +60,7 @@ class Humidity extends VisitDimension
      */
     protected $segmentName = 'weatherHumidity';
 
-    protected $acceptValues = 'Here you should explain which values are accepted/useful for segments: Any number, for instance 1, 2, 3 , 99';
+    protected $acceptValues = 'Integer between 0 and 100';
 
     /**
      * The onNewVisit method is triggered when a new visitor is detected. This means here you can define an initial

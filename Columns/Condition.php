@@ -61,7 +61,7 @@ class Condition extends VisitDimension
      */
     protected $segmentName = 'weatherCondition';
 
-    protected $acceptValues = "rainy, conditiony, sunny";
+    protected $acceptValues = "A text value for the current weather";
 
     /**
      * The onNewVisit method is triggered when a new visitor is detected. This means here you can define an initial

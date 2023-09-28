@@ -60,7 +60,7 @@ class Uv extends VisitDimension
      */
     protected $segmentName = 'weatherUv';
 
-    protected $acceptValues = 'Here you should explain which values are accepted/useful for segments: Any number, for instance 1, 2, 3 , 99';
+    protected $acceptValues = 'Decimal between 0 and 9';
 
     /**
      * The onNewVisit method is triggered when a new visitor is detected. This means here you can define an initial
