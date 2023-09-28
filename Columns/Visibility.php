@@ -75,7 +75,7 @@ class Visibility extends VisitDimension
      */
     public function onNewVisit(Request $request, Visitor $visitor, $action)
     {
-        $paramValue = Common::getRequestVar('weather_visibility', '', 'string', $request->getParams());
+        $paramValue = Common::getRequestVar('weather_visibility', '', 'int', $request->getParams());
         if (!empty($paramValue)) {
             return $paramValue;
         }
@@ -104,7 +104,7 @@ class Visibility extends VisitDimension
      */
     public function onExistingVisit(Request $request, Visitor $visitor, $action)
     {
-        $paramValue = Common::getRequestVar('weather_visibility', '', 'string', $request->getParams());
+        $paramValue = Common::getRequestVar('weather_visibility', '', 'int', $request->getParams());
         if (!empty($paramValue)) {
             return $paramValue;
         }

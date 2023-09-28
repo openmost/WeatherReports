@@ -76,7 +76,7 @@ class WindSpeed extends VisitDimension
      */
     public function onNewVisit(Request $request, Visitor $visitor, $action)
     {
-        $paramValue = Common::getRequestVar('weather_wind_speed', '', 'string', $request->getParams());
+        $paramValue = Common::getRequestVar('weather_wind_speed', '', 'int', $request->getParams());
         if (!empty($paramValue)) {
             return $paramValue;
         }
@@ -105,7 +105,7 @@ class WindSpeed extends VisitDimension
      */
     public function onExistingVisit(Request $request, Visitor $visitor, $action)
     {
-        $paramValue = Common::getRequestVar('weather_wind_speed', '', 'string', $request->getParams());
+        $paramValue = Common::getRequestVar('weather_wind_speed', '', 'int', $request->getParams());
         if (!empty($paramValue)) {
             return $paramValue;
         }

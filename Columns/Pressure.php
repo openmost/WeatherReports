@@ -75,7 +75,7 @@ class Pressure extends VisitDimension
      */
     public function onNewVisit(Request $request, Visitor $visitor, $action)
     {
-        $paramValue = Common::getRequestVar('weather_pressure', '', 'string', $request->getParams());
+        $paramValue = Common::getRequestVar('weather_pressure', '', 'int', $request->getParams());
         if (!empty($paramValue)) {
             return $paramValue;
         }
@@ -104,7 +104,7 @@ class Pressure extends VisitDimension
      */
     public function onExistingVisit(Request $request, Visitor $visitor, $action)
     {
-        $paramValue = Common::getRequestVar('weather_pressure', '', 'string', $request->getParams());
+        $paramValue = Common::getRequestVar('weather_pressure', '', 'int', $request->getParams());
         if (!empty($paramValue)) {
             return $paramValue;
         }

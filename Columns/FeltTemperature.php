@@ -75,7 +75,7 @@ class FeltTemperature extends VisitDimension
      */
     public function onNewVisit(Request $request, Visitor $visitor, $action)
     {
-        $paramValue = Common::getRequestVar('weather_felt_temperature', '', 'string', $request->getParams());
+        $paramValue = Common::getRequestVar('weather_felt_temperature', '', 'int', $request->getParams());
         if (!empty($paramValue)) {
             return $paramValue;
         }
@@ -84,7 +84,7 @@ class FeltTemperature extends VisitDimension
             return 0;
         }
 
-        return false;
+        return null;
 
         // you could also easily save any custom tracking url parameters
         // return Common::getRequestVar('myCustomTrackingParam', 'default', 'string', $request->getParams());
@@ -104,7 +104,7 @@ class FeltTemperature extends VisitDimension
      */
     public function onExistingVisit(Request $request, Visitor $visitor, $action)
     {
-        $paramValue = Common::getRequestVar('weather_felt_temperature', '', 'string', $request->getParams());
+        $paramValue = Common::getRequestVar('weather_felt_temperature', '', 'int', $request->getParams());
         if (!empty($paramValue)) {
             return $paramValue;
         }
@@ -113,7 +113,7 @@ class FeltTemperature extends VisitDimension
             return false; // Do not change an already persisted value
         }
 
-        return null;
+        return false;
     }
 
     /**

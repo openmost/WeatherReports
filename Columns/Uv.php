@@ -75,7 +75,7 @@ class Uv extends VisitDimension
      */
     public function onNewVisit(Request $request, Visitor $visitor, $action)
     {
-        $paramValue = Common::getRequestVar('weather_uv', '', 'string', $request->getParams());
+        $paramValue = Common::getRequestVar('weather_uv', '', 'int', $request->getParams());
         if (!empty($paramValue)) {
             return $paramValue;
         }
@@ -104,7 +104,7 @@ class Uv extends VisitDimension
      */
     public function onExistingVisit(Request $request, Visitor $visitor, $action)
     {
-        $paramValue = Common::getRequestVar('weather_uv', '', 'string', $request->getParams());
+        $paramValue = Common::getRequestVar('weather_uv', '', 'int', $request->getParams());
         if (!empty($paramValue)) {
             return $paramValue;
         }

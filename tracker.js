@@ -32,7 +32,7 @@
           }
 
           if (dewPoint) {
-            request += "&weather_dewPoint=" + dewPoint;
+            request += "&weather_dew_point=" + dewPoint;
           }
 
           if (humidity) {

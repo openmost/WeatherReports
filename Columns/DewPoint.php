@@ -6,6 +6,7 @@
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  *
  */
+
 namespace Piwik\Plugins\WeatherReports\Columns;
 
 use Piwik\Common;
@@ -75,7 +76,7 @@ class DewPoint extends VisitDimension
      */
     public function onNewVisit(Request $request, Visitor $visitor, $action)
     {
-        $paramValue = Common::getRequestVar('weather_dew_point', '', 'string', $request->getParams());
+        $paramValue = Common::getRequestVar('weather_dew_point', '', 'int', $request->getParams());
         if (!empty($paramValue)) {
             return $paramValue;
         }
@@ -84,7 +85,7 @@ class DewPoint extends VisitDimension
             return 0;
         }
 
-        return false;
+        return null;
 
         // you could also easily save any custom tracking url parameters
         // return Common::getRequestVar('myCustomTrackingParam', 'default', 'string', $request->getParams());
@@ -104,7 +105,7 @@ class DewPoint extends VisitDimension
      */
     public function onExistingVisit(Request $request, Visitor $visitor, $action)
     {
-        $paramValue = Common::getRequestVar('weather_dew_point', '', 'string', $request->getParams());
+        $paramValue = Common::getRequestVar('weather_dew_point', '', 'int', $request->getParams());
         if (!empty($paramValue)) {
             return $paramValue;
         }
@@ -113,7 +114,7 @@ class DewPoint extends VisitDimension
             return false; // Do not change an already persisted value
         }
 
-        return null;
+        return false;
     }
 
     /**
@@ -128,10 +129,10 @@ class DewPoint extends VisitDimension
      *
      * @return mixed|false
      *
-    public function onConvertedVisit(Request $request, Visitor $visitor, $action)
-    {
-        return $visitor->getVisitorColumn($this->columnName) + 5;  // give this visitor 5 extra achievement points
-    }
+     * public function onConvertedVisit(Request $request, Visitor $visitor, $action)
+     * {
+     * return $visitor->getVisitorColumn($this->columnName) + 5;  // give this visitor 5 extra achievement points
+     * }
      */
 
     /**
@@ -146,10 +147,10 @@ class DewPoint extends VisitDimension
      * @param Action|null $action
      *
      * @return mixed
-    public function onAnyGoalConversion(Request $request, Visitor $visitor, $action)
-    {
-        return $visitor->getVisitorColumn($this->columnName);
-    }
+     * public function onAnyGoalConversion(Request $request, Visitor $visitor, $action)
+     * {
+     * return $visitor->getVisitorColumn($this->columnName);
+     * }
      */
 
     /**
@@ -158,9 +159,9 @@ class DewPoint extends VisitDimension
      * If you access any value of any other column within your events, you should require them here. Otherwise those
      * values may not be available.
      * @return array
-    public function getRequiredVisitFields()
-    {
-        return array('idsite', 'server_time');
-    }
-    */
+     * public function getRequiredVisitFields()
+     * {
+     * return array('idsite', 'server_time');
+     * }
+     */
 }
