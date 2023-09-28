@@ -85,7 +85,7 @@ class Clouds extends VisitDimension
             return 0;
         }
 
-        return 1;
+        return null;
 
         // you could also easily save any custom tracking url parameters
         // return Common::getRequestVar('myCustomTrackingParam', 'default', 'string', $request->getParams());
@@ -114,7 +114,7 @@ class Clouds extends VisitDimension
             return false; // Do not change an already persisted value
         }
 
-        return $visitor->getVisitorColumn($this->columnName) + 1;
+        return false;
     }
 
 

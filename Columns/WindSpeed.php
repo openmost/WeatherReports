@@ -6,6 +6,7 @@
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  *
  */
+
 namespace Piwik\Plugins\WeatherReports\Columns;
 
 use Piwik\Common;
@@ -84,7 +85,7 @@ class WindSpeed extends VisitDimension
             return 0;
         }
 
-        return 1;
+        return null;
 
         // you could also easily save any custom tracking url parameters
         // return Common::getRequestVar('myCustomTrackingParam', 'default', 'string', $request->getParams());
@@ -113,7 +114,7 @@ class WindSpeed extends VisitDimension
             return false; // Do not change an already persisted value
         }
 
-        return $visitor->getVisitorColumn($this->columnName) + 1;
+        return false;
     }
 
     /**
@@ -128,10 +129,10 @@ class WindSpeed extends VisitDimension
      *
      * @return mixed|false
      *
-    public function onConvertedVisit(Request $request, Visitor $visitor, $action)
-    {
-        return $visitor->getVisitorColumn($this->columnName) + 5;  // give this visitor 5 extra achievement points
-    }
+     * public function onConvertedVisit(Request $request, Visitor $visitor, $action)
+     * {
+     * return $visitor->getVisitorColumn($this->columnName) + 5;  // give this visitor 5 extra achievement points
+     * }
      */
 
     /**
@@ -146,10 +147,10 @@ class WindSpeed extends VisitDimension
      * @param Action|null $action
      *
      * @return mixed
-    public function onAnyGoalConversion(Request $request, Visitor $visitor, $action)
-    {
-        return $visitor->getVisitorColumn($this->columnName);
-    }
+     * public function onAnyGoalConversion(Request $request, Visitor $visitor, $action)
+     * {
+     * return $visitor->getVisitorColumn($this->columnName);
+     * }
      */
 
     /**
@@ -158,9 +159,9 @@ class WindSpeed extends VisitDimension
      * If you access any value of any other column within your events, you should require them here. Otherwise those
      * values may not be available.
      * @return array
-    public function getRequiredVisitFields()
-    {
-        return array('idsite', 'server_time');
-    }
-    */
+     * public function getRequiredVisitFields()
+     * {
+     * return array('idsite', 'server_time');
+     * }
+     */
 }
