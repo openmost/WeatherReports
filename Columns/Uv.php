@@ -37,7 +37,7 @@ class Uv extends VisitDimension
      * perform an update which can sometimes take a long time so be careful when choosing the correct column type.
      * @var string
      */
-    protected $columnType = 'FLOAT NULL';
+    protected $columnType = 'INT(1) NULL';
 
     /**
      * The type of the dimension is automatically detected by the columnType. If the type of the dimension is not
