@@ -67,7 +67,7 @@ class GetClouds extends Base
         //$view->requestConfig->filter_sort_column = 'nb_visits';
         //$view->requestConfig->filter_limit = 10;
 
-        $view->config->columns_to_display = array_merge(array('label'), $this->metrics);
+        //$view->config->columns_to_display = array_merge(array('label'), $this->metrics);
     }
 
     /**

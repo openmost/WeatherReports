@@ -10,7 +10,7 @@ namespace Piwik\Plugins\WeatherReports\Reports;
 
 use Piwik\Piwik;
 use Piwik\Plugin\ViewDataTable;
-use Piwik\Plugins\WeatherReports\Columns\Clouds;
+use Piwik\Plugins\WeatherReports\Columns\Uv;
 
 /**
  * This class defines a new report.
@@ -24,7 +24,7 @@ class GetUv extends Base
         parent::init();
 
         $this->name = Piwik::translate('WeatherReports_Uv');
-        $this->dimension = new Clouds();
+        $this->dimension = new Uv();
         $this->documentation = Piwik::translate('The report description');
 
         // This defines in which order your report appears in the mobile app, in the menu and in the list of widgets
@@ -67,7 +67,7 @@ class GetUv extends Base
         //$view->requestConfig->filter_sort_column = 'nb_visits';
         //$view->requestConfig->filter_limit = 10;
 
-        $view->config->columns_to_display = array_merge(array('label'), $this->metrics);
+        //$view->config->columns_to_display = array_merge(array('label'), $this->metrics);
     }
 
     /**

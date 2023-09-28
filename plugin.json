@@ -1,6 +1,6 @@
 {
     "name": "WeatherReports",
-    "description": "Track weather informations from your visitors",
+    "description": "Track weather information's from your visitors",
     "version": "0.0.1",
     "theme": false,
     "require": {
