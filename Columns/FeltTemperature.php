@@ -75,7 +75,7 @@ class FeltTemperature extends VisitDimension
      */
     public function onNewVisit(Request $request, Visitor $visitor, $action)
     {
-        $paramValue = Common::getRequestVar('weather_felt_temperature', '', 'int', $request->getParams());
+        $paramValue = Common::getRequestVar('weather_felt_temperature', '', 'string', $request->getParams());
         if (!empty($paramValue)) {
             return $paramValue;
         }
@@ -104,7 +104,7 @@ class FeltTemperature extends VisitDimension
      */
     public function onExistingVisit(Request $request, Visitor $visitor, $action)
     {
-        $paramValue = Common::getRequestVar('weather_felt_temperature', '', 'int', $request->getParams());
+        $paramValue = Common::getRequestVar('weather_felt_temperature', '', 'string', $request->getParams());
         if (!empty($paramValue)) {
             return $paramValue;
         }

@@ -75,7 +75,7 @@ class Temperature extends VisitDimension
      */
     public function onNewVisit(Request $request, Visitor $visitor, $action)
     {
-        $paramValue = Common::getRequestVar('weather_temperature', '', 'int', $request->getParams());
+        $paramValue = Common::getRequestVar('weather_temperature', '', 'string', $request->getParams());
         if (!empty($paramValue)) {
             return $paramValue;
         }
@@ -104,7 +104,7 @@ class Temperature extends VisitDimension
      */
     public function onExistingVisit(Request $request, Visitor $visitor, $action)
     {
-        $paramValue = Common::getRequestVar('weather_temperature', '', 'int', $request->getParams());
+        $paramValue = Common::getRequestVar('weather_temperature', '', 'string', $request->getParams());
         if (!empty($paramValue)) {
             return $paramValue;
         }

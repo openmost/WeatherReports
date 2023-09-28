@@ -76,7 +76,7 @@ class DewPoint extends VisitDimension
      */
     public function onNewVisit(Request $request, Visitor $visitor, $action)
     {
-        $paramValue = Common::getRequestVar('weather_dew_point', '', 'int', $request->getParams());
+        $paramValue = Common::getRequestVar('weather_dew_point', '', 'string', $request->getParams());
         if (!empty($paramValue)) {
             return $paramValue;
         }
@@ -105,7 +105,7 @@ class DewPoint extends VisitDimension
      */
     public function onExistingVisit(Request $request, Visitor $visitor, $action)
     {
-        $paramValue = Common::getRequestVar('weather_dew_point', '', 'int', $request->getParams());
+        $paramValue = Common::getRequestVar('weather_dew_point', '', 'string', $request->getParams());
         if (!empty($paramValue)) {
             return $paramValue;
         }
