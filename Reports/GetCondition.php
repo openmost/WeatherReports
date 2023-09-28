@@ -10,25 +10,25 @@ namespace Piwik\Plugins\WeatherReports\Reports;
 
 use Piwik\Piwik;
 use Piwik\Plugin\ViewDataTable;
-use Piwik\Plugins\WeatherReports\Columns\Visibility;
+use Piwik\Plugins\WeatherReports\Columns\Condition;
 
 /**
  * This class defines a new report.
  *
  * See {@link http://developer.piwik.org/api-reference/Piwik/Plugin/Report} for more information.
  */
-class GetVisibility extends Base
+class GetCondition extends Base
 {
     protected function init()
     {
         parent::init();
 
-        $this->name = Piwik::translate('WeatherReports_Visibility');
-        $this->dimension = new Visibility();
+        $this->name = Piwik::translate('WeatherReports_Condition');
+        $this->dimension = new Condition();
         $this->documentation = Piwik::translate('The report description');
 
         // This defines in which order your report appears in the mobile app, in the menu and in the list of widgets
-        $this->order = 9;
+        $this->order = 1;
 
         // By default standard metrics are defined but you can customize them by defining an array of metric names
         //$this->metrics = array('nb_visits', '');

@@ -10,25 +10,25 @@ namespace Piwik\Plugins\WeatherReports\Reports;
 
 use Piwik\Piwik;
 use Piwik\Plugin\ViewDataTable;
-use Piwik\Plugins\WeatherReports\Columns\Clouds;
+use Piwik\Plugins\WeatherReports\Columns\Precipitation;
 
 /**
  * This class defines a new report.
  *
  * See {@link http://developer.piwik.org/api-reference/Piwik/Plugin/Report} for more information.
  */
-class GetClouds extends Base
+class GetPrecipitation extends Base
 {
     protected function init()
     {
         parent::init();
 
-        $this->name = Piwik::translate('WeatherReports_Clouds');
-        $this->dimension = new Clouds();
+        $this->name = Piwik::translate('WeatherReports_Precipitation');
+        $this->dimension = new Precipitation();
         $this->documentation = Piwik::translate('The report description');
 
         // This defines in which order your report appears in the mobile app, in the menu and in the list of widgets
-        $this->order = 1;
+        $this->order = 6;
 
         // By default standard metrics are defined but you can customize them by defining an array of metric names
         //$this->metrics = array('nb_visits', '');

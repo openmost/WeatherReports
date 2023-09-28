@@ -24,13 +24,13 @@ use Piwik\Tracker\Action;
  *
  * See {@link http://developer.piwik.org/api-reference/Piwik/Plugin\Dimension\VisitDimension} for more information.
  */
-class Clouds extends VisitDimension
+class Condition extends VisitDimension
 {
     /**
      * This will be the name of the column in the log_visit table if a $columnType is specified.
      * @var string
      */
-    protected $columnName = 'weather_clouds';
+    protected $columnName = 'weather_condition';
 
     /**
      * If a columnType is defined, we will create this a column in the MySQL table having this type. Please make sure
@@ -52,16 +52,16 @@ class Clouds extends VisitDimension
      * The name of the dimension which will be visible for instance in the UI of a related report and in the mobile app.
      * @return string
      */
-    protected $nameSingular = 'WeatherReports_Clouds';
+    protected $nameSingular = 'WeatherReports_Condition';
 
     /**
      * By defining a segment a user will be able to filter their visitors by this column. For instance
      * show all reports only considering users having more than 10 achievement points. If you do not want to define a
      * segment for this dimension, simply leave the name empty.
      */
-    protected $segmentName = 'weatherClouds';
+    protected $segmentName = 'weatherCondition';
 
-    protected $acceptValues = "rainy, cloudy, sunny";
+    protected $acceptValues = "rainy, conditiony, sunny";
 
     /**
      * The onNewVisit method is triggered when a new visitor is detected. This means here you can define an initial
@@ -76,7 +76,7 @@ class Clouds extends VisitDimension
      */
     public function onNewVisit(Request $request, Visitor $visitor, $action)
     {
-        $paramValue = Common::getRequestVar('weather_clouds', '', 'string', $request->getParams());
+        $paramValue = Common::getRequestVar('weather_condition', '', 'string', $request->getParams());
         if (!empty($paramValue)) {
             return $paramValue;
         }
@@ -105,7 +105,7 @@ class Clouds extends VisitDimension
      */
     public function onExistingVisit(Request $request, Visitor $visitor, $action)
     {
-        $paramValue = Common::getRequestVar('weather_clouds', '', 'string', $request->getParams());
+        $paramValue = Common::getRequestVar('weather_condition', '', 'string', $request->getParams());
         if (!empty($paramValue)) {
             return $paramValue;
         }

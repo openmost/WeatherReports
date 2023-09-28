@@ -5,10 +5,11 @@
     Matomo.on('TrackerSetup', function (tracker) {
       tracker.WeatherReports = {
         setWeather: function (
-          clouds,
+          condition,
+          cloud,
           temperature,
           feltTemperature,
-          dewPoint,
+          precipitation,
           humidity,
           pressure,
           uv,
@@ -19,8 +20,12 @@
 
           var request = "";
 
-          if (clouds) {
-            request += "&weather_clouds=" + clouds;
+          if (condition) {
+            request += "&weather_condition=" + condition;
+          }
+
+          if (cloud) {
+            request += "&weather_cloud=" + cloud;
           }
 
           if (temperature) {
@@ -31,8 +36,8 @@
             request += "&weather_felt_temperature=" + feltTemperature;
           }
 
-          if (dewPoint) {
-            request += "&weather_dew_point=" + dewPoint;
+          if (precipitation) {
+            request += "&weather_precipitation=" + precipitation;
           }
 
           if (humidity) {

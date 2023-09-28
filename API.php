@@ -29,9 +29,14 @@ class API extends \Piwik\Plugin\API
      * @param bool|string $segment
      * @return DataTable
      */
-    public function getClouds($idSite, $period, $date, $segment = false)
+
+    public function getCondition($idSite, $period, $date, $segment = false)
     {
-        return $this->getDataTable('WeatherReports_Clouds', $idSite, $period, $date, $segment);
+        return $this->getDataTable('WeatherReports_Condition', $idSite, $period, $date, $segment);
+    }
+    public function getCloud($idSite, $period, $date, $segment = false)
+    {
+        return $this->getDataTable('WeatherReports_Cloud', $idSite, $period, $date, $segment);
     }
 
     public function getTemperature($idSite, $period, $date, $segment = false)
@@ -54,9 +59,9 @@ class API extends \Piwik\Plugin\API
         return $this->getDataTable('WeatherReports_Humidity', $idSite, $period, $date, $segment);
     }
 
-    public function getDewPoint($idSite, $period, $date, $segment = false)
+    public function getPrecipitation($idSite, $period, $date, $segment = false)
     {
-        return $this->getDataTable('WeatherReports_DewPoint', $idSite, $period, $date, $segment);
+        return $this->getDataTable('WeatherReports_Precipitation', $idSite, $period, $date, $segment);
     }
 
     public function getUv($idSite, $period, $date, $segment = false)

@@ -17,7 +17,7 @@ use Piwik\DataTable;
 use Piwik\Metrics;
 use Piwik\Plugins\WeatherReports\Archiver;
 
-class DewPoint extends RecordBuilder
+class Condition extends RecordBuilder
 {
     public function __construct()
     {
@@ -30,7 +30,7 @@ class DewPoint extends RecordBuilder
     public function getRecordMetadata(ArchiveProcessor $archiveProcessor): array
     {
         return [
-            Record::make(Record::TYPE_BLOB, Archiver::DEW_POINT_RECORD_NAME),
+            Record::make(Record::TYPE_BLOB, Archiver::CONDITION_RECORD_NAME),
         ];
     }
 
@@ -38,7 +38,7 @@ class DewPoint extends RecordBuilder
     {
         $record = new DataTable();
 
-        $cursor = $archiveProcessor->getLogAggregator()->queryVisitsByDimension(['label' => Archiver::DEW_POINT_DIMENSION]);
+        $cursor = $archiveProcessor->getLogAggregator()->queryVisitsByDimension(['label' => Archiver::CONDITION_DIMENSION]);
         while ($row = $cursor->fetch()) {
             $columns = [
                 Metrics::INDEX_NB_UNIQ_VISITORS => $row[Metrics::INDEX_NB_UNIQ_VISITORS],
@@ -58,6 +58,6 @@ class DewPoint extends RecordBuilder
             $record->sumRowWithLabel($row['label'], $columns);
         }
 
-        return [Archiver::DEW_POINT_RECORD_NAME => $record];
+        return [Archiver::CONDITION_RECORD_NAME => $record];
     }
 }

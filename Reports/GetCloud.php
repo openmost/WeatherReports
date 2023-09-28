@@ -10,25 +10,25 @@ namespace Piwik\Plugins\WeatherReports\Reports;
 
 use Piwik\Piwik;
 use Piwik\Plugin\ViewDataTable;
-use Piwik\Plugins\WeatherReports\Columns\DewPoint;
+use Piwik\Plugins\WeatherReports\Columns\Cloud;
 
 /**
  * This class defines a new report.
  *
  * See {@link http://developer.piwik.org/api-reference/Piwik/Plugin/Report} for more information.
  */
-class GetDewPoint extends Base
+class GetCloud extends Base
 {
     protected function init()
     {
         parent::init();
 
-        $this->name = Piwik::translate('WeatherReports_DewPoint');
-        $this->dimension = new DewPoint();
+        $this->name = Piwik::translate('WeatherReports_Cloud');
+        $this->dimension = new Cloud();
         $this->documentation = Piwik::translate('The report description');
 
         // This defines in which order your report appears in the mobile app, in the menu and in the list of widgets
-        $this->order = 5;
+        $this->order = 2;
 
         // By default standard metrics are defined but you can customize them by defining an array of metric names
         //$this->metrics = array('nb_visits', '');

@@ -28,7 +28,7 @@ class GetFeltTemperature extends Base
         $this->documentation = Piwik::translate('The report description');
 
         // This defines in which order your report appears in the mobile app, in the menu and in the list of widgets
-        $this->order = 4;
+        $this->order = 5;
 
         // By default standard metrics are defined but you can customize them by defining an array of metric names
         //$this->metrics = array('nb_visits', '');

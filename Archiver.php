@@ -17,8 +17,9 @@ use Piwik\DataTable;
  */
 class Archiver extends \Piwik\Plugin\Archiver
 {
-    const CLOUDS_RECORD_NAME = 'WeatherReports_Clouds';
-    const DEW_POINT_RECORD_NAME = 'WeatherReports_DewPoint';
+    const CONDITION_RECORD_NAME = 'WeatherReports_Condition';
+    const CLOUD_RECORD_NAME = 'WeatherReports_Cloud';
+    const PRECIPITATION_RECORD_NAME = 'WeatherReports_Precipitation';
     const FELT_TEMPERATURE_RECORD_NAME = 'WeatherReports_FeltTemperature';
     const HUMIDITY_RECORD_NAME = 'WeatherReports_Humidity';
     const PRESSURE_RECORD_NAME = 'WeatherReports_Pressure';
@@ -29,8 +30,9 @@ class Archiver extends \Piwik\Plugin\Archiver
     const WIND_DIRECTION_RECORD_NAME = 'WeatherReports_WindDirection';
 
 
-    const CLOUDS_DIMENSION = "log_visit.weather_clouds";
-    const DEW_POINT_DIMENSION = "log_visit.weather_dew_point";
+    const CONDITION_DIMENSION = "log_visit.weather_condition";
+    const CLOUD_DIMENSION = "log_visit.weather_cloud";
+    const PRECIPITATION_DIMENSION = "log_visit.weather_precipitation";
     const FELT_TEMPERATURE_DIMENSION = "log_visit.weather_felt_temperature";
     const HUMIDITY_DIMENSION = "log_visit.weather_humidity";
     const PRESSURE_DIMENSION = "log_visit.weather_pressure";

@@ -24,13 +24,13 @@ use Piwik\Tracker\Action;
  *
  * See {@link http://developer.piwik.org/api-reference/Piwik/Plugin\Dimension\VisitDimension} for more information.
  */
-class DewPoint extends VisitDimension
+class Precipitation extends VisitDimension
 {
     /**
      * This will be the name of the column in the log_visit table if a $columnType is specified.
      * @var string
      */
-    protected $columnName = 'weather_dew_point';
+    protected $columnName = 'weather_precipitation';
 
     /**
      * If a columnType is defined, we will create this a column in the MySQL table having this type. Please make sure
@@ -52,14 +52,14 @@ class DewPoint extends VisitDimension
      * The name of the dimension which will be visible for instance in the UI of a related report and in the mobile app.
      * @return string
      */
-    protected $nameSingular = 'WeatherReports_DewPoint';
+    protected $nameSingular = 'WeatherReports_Precipitation';
 
     /**
      * By defining a segment a user will be able to filter their visitors by this column. For instance
      * show all reports only considering users having more than 10 achievement points. If you do not want to define a
      * segment for this dimension, simply leave the name empty.
      */
-    protected $segmentName = 'weatherDewPoint';
+    protected $segmentName = 'weatherPrecipitation';
 
     protected $acceptValues = 'Here you should explain which values are accepted/useful for segments: Any number, for instance 1, 2, 3 , 99';
 
@@ -76,7 +76,7 @@ class DewPoint extends VisitDimension
      */
     public function onNewVisit(Request $request, Visitor $visitor, $action)
     {
-        $paramValue = Common::getRequestVar('weather_dew_point', '', 'string', $request->getParams());
+        $paramValue = Common::getRequestVar('weather_precipitation', '', 'string', $request->getParams());
         if (!empty($paramValue)) {
             return $paramValue;
         }
@@ -105,7 +105,7 @@ class DewPoint extends VisitDimension
      */
     public function onExistingVisit(Request $request, Visitor $visitor, $action)
     {
-        $paramValue = Common::getRequestVar('weather_dew_point', '', 'string', $request->getParams());
+        $paramValue = Common::getRequestVar('weather_precipitation', '', 'string', $request->getParams());
         if (!empty($paramValue)) {
             return $paramValue;
         }

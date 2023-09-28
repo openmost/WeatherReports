@@ -37,7 +37,7 @@ class WindDirection extends VisitDimension
      * perform an update which can sometimes take a long time so be careful when choosing the correct column type.
      * @var string
      */
-    protected $columnType = 'INT(10) NULL';
+    protected $columnType = 'VARCHAR(255) NULL';
 
     /**
      * The type of the dimension is automatically detected by the columnType. If the type of the dimension is not

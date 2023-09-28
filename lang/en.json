@@ -1,8 +1,9 @@
 {
   "WeatherReports": {
     "Weather": "Weather",
-    "Clouds": "Clouds",
-    "DewPoint": "Dew point",
+    "Condition": "Condition",
+    "Cloud": "Cloud",
+    "Precipitation": "Precipitation",
     "FeltTemperature": "Felt temperature",
     "Humidity": "Humidity",
     "Pressure": "Pressure",

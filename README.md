@@ -5,43 +5,35 @@
 Visualize all weather details in a powerful report
 
 ## Dataset used to create the plugin
-https://openweathermap.org/api/one-call-3#hist_example
+https://www.weatherapi.com/docs/
 ```json
  {
-  "lat": 52.2297,
-  "lon": 21.0122,
-  "timezone": "Europe/Warsaw",
-  "timezone_offset": 3600,
-  "data": [
-    {
-      "dt": 1645888976,
-      "sunrise": 1645853361,
-      "sunset": 1645891727,
-      "temp": 279.13,
-      "feels_like": 276.44,
-      "pressure": 1029,
-      "humidity": 64,
-      "dew_point": 272.88,
-      "uvi": 0.06,
-      "clouds": 0,
-      "visibility": 10000,
-      "wind_speed": 3.6,
-      "wind_deg": 340,
-      "weather": [
-        {
-          "id": 800,
-          "main": "Clear",
-          "description": "clear sky",
-          "icon": "01d"
-        }
-      ]
-    }
-  ]
+  "last_updated_epoch": 1695921300,
+  "last_updated": "2023-09-28 19:15",
+  "temp_c": 23,
+  "temp_f": 73.4,
+  "is_day": 1,
+  "condition": {
+    "text": "Partly cloudy",
+    "icon": "//cdn.weatherapi.com/weather/64x64/day/116.png",
+    "code": 1003
+  },
+  "wind_mph": 10.5,
+  "wind_kph": 16.9,
+  "wind_degree": 220,
+  "wind_dir": "SW",
+  "pressure_mb": 1015,
+  "pressure_in": 29.97,
+  "precip_mm": 0,
+  "precip_in": 0,
+  "humidity": 69,
+  "cloud": 75,
+  "feelslike_c": 25.1,
+  "feelslike_f": 77.2,
+  "vis_km": 10,
+  "vis_miles": 6,
+  "uv": 5,
+  "gust_mph": 18.7,
+  "gust_kph": 30.2
 }
 ```
-
-
-Accepted values for clouds : https://openweathermap.org/weather-conditions
-
-
-`&weather_cloud=Clear&weather_pressure=1029&weather_humidity=64&weather_temperature=24.50&weather_dew_point=6.12&weather_uv=1.02&weather_wind_speed=3.6&weather_wind_direction=340&visibility=1000&weather_felt_temperature=13.2`

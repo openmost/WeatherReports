@@ -6,6 +6,7 @@
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  *
  */
+
 namespace Piwik\Plugins\WeatherReports\Columns;
 
 use Piwik\Common;
@@ -23,13 +24,13 @@ use Piwik\Tracker\Action;
  *
  * See {@link http://developer.piwik.org/api-reference/Piwik/Plugin\Dimension\VisitDimension} for more information.
  */
-class Uv extends VisitDimension
+class Cloud extends VisitDimension
 {
     /**
      * This will be the name of the column in the log_visit table if a $columnType is specified.
      * @var string
      */
-    protected $columnName = 'weather_uv';
+    protected $columnName = 'weather_cloud';
 
     /**
      * If a columnType is defined, we will create this a column in the MySQL table having this type. Please make sure
@@ -37,7 +38,7 @@ class Uv extends VisitDimension
      * perform an update which can sometimes take a long time so be careful when choosing the correct column type.
      * @var string
      */
-    protected $columnType = 'FLOAT NULL';
+    protected $columnType = 'INT(10) NULL';
 
     /**
      * The type of the dimension is automatically detected by the columnType. If the type of the dimension is not
@@ -51,16 +52,16 @@ class Uv extends VisitDimension
      * The name of the dimension which will be visible for instance in the UI of a related report and in the mobile app.
      * @return string
      */
-    protected $nameSingular = 'WeatherReports_Uv';
+    protected $nameSingular = 'WeatherReports_Cloud';
 
     /**
      * By defining a segment a user will be able to filter their visitors by this column. For instance
      * show all reports only considering users having more than 10 achievement points. If you do not want to define a
      * segment for this dimension, simply leave the name empty.
      */
-    protected $segmentName = 'weatherUv';
+    protected $segmentName = 'weatherCloud';
 
-    protected $acceptValues = 'Here you should explain which values are accepted/useful for segments: Any number, for instance 1, 2, 3 , 99';
+    protected $acceptValues = "0 to 8";
 
     /**
      * The onNewVisit method is triggered when a new visitor is detected. This means here you can define an initial
@@ -75,7 +76,7 @@ class Uv extends VisitDimension
      */
     public function onNewVisit(Request $request, Visitor $visitor, $action)
     {
-        $paramValue = Common::getRequestVar('weather_uv', '', 'string', $request->getParams());
+        $paramValue = Common::getRequestVar('weather_cloud', '', 'string', $request->getParams());
         if (!empty($paramValue)) {
             return $paramValue;
         }
@@ -104,7 +105,7 @@ class Uv extends VisitDimension
      */
     public function onExistingVisit(Request $request, Visitor $visitor, $action)
     {
-        $paramValue = Common::getRequestVar('weather_uv', '', 'string', $request->getParams());
+        $paramValue = Common::getRequestVar('weather_cloud', '', 'string', $request->getParams());
         if (!empty($paramValue)) {
             return $paramValue;
         }
@@ -115,6 +116,7 @@ class Uv extends VisitDimension
 
         return false;
     }
+
 
     /**
      * This event is executed shortly after "onNewVisit" or "onExistingVisit" in case the visitor converted a goal.
@@ -127,11 +129,10 @@ class Uv extends VisitDimension
      * @param Action|null $action
      *
      * @return mixed|false
-     *
-    public function onConvertedVisit(Request $request, Visitor $visitor, $action)
-    {
-        return $visitor->getVisitorColumn($this->columnName) + 5;  // give this visitor 5 extra achievement points
-    }
+     * public function onConvertedVisit(Request $request, Visitor $visitor, $action)
+     * {
+     * return $visitor->getVisitorColumn($this->columnName) + 5;  // give this visitor 5 extra achievement points
+     * }
      */
 
     /**
@@ -146,10 +147,10 @@ class Uv extends VisitDimension
      * @param Action|null $action
      *
      * @return mixed
-    public function onAnyGoalConversion(Request $request, Visitor $visitor, $action)
-    {
-        return $visitor->getVisitorColumn($this->columnName);
-    }
+     * public function onAnyGoalConversion(Request $request, Visitor $visitor, $action)
+     * {
+     * return $visitor->getVisitorColumn($this->columnName);
+     * }
      */
 
     /**
@@ -158,9 +159,9 @@ class Uv extends VisitDimension
      * If you access any value of any other column within your events, you should require them here. Otherwise those
      * values may not be available.
      * @return array
-    public function getRequiredVisitFields()
-    {
-        return array('idsite', 'server_time');
-    }
-    */
+     * public function getRequiredVisitFields()
+     * {
+     * return array('idsite', 'server_time');
+     * }
+     */
 }
