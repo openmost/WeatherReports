@@ -1,5 +1,8 @@
 ## Changelog
 
+# v4.0.3
+Add abstract method to Archiver.php
+
 # v4.0.2
 Update IP Address
 

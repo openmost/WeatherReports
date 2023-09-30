@@ -41,4 +41,7 @@ class Archiver extends \Piwik\Plugin\Archiver
     const VISIBILITY_DIMENSION = "log_visit.weather_visibility";
     const WIND_SPEED_DIMENSION = "log_visit.weather_wind_speed";
     const WIND_DIRECTION_DIMENSION = "log_visit.weather_wind_direction";
+
+    abstract function aggregateDayReport();
+    abstract function aggregateMultipleReports();
 }
