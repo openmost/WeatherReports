@@ -1,7 +1,7 @@
 {
   "name": "WeatherReports",
   "description": "Track weather data from your website visitors",
-  "version": "4.0.1",
+  "version": "4.0.2",
   "theme": false,
   "require": {
     "matomo": ">=4.0.0-b1,<5.0.0-b1"

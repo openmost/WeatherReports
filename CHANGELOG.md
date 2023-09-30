@@ -1,5 +1,8 @@
 ## Changelog
 
+# v4.0.2
+Update IP Address
+
 # v4.0.1
 Update table in docs/index.md (Markdown tables are not supported by Matomo)
 

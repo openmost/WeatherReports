@@ -26,9 +26,10 @@ Implement the `_paq.push(['WeatherReports.setWeather'])` method on your website 
 
         const apiKey = 'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX';
         const lang = 'en'; // Available lang code here https://www.weatherapi.com/docs/
+        const ipAddress = '<?php echo $_SERVER['REMOTE_ADDR']; ?>'; // Only for PHP servers
 
         if (!sessionStorage.getItem("matomoWeather")) {
-            const response = await fetch(`https://api.weatherapi.com/v1/current.json?key=${apiKey}&q=90.49.112.61&aqi=no&lang=${lang}`)
+            const response = await fetch(`https://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${ipAddress}&aqi=no&lang=${lang}`)
             const data = await response.json();
             const weather = data.current;
 
