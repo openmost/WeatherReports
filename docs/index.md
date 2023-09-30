@@ -60,25 +60,27 @@ Matomo "Visitors" menu.
 
 These different reports support Matomo's automatic archiving CRON for better performance (recommended)
 
-**New dimensions with segments adn API methods:**
+**New dimensions with segments and API methods:**
 
-| Dimension name   | Type     | Segment name             | API method                          | Tracking HTTP API parameter |
-|------------------|----------|--------------------------|-------------------------------------|-----------------------------|
-| Condition        | `string` | `weatherCondition`       | `WeatherReports.getCondition`       | `weather_condition`         |
-| Cloud            | `int`    | `weatherCloud`           | `WeatherReports.getCloud`           | `weather_cloud`             |
-| Pressure         | `int`    | `weatherPressure`        | `WeatherReports.getPressure`        | `weather_pressure`          |
-| Temperature      | `float`  | `weatherTemperature`     | `WeatherReports.getTemperature`     | `weather_temperature`       |
-| Felt temperature | `float`  | `weatherFeltTemperature` | `WeatherReports.getFeltTemperature` | `weather_felt_temperature`  |
-| Precipitation    | `float`  | `weatherPrecipitation`   | `WeatherReports.getPrecipitation`   | `weather_precipitation`     |
-| Humidity         | `int`    | `weatherHumidity`        | `WeatherReports.getHumidity`        | `weather_humidity`          |
-| Uv               | `float`  | `weatherUv`              | `WeatherReports.getUv`              | `weather_uv`                |
-| Visibility       | `int`    | `weatherVisibility`      | `WeatherReports.getVisibility`      | `weather_visibility`        |
-| Wind direction   | `string` | `weatherWindDirection`   | `WeatherReports.getWindDirection`   | `weather_wind_direction`    |
-| Wind speed       | `float`  | `weatherWindSpeed`       | `WeatherReports.getWindSpeed`       | `weather_wind_speed`        |
+```
+| Dimension name   | Type   | Segment name           | API method                        | Tracking HTTP API parameter |
+|------------------|--------|------------------------|-----------------------------------|-----------------------------|
+| Condition        | string | weatherCondition       | WeatherReports.getCondition       | weather_condition           |
+| Cloud            | int    | weatherCloud           | WeatherReports.getCloud           | weather_cloud               |
+| Pressure         | int    | weatherPressure        | WeatherReports.getPressure        | weather_pressure            |
+| Temperature      | float  | weatherTemperature     | WeatherReports.getTemperature     | weather_temperature         |
+| Felt temperature | float  | weatherFeltTemperature | WeatherReports.getFeltTemperature | weather_felt_temperature    |
+| Precipitation    | float  | weatherPrecipitation   | WeatherReports.getPrecipitation   | weather_precipitation       |
+| Humidity         | int    | weatherHumidity        | WeatherReports.getHumidity        | weather_humidity            |
+| Uv               | float  | weatherUv              | WeatherReports.getUv              | weather_uv                  |
+| Visibility       | int    | weatherVisibility      | WeatherReports.getVisibility      | weather_visibility          |
+| Wind direction   | string | weatherWindDirection   | WeatherReports.getWindDirection   | weather_wind_direction      |
+| Wind speed       | float  | weatherWindSpeed       | WeatherReports.getWindSpeed       | weather_wind_speed          |
+```
 
 Enjoy !
 
-### This is an expample of WeatherAPI response:
+### This is an example of WeatherAPI response:
 
 You do not have to copy or understand this code, it is simply information about the type of metric returned by
 WeatherAPI.
