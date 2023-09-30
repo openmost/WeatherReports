@@ -1,5 +1,8 @@
 ## Changelog
 
+# v4.0.4
+Change blade view for VisitorDetails
+
 # v4.0.3
 Add abstract method to Archiver.php
 
