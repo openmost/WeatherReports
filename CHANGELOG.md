@@ -1,5 +1,8 @@
 ## Changelog
 
+# v4.0.10
+Add screenshots
+
 # v4.0.9
 Fix report Archiver.php class
 
