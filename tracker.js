@@ -18,7 +18,7 @@
           windSpeed
         ) {
 
-          var request = "";
+          var request = "ping=1";
 
           if (condition) {
             request += "&weather_condition=" + condition;

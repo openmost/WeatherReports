@@ -1,5 +1,8 @@
 ## Changelog
 
+# v4.0.12
+Change request to PING=1
+
 # v4.0.11
 Rename screenshots
 
