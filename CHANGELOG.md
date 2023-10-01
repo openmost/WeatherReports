@@ -1,5 +1,8 @@
 ## Changelog
 
+# v4.0.7
+Test #2 with abstract Class in Archiver.php
+
 # v4.0.6
 Test #2 with abstract method in Archiver.php
 

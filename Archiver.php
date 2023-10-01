@@ -15,7 +15,7 @@ use Piwik\DataTable;
  * Class encapsulating logic to process Day/Period Archiving for the Actions reports
  *
  */
-class Archiver extends \Piwik\Plugin\Archiver
+abstract class Archiver extends \Piwik\Plugin\Archiver
 {
     const CONDITION_RECORD_NAME = 'WeatherReports_Condition';
     const CLOUD_RECORD_NAME = 'WeatherReports_Cloud';
@@ -42,8 +42,8 @@ class Archiver extends \Piwik\Plugin\Archiver
     const WIND_SPEED_DIMENSION = "log_visit.weather_wind_speed";
     const WIND_DIRECTION_DIMENSION = "log_visit.weather_wind_direction";
 
-    public abstract function aggregateDayReport();
+    abstract public function aggregateDayReport();
 
-    public abstract function aggregateMultipleReports();
+    abstract public function aggregateMultipleReports();
 
 }
