@@ -44,7 +44,7 @@ class API extends \Piwik\Plugin\API
     {
         $table = $this->getDataTable('WeatherReports_Temperature', $idSite, $period, $date, $segment);
         $table->filter('GroupBy', array('label', function ($label) {
-            return round($label);
+            return is_float($label) ? round($label) : $label;
         }));
         return $table;
     }
@@ -53,7 +53,7 @@ class API extends \Piwik\Plugin\API
     {
         $table = $this->getDataTable('WeatherReports_FeltTemperature', $idSite, $period, $date, $segment);
         $table->filter('GroupBy', array('label', function ($label) {
-            return round($label);
+            return is_float($label) ? round($label) : $label;
         }));
         return $table;
     }
@@ -72,7 +72,7 @@ class API extends \Piwik\Plugin\API
     {
         $table = $this->getDataTable('WeatherReports_Precipitation', $idSite, $period, $date, $segment);
         $table->filter('GroupBy', array('label', function ($label) {
-            return round($label);
+            return is_float($label) ? round($label) : $label;
         }));
         return $table;
     }
@@ -81,7 +81,7 @@ class API extends \Piwik\Plugin\API
     {
         $table = $this->getDataTable('WeatherReports_Uv', $idSite, $period, $date, $segment);
         $table->filter('GroupBy', array('label', function ($label) {
-            return round($label);
+            return is_float($label) ? round($label) : $label;
         }));
         return $table;
     }
@@ -90,7 +90,7 @@ class API extends \Piwik\Plugin\API
     {
         $table = $this->getDataTable('WeatherReports_Visibility', $idSite, $period, $date, $segment);
         $table->filter('GroupBy', array('label', function ($label) {
-            return round($label);
+            return is_float($label) ? round($label) : $label;
         }));
         return $table;
     }
@@ -99,7 +99,7 @@ class API extends \Piwik\Plugin\API
     {
         $table = $this->getDataTable('WeatherReports_WindSpeed', $idSite, $period, $date, $segment);
         $table->filter('GroupBy', array('label', function ($label) {
-            return round($label);
+            return is_float($label) ? round($label) : $label;
         }));
         return $table;
     }
