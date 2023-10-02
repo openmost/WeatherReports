@@ -23,35 +23,41 @@ Implement the `_paq.push(['WeatherReports.setWeather'])` method on your website 
 
 <script>
     document.addEventListener('DOMContentLoaded', async function () {
-
+        
+        // Fill with your credentials
         const apiKey = 'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX';
         const lang = 'en'; // Available lang code here https://www.weatherapi.com/docs/
-        const ipAddress = '<?php echo $_SERVER['
-        REMOTE_ADDR
-        ']; ?>'; // Only for PHP servers
+
 
         if (!sessionStorage.getItem("matomoWeather")) {
-            const response = await fetch(`https://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${ipAddress}&aqi=no&lang=${lang}`)
-            const data = await response.json();
-            const weather = data.current;
+            // Get visitor IP address
+            const ipapiResponse = await fetch('https://ipapi.co/json/');
+            const ipapiData = await ipapiResponse.json();
 
-            _paq.push(['WeatherReports.setWeather',
-                weather.condition.text,   // Condition
-                weather.cloud,            // Cloud
-                weather.temp_c,           // Temperature in Celsius (for Fahrenheit, use: weather.temp_f)
-                weather.feelslike_c,      // Temperature in Celsius (for Fahrenheit, use: weather.feelslike_f)
-                weather.precip_mm,        // Precipitation in millimeters (for inches, use: weather.precip_in)
-                weather.humidity,         // Humidity
-                weather.pressure_mb,      // Pressure in millibars (for inches, use: weather.pressure_in)
-                weather.uv,               // Uv
-                weather.vis_km,           // Visibility in kilometers (for miles, use: weather.vis_miles)
-                weather.wind_dir,         // WindDirection
-                weather.wind_kph,         // WindSpeed in Kilometers/h (for miles/h, use: weather.wind_mph)
-            ]);
+            if (ipapiData.ip) {
+                // Fetch Weather data
+                const response = await fetch(`https://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${ipapiData.ip}&aqi=no&lang=${lang}`)
+                const data = await response.json();
+                const weather = data.current;
 
-            sessionStorage.setItem("matomoWeather", JSON.stringify(weather));
+                // Send data to Matomo instance
+                _paq.push(['WeatherReports.setWeather',
+                    weather.condition.text,   // Condition
+                    weather.cloud,            // Cloud
+                    weather.temp_c,           // Temperature in Celsius (for Fahrenheit, use: weather.temp_f)
+                    weather.feelslike_c,      // Temperature in Celsius (for Fahrenheit, use: weather.feelslike_f)
+                    weather.precip_mm,        // Precipitation in millimeters (for inches, use: weather.precip_in)
+                    weather.humidity,         // Humidity
+                    weather.pressure_mb,      // Pressure in millibars (for inches, use: weather.pressure_in)
+                    weather.uv,               // Uv
+                    weather.vis_km,           // Visibility in kilometers (for miles, use: weather.vis_miles)
+                    weather.wind_dir,         // WindDirection
+                    weather.wind_kph,         // WindSpeed in Kilometers/h (for miles/h, use: weather.wind_mph)
+                ]);
+
+                sessionStorage.setItem("matomoWeather", JSON.stringify(weather));
+            }
         }
-
     })
 </script>
 ```

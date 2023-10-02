@@ -1,5 +1,8 @@
 ## Changelog
 
+# v4.0.13
+Add fetch to IPApi to get rid of PHP global variable
+
 # v4.0.12
 Change request to PING=1
 
