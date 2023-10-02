@@ -17,6 +17,17 @@ variable to avoid multiple requests. The sessionStorage is purged each time the 
 You'll need to generate your own API key (Free plan is up to 1 Million calls per month).
 Replace `XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX` with your API Key and adjust your language if necessary.
 
+
+### 2 - 1 With Matomo Tag Manager (Recommended)
+
+Use the Weather custom Tag in Matomo Tag Manager (in the Openmost section)
+
+Set your API Key and publish a new version of your container.
+
+That's all !
+
+### 2 - 2 OR with Matomo classic code (Only if you don't use Matomo Tag Manager)
+
 Implement the `_paq.push(['WeatherReports.setWeather'])` method on your website using the following snippet:
 
 ```html
