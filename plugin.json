@@ -1,33 +1,33 @@
 {
-  "name": "WeatherReports",
-  "description": "Track weather data from your website visitors",
-  "version": "4.1.0",
-  "theme": false,
-  "require": {
-    "matomo": ">=4.0.0-b1,<5.0.0-b1"
-  },
-  "authors": [
-    {
-      "name": "Openmost",
-      "email": "ronan@openmost.io",
-      "homepage": "https://openmost.io"
-    }
-  ],
-  "support": {
-    "email": "ronan@openmost.io",
-    "issues": "https://github.com/openmost/WeatherReports/issues",
-    "source": "https://github.com/openmost/WeatherReports"
-  },
-  "homepage": "https://openmost.io/products",
-  "license": "GPL v3+",
-  "keywords": [
-    "Weather",
-    "Meteo",
-    "Météo",
-    "Visits",
-    "Reports",
-    "Report",
-    "Reporting",
-    "Openmost"
-  ]
+    "name": "WeatherReports",
+    "description": "Track weather data from your website visitors",
+    "version": "4.2.0",
+    "theme": false,
+    "require": {
+        "matomo": ">=4.15.1-stable,<5.0.0-b1"
+    },
+    "authors": [
+        {
+            "name": "Openmost",
+            "email": "ronan@openmost.io",
+            "homepage": "https:\/\/openmost.io"
+        }
+    ],
+    "support": {
+        "email": "ronan@openmost.io",
+        "issues": "https:\/\/github.com\/openmost\/WeatherReports\/issues",
+        "source": "https:\/\/github.com\/openmost\/WeatherReports"
+    },
+    "homepage": "https:\/\/openmost.io\/products",
+    "license": "GPL v3+",
+    "keywords": [
+        "Weather",
+        "Meteo",
+        "M\u00e9t\u00e9o",
+        "Visits",
+        "Reports",
+        "Report",
+        "Reporting",
+        "Openmost"
+    ]
 }

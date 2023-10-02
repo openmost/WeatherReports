@@ -1,5 +1,8 @@
 ## Changelog
 
+# V4.2.0
+Add Matomo Tag Manager Custom Tag 
+
 # v4.1.0
 Support Matomo Tag Manager
 

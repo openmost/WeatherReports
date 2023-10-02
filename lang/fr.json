@@ -12,6 +12,11 @@
     "Uv": "UV",
     "Visibility": "Visibilité",
     "WindSpeed": "Vitesse du vent",
-    "WindDirection": "Direction du vent"
+    "WindDirection": "Direction du vent",
+    "WeatherTagName": "Météo",
+    "WeatherTagDescription": "Obtenez les informations météo de vos visiteurs",
+    "WeatherTagHelp": "",
+    "ApiKey": "Clé d'API",
+    "ApiKeyDescription": "Obtenez votre clé d'API sur le site https://www.weatherapi.com/"
   }
 }

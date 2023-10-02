@@ -25,13 +25,13 @@ Implement the `_paq.push(['WeatherReports.setWeather'])` method on your website 
     async function fetchWeatherData() {
 
         // Fill with your credentials
-        const apiKey = 'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX';
-        const lang = 'en'; // Available lang code here https://www.weatherapi.com/docs/
+        const apiKey = "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
+        const lang = "en"; // Available lang code here https://www.weatherapi.com/docs/
 
 
         if (!sessionStorage.getItem("matomoWeather")) {
             // Get visitor IP address
-            const ipapiResponse = await fetch('https://ipapi.co/json/');
+            const ipapiResponse = await fetch("https://ipapi.co/json/");
             const ipapiData = await ipapiResponse.json();
 
             if (ipapiData.ip) {
@@ -41,7 +41,7 @@ Implement the `_paq.push(['WeatherReports.setWeather'])` method on your website 
                 const weather = data.current;
 
                 // Send data to Matomo instance
-                _paq.push(['WeatherReports.setWeather',
+                _paq.push(["WeatherReports.setWeather",
                     weather.cloud,            // Cloud
                     weather.condition.text,   // Condition
                     weather.feelslike_c,      // Temperature in Celsius (for Fahrenheit, use: weather.feelslike_f)

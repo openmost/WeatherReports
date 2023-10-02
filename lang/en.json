@@ -1,16 +1,21 @@
 {
-  "WeatherReports": {
-    "Weather": "Weather",
-    "Condition": "Condition",
-    "Cloud": "Cloud",
-    "FeltTemperature": "Felt temperature",
-    "Humidity": "Humidity",
-    "Precipitation": "Precipitation",
-    "Pressure": "Pressure",
-    "Temperature": "Temperature",
-    "Uv": "UV",
-    "Visibility": "Visibility",
-    "WindSpeed": "Wind speed",
-    "WindDirection": "Wind direction"
-  }
+    "WeatherReports": {
+        "Weather": "Weather",
+        "Condition": "Condition",
+        "Cloud": "Cloud",
+        "FeltTemperature": "Felt temperature",
+        "Humidity": "Humidity",
+        "Precipitation": "Precipitation",
+        "Pressure": "Pressure",
+        "Temperature": "Temperature",
+        "Uv": "UV",
+        "Visibility": "Visibility",
+        "WindSpeed": "Wind speed",
+        "WindDirection": "Wind direction",
+        "WeatherTagName": "Weather",
+        "WeatherTagDescription": "Get weather informations from your visitors",
+        "WeatherTagHelp": "",
+        "ApiKey": "API Key",
+        "ApiKeyDescription": "Get your API Key from https://www.weatherapi.com/"
+    }
 }
