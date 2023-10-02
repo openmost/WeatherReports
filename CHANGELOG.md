@@ -1,5 +1,12 @@
 ## Changelog
 
+# v4.1.0
+Support Matomo Tag Manager
+
+Add FR translation
+
+Change `_paq.push(['WeatherReports.setWeather'])` parameters order
+
 # v4.0.13
 Add fetch to IPApi to get rid of PHP global variable
 

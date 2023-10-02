@@ -1,0 +1,17 @@
+{
+  "WeatherReports": {
+    "Weather": "Météo",
+    "Condition": "Condition",
+    "Cloud": "Nuage",
+    "Clouds": "Nuages",
+    "FeltTemperature": "Température ressentie",
+    "Humidity": "Humidité",
+    "Precipitation": "Précipitation",
+    "Pressure": "Pression",
+    "Temperature": "Température",
+    "Uv": "UV",
+    "Visibility": "Visibilité",
+    "WindSpeed": "Vitesse du vent",
+    "WindDirection": "Direction du vent"
+  }
+}

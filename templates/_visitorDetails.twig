@@ -1,53 +1,69 @@
 {% if visitInfo.getColumn('weather_condition') or visitInfo.getColumn('weather_cloud') or visitInfo.getColumn('weather_temperature') or visitInfo.getColumn('weather_felt_temperature') or visitInfo.getColumn('weather_precipitation') or visitInfo.getColumn('weather_humidity') or visitInfo.getColumn('weather_pressure') or visitInfo.getColumn('weather_uv') or visitInfo.getColumn('weather_visibility') or visitInfo.getColumn('weather_wind_direction') or visitInfo.getColumn('weather_wind_speed') %}
     <div class="weather-reports-visitor-log-details" style="margin-top: .75rem;">
-        <span style="font-size: .875rem; font-weight: 500;">Weather</span>
+        <span style="font-size: .875rem; font-weight: 500;">{{ 'WeatherReports_Weather'|translate }}</span>
         <ul>
             {% if visitInfo.getColumn('weather_condition') %}
-                <li>Condition: <span class="weather-reports-value">{{ visitInfo.getColumn('weather_condition') }}</span>
+                <li>
+                    {{ 'WeatherReports_Condition'|translate }}:
+                    <span class="weather-reports-value">{{ visitInfo.getColumn('weather_condition') }}</span>
                 </li>
             {% endif %}
             {% if visitInfo.getColumn('weather_cloud') %}
-                <li>Cloud: <span class="weather-reports-value">{{ visitInfo.getColumn('weather_cloud') }}</span></li>
+                <li>
+                    {{ 'WeatherReports_Cloud'|translate }}:
+                    <span class="weather-reports-value">{{ visitInfo.getColumn('weather_cloud') }}</span></li>
             {% endif %}
             {% if visitInfo.getColumn('weather_temperature') %}
-                <li>Temperature: <span
-                            class="weather-reports-value">{{ visitInfo.getColumn('weather_temperature') }}</span>
+                <li>
+                    {{ 'WeatherReports_Temperature'|translate }}:
+                    <span class="weather-reports-value">{{ visitInfo.getColumn('weather_temperature') }}</span>
                 </li>
             {% endif %}
             {% if visitInfo.getColumn('weather_felt_temperature') %}
-                <li>Felt temperature: <span
-                            class="weather-reports-value">{{ visitInfo.getColumn('weather_felt_temperature') }}</span>
+                <li>
+                    {{ 'WeatherReports_FeltTemperature'|translate }}:
+                    <span class="weather-reports-value">{{ visitInfo.getColumn('weather_felt_temperature') }}</span>
                 </li>
             {% endif %}
             {% if visitInfo.getColumn('weather_precipitation') %}
-                <li>Precipitation: <span
-                            class="weather-reports-value">{{ visitInfo.getColumn('weather_precipitation') }}</span>
+                <li>
+                    {{ 'WeatherReports_Precipitation'|translate }}:
+                    <span class="weather-reports-value">{{ visitInfo.getColumn('weather_precipitation') }}</span>
                 </li>
             {% endif %}
             {% if visitInfo.getColumn('weather_humidity') %}
-                <li>Humidity: <span class="weather-reports-value">{{ visitInfo.getColumn('weather_humidity') }}</span>
+                <li>
+                    {{ 'WeatherReports_Humidity'|translate }}:
+                    <span class="weather-reports-value">{{ visitInfo.getColumn('weather_humidity') }}</span>
                 </li>
             {% endif %}
             {% if visitInfo.getColumn('weather_pressure') %}
-                <li>Pressure: <span class="weather-reports-value">{{ visitInfo.getColumn('weather_pressure') }}</span>
+                <li>
+                    {{ 'WeatherReports_Pressure'|translate }}:
+                    <span class="weather-reports-value">{{ visitInfo.getColumn('weather_pressure') }}</span>
                 </li>
             {% endif %}
             {% if visitInfo.getColumn('weather_uv') %}
-                <li>UV: <span class="weather-reports-value">{{ visitInfo.getColumn('weather_uv') }}</span></li>
+                <li>
+                    {{ 'WeatherReports_Uv'|translate }}:
+                    <span class="weather-reports-value">{{ visitInfo.getColumn('weather_uv') }}</span></li>
             {% endif %}
             {% if visitInfo.getColumn('weather_visibility') %}
-                <li>Visibility: <span
-                            class="weather-reports-value">{{ visitInfo.getColumn('weather_visibility') }}</span>
+                <li>
+                    {{ 'WeatherReports_Visibility'|translate }}:
+                    <span class="weather-reports-value">{{ visitInfo.getColumn('weather_visibility') }}</span>
                 </li>
             {% endif %}
             {% if visitInfo.getColumn('weather_wind_direction') %}
-                <li>Wind direction: <span
-                            class="weather-reports-value">{{ visitInfo.getColumn('weather_wind_direction') }}</span>
+                <li>
+                    {{ 'WeatherReports_WindDirection'|translate }}:
+                    <span class="weather-reports-value">{{ visitInfo.getColumn('weather_wind_direction') }}</span>
                 </li>
             {% endif %}
             {% if visitInfo.getColumn('weather_wind_speed') %}
-                <li>Wind speed: <span
-                            class="weather-reports-value">{{ visitInfo.getColumn('weather_wind_speed') }}</span>
+                <li>
+                    {{ 'WeatherReports_WindSpeed'|translate }}:
+                    <span class="weather-reports-value">{{ visitInfo.getColumn('weather_wind_speed') }}</span>
                 </li>
             {% endif %}
         </ul>

@@ -20,10 +20,10 @@ Replace `XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX` with your API Key and adjust your lang
 Implement the `_paq.push(['WeatherReports.setWeather'])` method on your website using the following snippet:
 
 ```html
-
+<!-- Openmost WeatherReports code for Matomo -->
 <script>
-    document.addEventListener('DOMContentLoaded', async function () {
-        
+    async function fetchWeatherData() {
+
         // Fill with your credentials
         const apiKey = 'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX';
         const lang = 'en'; // Available lang code here https://www.weatherapi.com/docs/
@@ -42,13 +42,13 @@ Implement the `_paq.push(['WeatherReports.setWeather'])` method on your website 
 
                 // Send data to Matomo instance
                 _paq.push(['WeatherReports.setWeather',
-                    weather.condition.text,   // Condition
                     weather.cloud,            // Cloud
-                    weather.temp_c,           // Temperature in Celsius (for Fahrenheit, use: weather.temp_f)
+                    weather.condition.text,   // Condition
                     weather.feelslike_c,      // Temperature in Celsius (for Fahrenheit, use: weather.feelslike_f)
-                    weather.precip_mm,        // Precipitation in millimeters (for inches, use: weather.precip_in)
                     weather.humidity,         // Humidity
+                    weather.precip_mm,        // Precipitation in millimeters (for inches, use: weather.precip_in)
                     weather.pressure_mb,      // Pressure in millibars (for inches, use: weather.pressure_in)
+                    weather.temp_c,           // Temperature in Celsius (for Fahrenheit, use: weather.temp_f)
                     weather.uv,               // Uv
                     weather.vis_km,           // Visibility in kilometers (for miles, use: weather.vis_miles)
                     weather.wind_dir,         // WindDirection
@@ -58,8 +58,11 @@ Implement the `_paq.push(['WeatherReports.setWeather'])` method on your website 
                 sessionStorage.setItem("matomoWeather", JSON.stringify(weather));
             }
         }
-    })
+    }
+
+    fetchWeatherData();
 </script>
+<!-- End Openmost WeatherReports code for Matomo -->
 ```
 
 ### 3 - Enjoy new reports and features
