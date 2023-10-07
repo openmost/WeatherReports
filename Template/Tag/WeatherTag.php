@@ -5,6 +5,7 @@
  * @link https://matomo.org
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
+
 namespace Piwik\Plugins\WeatherReports\Template\Tag;
 
 use Piwik\Piwik;
@@ -63,6 +64,68 @@ class WeatherTag extends BaseTag
                 $field->title = Piwik::translate('WeatherReports_ApiKey');
                 $field->description = Piwik::translate('WeatherReports_ApiKeyDescription');
                 $field->customFieldComponent = self::FIELD_VARIABLE_COMPONENT;
+                $field->validators[] = new NotEmpty();
+            }),
+
+            $this->makeSetting('lang', 'en', FieldConfig::TYPE_STRING, function (FieldConfig $field) {
+                $field->title = Piwik::translate('WeatherReports_LanguageTitle');
+                $field->description = Piwik::translate('WeatherReports_LanguageDescription');
+                $field->customFieldComponent = self::FIELD_VARIABLE_COMPONENT;
+                $field->validators[] = new NotEmpty();
+            }),
+
+            $this->makeSetting('temperatureUnit', 'c', FieldConfig::TYPE_ARRAY, function (FieldConfig $field) {
+                $field->title = Piwik::translate('WeatherReports_TemperatureUnitTitle');
+                $field->description = Piwik::translate('WeatherReports_TemperatureUnitDescription');
+                $field->uiControl = FieldConfig::UI_CONTROL_SINGLE_SELECT;
+                $field->availableValues = array(
+                    'c' => Piwik::translate('WeatherReports_Celsius'),
+                    'f' => Piwik::translate('WeatherReports_Fahrenheit'),
+                );
+                $field->validators[] = new NotEmpty();
+            }),
+
+            $this->makeSetting('precipitationUnit', 'mm', FieldConfig::TYPE_ARRAY, function (FieldConfig $field) {
+                $field->title = Piwik::translate('WeatherReports_PrecipitationUnitTitle');
+                $field->description = Piwik::translate('WeatherReports_PrecipitationUnitDescription');
+                $field->uiControl = FieldConfig::UI_CONTROL_SINGLE_SELECT;
+                $field->availableValues = array(
+                    'mm' => Piwik::translate('WeatherReports_Millimeters'),
+                    'in' => Piwik::translate('WeatherReports_Inches'),
+                );
+                $field->validators[] = new NotEmpty();
+            }),
+
+            $this->makeSetting('pressureUnit', 'mb', FieldConfig::TYPE_ARRAY, function (FieldConfig $field) {
+                $field->title = Piwik::translate('WeatherReports_PressureUnitTitle');
+                $field->description = Piwik::translate('WeatherReports_PressureUnitDescription');
+                $field->uiControl = FieldConfig::UI_CONTROL_SINGLE_SELECT;
+                $field->availableValues = array(
+                    'mb' => Piwik::translate('WeatherReports_Millibars'),
+                    'in' => Piwik::translate('WeatherReports_Inches'),
+                );
+                $field->validators[] = new NotEmpty();
+            }),
+
+            $this->makeSetting('visibilityUnit', 'km', FieldConfig::TYPE_ARRAY, function (FieldConfig $field) {
+                $field->title = Piwik::translate('WeatherReports_VisibilityUnitTitle');
+                $field->description = Piwik::translate('WeatherReports_VisibilityUnitDescription');
+                $field->uiControl = FieldConfig::UI_CONTROL_SINGLE_SELECT;
+                $field->availableValues = array(
+                    'km' => Piwik::translate('WeatherReports_Kilometers'),
+                    'miles' => Piwik::translate('WeatherReports_Miles'),
+                );
+                $field->validators[] = new NotEmpty();
+            }),
+
+            $this->makeSetting('windSpeedUnit', 'kph', FieldConfig::TYPE_ARRAY, function (FieldConfig $field) {
+                $field->title = Piwik::translate('WeatherReports_WindSpeedUnitTitle');
+                $field->description = Piwik::translate('WeatherReports_WindSpeedUnitDescription');
+                $field->uiControl = FieldConfig::UI_CONTROL_SINGLE_SELECT;
+                $field->availableValues = array(
+                    'kph' => Piwik::translate('WeatherReports_KilometersPerHour'),
+                    'mph' => Piwik::translate('WeatherReports_MilesPerHour'),
+                );
                 $field->validators[] = new NotEmpty();
             }),
         );

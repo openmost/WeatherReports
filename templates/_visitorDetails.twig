@@ -8,11 +8,10 @@
                     <span class="weather-reports-value">{{ visitInfo.getColumn('weather_condition') }}</span>
                 </li>
             {% endif %}
-            {% if visitInfo.getColumn('weather_cloud') %}
                 <li>
                     {{ 'WeatherReports_Cloud'|translate }}:
-                    <span class="weather-reports-value">{{ visitInfo.getColumn('weather_cloud') }}</span></li>
-            {% endif %}
+                    <span class="weather-reports-value">{{ visitInfo.getColumn('weather_cloud') ?: '0' }}</span>
+                </li>
             {% if visitInfo.getColumn('weather_temperature') %}
                 <li>
                     {{ 'WeatherReports_Temperature'|translate }}:
@@ -25,12 +24,10 @@
                     <span class="weather-reports-value">{{ visitInfo.getColumn('weather_felt_temperature') }}</span>
                 </li>
             {% endif %}
-            {% if visitInfo.getColumn('weather_precipitation') %}
                 <li>
                     {{ 'WeatherReports_Precipitation'|translate }}:
-                    <span class="weather-reports-value">{{ visitInfo.getColumn('weather_precipitation') }}</span>
+                    <span class="weather-reports-value">{{ visitInfo.getColumn('weather_precipitation') ?: '0' }}</span>
                 </li>
-            {% endif %}
             {% if visitInfo.getColumn('weather_humidity') %}
                 <li>
                     {{ 'WeatherReports_Humidity'|translate }}:

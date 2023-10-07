@@ -16,6 +16,27 @@
         "WeatherTagDescription": "Get weather informations from your visitors",
         "WeatherTagHelp": "",
         "ApiKey": "API Key",
-        "ApiKeyDescription": "Get your API Key from https://www.weatherapi.com/"
+        "ApiKeyDescription": "Get your API Key from https://www.weatherapi.com/",
+        "LanguageTitle": "Weather reporting language",
+        "LanguageDescription": "Set a language for the \"Condition\" value",
+        "TemperatureUnitTitle": "Temperature unit",
+        "TemperatureUnitDescription": "Available units : Celsius or Fahrenheit",
+        "Celsius": "Celsius",
+        "Fahrenheit": "Fahrenheit",
+        "PrecipitationUnitTitle": "Precipitation unit",
+        "PrecipitationUnitDescription": "Available units : Millimeters or Inches",
+        "Millimeters": "Millimeters",
+        "Inches": "Inches",
+        "PressureUnitTitle": "Pressure unit",
+        "PressureUnitDescription": "Available units : Millibars or Inches",
+        "Millibars": "Millibars",
+        "VisibilityUnitTitle": "Visibility unit",
+        "VisibilityUnitDescription": "Available units : Kilometers or Miles",
+        "Kilometers": "Kilometers",
+        "Miles": "Miles",
+        "WindSpeedUnitTitle": "Wind speed unit",
+        "WindSpeedUnitDescription": "Available units : Kilometers/h or Miles/h",
+        "KilometersPerHour": "Kilometers per hour",
+        "MilesPerHour": "Miles per hour"
     }
 }
