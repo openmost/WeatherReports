@@ -1,5 +1,8 @@
 ## Changelog
 
+### v4.3.2
+Update tag language selector
+
 ### v4.3.1
 Add screenshots
 

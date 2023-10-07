@@ -32,7 +32,7 @@ class MeasurableSettings extends \Piwik\Settings\Measurable\MeasurableSettings
 
     protected function init()
     {
-        $this->weatherLang = $this->makeWeatherLangSetting();
+        //$this->weatherLang = $this->makeWeatherLangSetting();
         $this->weatherTemperatureUnit = $this->makeWeatherTemperatureUnitSetting();
         $this->weatherPrecipitationUnit = $this->makeWeatherPrecipitationUnitSetting();
         $this->weatherPressureUnit = $this->makeWeatherPressureUnitSetting();
@@ -40,16 +40,59 @@ class MeasurableSettings extends \Piwik\Settings\Measurable\MeasurableSettings
         $this->weatherWindSpeed = $this->makeWeatherWindSpeedUnitSetting();
     }
 
+    /*
     private function makeWeatherLangSetting()
     {
         return $this->makeSetting('weatherLang', 'en', FieldConfig::TYPE_ARRAY, function (FieldConfig $field) {
             $field->title = Piwik::translate('WeatherReports_LanguageTitle');
             $field->description = Piwik::translate('WeatherReports_LanguageDescription');
-            $field->uiControl = FieldConfig::UI_CONTROL_TEXT;
+            $field->uiControl = FieldConfig::UI_CONTROL_SINGLE_SELECT;
+            $field->availableValues = array(
+                'ar' => 'Arabic',
+                'bn' => 'Bengali',
+                'bg' => 'Bulgarian',
+                'zh' => 'Chinese Simplified',
+                'zh_tw' => 'Chinese Traditional',
+                'cs' => 'Czech',
+                'da' => 'Danish',
+                'nl' => 'Dutch',
+                'fi' => 'Finnish',
+                'fr' => 'French',
+                'de' => 'German',
+                'el' => 'Greek',
+                'hi' => 'Hindi',
+                'hu' => 'Hungarian',
+                'it' => 'Italian',
+                'ja' => 'Japanese',
+                'jv' => 'Javanese',
+                'ko' => 'Korean',
+                'zh_cmn' => 'Mandarin',
+                'mr' => 'Marathi',
+                'pl' => 'Polish',
+                'pt' => 'Portuguese',
+                'pa' => 'Punjabi',
+                'ro' => 'Romanian',
+                'ru' => 'Russian',
+                'sr' => 'Serbian',
+                'si' => 'Sinhalese',
+                'sk' => 'Slovak',
+                'es' => 'Spanish',
+                'sv' => 'Swedish',
+                'ta' => 'Tamil',
+                'te' => 'Telugu',
+                'tr' => 'Turkish',
+                'uk' => 'Ukrainian',
+                'ur' => 'Urdu',
+                'vi' => 'Vietnamese',
+                'zh_wuu' => 'Wu (Shanghainese)',
+                'zh_hsn' => 'Xiang',
+                'zh_yue' => 'Yue (Cantonese)',
+                'zu' => 'Zulu',
+            );
             $field->validators[] = new NotEmpty();
         });
     }
-
+    */
 
     public function makeWeatherTemperatureUnitSetting()
     {
