@@ -13,7 +13,7 @@
         "WindSpeed": "Wind speed",
         "WindDirection": "Wind direction",
         "WeatherTagName": "Weather",
-        "WeatherTagDescription": "Get weather informations from your visitors",
+        "WeatherTagDescription": "Get weather informations from your visitors.",
         "WeatherTagHelp": "",
         "ApiKey": "API Key",
         "ApiKeyDescription": "Get your API Key from https://www.weatherapi.com/",
