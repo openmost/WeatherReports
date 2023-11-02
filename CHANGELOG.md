@@ -1,5 +1,8 @@
 ## Changelog
 
+### v4.3.3
+Update documentation FAQ
+
 ### v4.3.2
 Update tag language selector
 
