@@ -24,11 +24,26 @@ use Piwik\Validators\NotEmpty;
  */
 class MeasurableSettings extends \Piwik\Settings\Measurable\MeasurableSettings
 {
-    /** @var Setting|null */
-    public $appId;
-
-    /** @var Setting */
-    public $contactEmails;
+    /**
+     * @var \Piwik\Settings\Measurable\MeasurableSetting
+     */
+    public $weatherTemperatureUnit;
+    /**
+     * @var \Piwik\Settings\Measurable\MeasurableSetting
+     */
+    public $weatherPrecipitationUnit;
+    /**
+     * @var \Piwik\Settings\Measurable\MeasurableSetting
+     */
+    public $weatherPressureUnit;
+    /**
+     * @var \Piwik\Settings\Measurable\MeasurableSetting
+     */
+    public $weatherVisibilityUnit;
+    /**
+     * @var \Piwik\Settings\Measurable\MeasurableSetting
+     */
+    public $weatherWindSpeed;
 
     protected function init()
     {

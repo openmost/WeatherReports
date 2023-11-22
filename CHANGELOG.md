@@ -1,5 +1,9 @@
 ## Changelog
 
+### v5.0.1
+
+update: MeasurableSettings
+
 ### v5.0.0
 
 Support Matomo v5
