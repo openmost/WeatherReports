@@ -1,10 +1,10 @@
 {
     "name": "WeatherReports",
     "description": "Track weather data from your website visitors",
-    "version": "4.3.3",
+    "version": "4.3.4",
     "theme": false,
     "require": {
-        "matomo": ">=4.15.1-stable,<5.0.0-b1"
+        "matomo": ">=4.0.0-b1,<5.0.0-b1"
     },
     "authors": [
         {

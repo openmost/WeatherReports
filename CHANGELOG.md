@@ -1,5 +1,8 @@
 ## Changelog
 
+### v4.3.4
+Support Matomo 4.0.0 instead of Matomo 4.15.1
+
 ### v4.3.3
 Update documentation FAQ
 
