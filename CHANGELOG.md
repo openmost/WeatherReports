@@ -1,5 +1,9 @@
 ## Changelog
 
+### v5.0.2
+
+update: Documentation URL
+
 ### v5.0.1
 
 update: MeasurableSettings
