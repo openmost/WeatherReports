@@ -1,5 +1,10 @@
 ## Changelog
 
+
+### v4.3.6
+
+update documentation URL
+
 ### v4.3.5
 
 fix: MeasurableSettings declaration
