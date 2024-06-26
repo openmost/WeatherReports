@@ -1,5 +1,9 @@
 ## Changelog
 
+### v5.0.3
+
+add: Cover for marketplace
+
 ### v5.0.2
 
 update: Documentation URL
