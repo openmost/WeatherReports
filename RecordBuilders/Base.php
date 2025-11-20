@@ -72,17 +72,42 @@ abstract class Base extends RecordBuilder
                 Metrics::INDEX_NB_VISITS_CONVERTED => $row[Metrics::INDEX_NB_VISITS_CONVERTED],
             ];
 
-            $report->sumRowWithLabel($row['label'] ?? '', $columns);
+            // Convert empty, null, or 0 labels to "-"
+            $label = $row['label'] ?? '';
+            if ($label === '' || $label === 0 || $label === '0' || $label === null) {
+                $label = '-';
+            }
+
+            $report->sumRowWithLabel($label, $columns);
         }
 
         if ($this->enrichWithConversionMetrics) {
-            $labelSql = str_replace('log_visit.', 'log_conversion.', $this->labelSql);
+            // Join conversions with visits to get weather data from log_visit
+            // since weather columns may not exist in log_conversion or may not have data
+            $extraFrom = [
+                [
+                    'table' => 'log_visit',
+                    'tableAlias' => 'log_visit',
+                    'joinOn' => 'log_conversion.idvisit = log_visit.idvisit'
+                ]
+            ];
 
-            $query = $logAggregator->queryConversionsByDimension(['label' => $labelSql]);
+            $query = $logAggregator->queryConversionsByDimension(
+                ['label' => $this->labelSql],
+                false,
+                [],
+                $extraFrom
+            );
+
             while ($conversionRow = $query->fetch()) {
                 $label = $conversionRow['label'] ?? '';
 
-                $idGoal = $conversionRow['idgoal'];
+                // Convert empty, null, or 0 labels to "-"
+                if ($label === '' || $label === 0 || $label === '0' || $label === null) {
+                    $label = '-';
+                }
+
+                $idGoal = (int) $conversionRow['idgoal'];
                 $columns = [
                     Metrics::INDEX_GOALS => [
                         $idGoal => Metrics::makeGoalColumnsRow($idGoal, $conversionRow),
@@ -94,6 +119,18 @@ abstract class Base extends RecordBuilder
 
             $report->filter(DataTable\Filter\EnrichRecordWithGoalMetricSums::class);
         }
+
+        // Apply callback sorting for proper numeric ordering
+        // This ensures values are sorted as 1, 2, 10, 20 instead of 1, 10, 2, 20
+        $report->filter('Sort', function ($row) {
+            $label = $row->getColumn('label');
+            // If label is "-", put it at the end
+            if ($label === '-') {
+                return PHP_FLOAT_MAX;
+            }
+            // Convert to float for numeric sorting
+            return (float) $label;
+        }, 'asc');
 
         return [$this->recordName => $report];
     }

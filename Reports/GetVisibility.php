@@ -17,7 +17,7 @@ use Piwik\Plugins\WeatherReports\Columns\Visibility;
  *
  * See {@link http://developer.piwik.org/api-reference/Piwik/Plugin/Report} for more information.
  */
-class GetVisibility extends Base
+class GetVisibility extends BaseScale
 {
     protected function init()
     {
@@ -25,7 +25,7 @@ class GetVisibility extends Base
 
         $this->name = Piwik::translate('WeatherReports_Visibility');
         $this->dimension = new Visibility();
-        $this->documentation = Piwik::translate('The report description');
+        $this->documentation = Piwik::translate('WeatherReports_VisibilityDescription');
 
         // This defines in which order your report appears in the mobile app, in the menu and in the list of widgets
         $this->order = 9;
@@ -59,15 +59,7 @@ class GetVisibility extends Base
      */
     public function configureView(ViewDataTable $view)
     {
-        if (!empty($this->dimension)) {
-            $view->config->addTranslations(array('label' => $this->dimension->getName()));
-        }
-
-        $view->config->show_search = true;
-        //$view->requestConfig->filter_sort_column = 'nb_visits';
-        //$view->requestConfig->filter_limit = 10;
-
-        //$view->config->columns_to_display = array_merge(array('label'), $this->metrics);
+        parent::configureView($view);
     }
 
     /**

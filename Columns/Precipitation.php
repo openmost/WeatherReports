@@ -147,11 +147,11 @@ class Precipitation extends VisitDimension
      * @param Action|null $action
      *
      * @return mixed
-     * public function onAnyGoalConversion(Request $request, Visitor $visitor, $action)
-     * {
-     * return $visitor->getVisitorColumn($this->columnName);
-     * }
      */
+    public function onAnyGoalConversion(Request $request, Visitor $visitor, $action)
+    {
+        return $visitor->getVisitorColumn($this->columnName);
+    }
 
     /**
      * Sometimes you may want to make sure another dimension is executed before your dimension so you can persist

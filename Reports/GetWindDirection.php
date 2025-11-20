@@ -25,7 +25,7 @@ class GetWindDirection extends Base
 
         $this->name = Piwik::translate('WeatherReports_WindDirection');
         $this->dimension = new WindDirection();
-        $this->documentation = Piwik::translate('The report description');
+        $this->documentation = Piwik::translate('WeatherReports_WindDirectionDescription');
 
         // This defines in which order your report appears in the mobile app, in the menu and in the list of widgets
         $this->order = 10;

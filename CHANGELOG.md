@@ -1,5 +1,14 @@
 ## Changelog
 
+### v5.1.0
+
+The great update you waited for!
+
+support: Conversions reports
+update: translations for DE, ES, IT, NL and SV
+refactor: ReportsBuilders
+enhanced bar charts visualisation
+
 ### v5.0.3
 
 add: Cover for marketplace

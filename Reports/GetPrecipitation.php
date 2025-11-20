@@ -17,7 +17,7 @@ use Piwik\Plugins\WeatherReports\Columns\Precipitation;
  *
  * See {@link http://developer.piwik.org/api-reference/Piwik/Plugin/Report} for more information.
  */
-class GetPrecipitation extends Base
+class GetPrecipitation extends BaseScale
 {
     protected function init()
     {
@@ -25,7 +25,7 @@ class GetPrecipitation extends Base
 
         $this->name = Piwik::translate('WeatherReports_Precipitation');
         $this->dimension = new Precipitation();
-        $this->documentation = Piwik::translate('The report description');
+        $this->documentation = Piwik::translate('WeatherReports_PrecipitationDescription');
 
         // This defines in which order your report appears in the mobile app, in the menu and in the list of widgets
         $this->order = 6;
@@ -59,15 +59,7 @@ class GetPrecipitation extends Base
      */
     public function configureView(ViewDataTable $view)
     {
-        if (!empty($this->dimension)) {
-            $view->config->addTranslations(array('label' => $this->dimension->getName()));
-        }
-
-        $view->config->show_search = true;
-        //$view->requestConfig->filter_sort_column = 'nb_visits';
-        //$view->requestConfig->filter_limit = 10;
-
-        //$view->config->columns_to_display = array_merge(array('label'), $this->metrics);
+        parent::configureView($view);
     }
 
     /**
