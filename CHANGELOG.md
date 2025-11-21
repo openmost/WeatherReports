@@ -1,5 +1,9 @@
 ## Changelog
 
+### v5.1.2
+
+fix: Archiving issues
+
 ### v5.1.1
 
 fix: Sorting deprecated method replace with "label"

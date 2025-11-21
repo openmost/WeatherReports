@@ -120,17 +120,21 @@ abstract class Base extends RecordBuilder
             $report->filter(DataTable\Filter\EnrichRecordWithGoalMetricSums::class);
         }
 
-        // Apply callback sorting for proper numeric ordering
+        // Apply sorting for proper numeric ordering
         // This ensures values are sorted as 1, 2, 10, 20 instead of 1, 10, 2, 20
-        $report->filter('Sort', function ($row) {
-            $label = $row->getColumn('label');
-            // If label is "-", put it at the end
+        // Add a temporary sort key column
+        $report->filter('ColumnCallbackAddColumn', [['label'], '_sort_key', function ($label) {
             if ($label === '-') {
                 return PHP_FLOAT_MAX;
             }
-            // Convert to float for numeric sorting
             return (float) $label;
-        }, 'asc');
+        }]);
+
+        // Sort by the temporary column
+        $report->filter('Sort', ['_sort_key', 'asc']);
+
+        // Remove the temporary column
+        $report->filter('ColumnDelete', ['_sort_key']);
 
         return [$this->recordName => $report];
     }
