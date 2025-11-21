@@ -46,11 +46,6 @@ abstract class BaseScale extends Base
         $view->requestConfig->filter_sort_column = 'label';
         $view->requestConfig->filter_sort_order = 'asc';
 
-        // Enable natural sorting to handle numeric values correctly
-        // This ensures values like 1, 2, 10, 20 are sorted as 1, 2, 10, 20
-        // instead of 1, 10, 2, 20 (alphabetic sorting)
-        $view->requestConfig->filter_sort_column_natural = true;
-
         $view->requestConfig->addPropertiesThatShouldBeAvailableClientSide(array('filter_sort_column'));
 
         // Disable search and pagination for cleaner visualization
