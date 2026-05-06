@@ -9,12 +9,12 @@
     "authors": [
         {
             "name": "Openmost",
-            "email": "ronan@openmost.io",
-            "homepage": "https:\/\/openmost.io"
+            "email": "ronan@openmost.com",
+            "homepage": "https:\/\/openmost.com"
         }
     ],
     "support": {
-        "email": "ronan@openmost.io",
+        "email": "ronan@openmost.com",
         "issues": "https:\/\/github.com\/openmost\/WeatherReports\/issues",
         "source": "https:\/\/github.com\/openmost\/WeatherReports"
     },
