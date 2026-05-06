@@ -8,9 +8,6 @@
 
 namespace Piwik\Plugins\WeatherReports;
 
-use Piwik\Plugins\Live\Model;
-use Piwik\View;
-
 class WeatherReports extends \Piwik\Plugin
 {
     public function registerEvents()
@@ -20,23 +17,10 @@ class WeatherReports extends \Piwik\Plugin
         ];
     }
 
-    // support archiving just this plugin via core:archive
     public function getArchivingAPIMethodForPlugin(&$method, $plugin)
     {
-        if ($plugin == 'WeatherReports') {
-            $method = 'WeatherReports.getWeather';
+        if ($plugin === 'WeatherReports') {
+            $method = 'WeatherReports.getCondition';
         }
-    }
-
-    public function extendVisitorDetails(&$visitor) {
-        $crmData = Model::getCRMData($visitor['userid']);
-
-        foreach ($crmData as $prop => $value) {
-            $visitor[$prop] = $value;
-        }
-    }
-    public function provideActionsForVisit(&$actions, $visitorDetails) {
-        $adviews = Model::getAdviews($visitorDetails['visitid']);
-        $actions += $adviews;
     }
 }

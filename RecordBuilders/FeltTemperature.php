@@ -15,6 +15,6 @@ class FeltTemperature extends Base
 {
     public function __construct()
     {
-        parent::__construct(Archiver::FELT_TEMPERATURE_RECORD_NAME, Archiver::FELT_TEMPERATURE_DIMENSION, true);
+        parent::__construct(Archiver::FELT_TEMPERATURE_RECORD_NAME, Archiver::FELT_TEMPERATURE_DIMENSION, true, true);
     }
 }

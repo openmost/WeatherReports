@@ -15,7 +15,6 @@ class Humidity extends Base
 {
     public function __construct()
     {
-        // Cast to SIGNED for proper numeric sorting in SQL
-        parent::__construct(Archiver::HUMIDITY_RECORD_NAME, 'CAST(' . Archiver::HUMIDITY_DIMENSION . ' AS SIGNED)', true);
+        parent::__construct(Archiver::HUMIDITY_RECORD_NAME, 'CAST(' . Archiver::HUMIDITY_DIMENSION . ' AS SIGNED)', true, true);
     }
 }

@@ -15,7 +15,6 @@ class Pressure extends Base
 {
     public function __construct()
     {
-        // Cast to SIGNED for proper numeric sorting in SQL
-        parent::__construct(Archiver::PRESSURE_RECORD_NAME, 'CAST(' . Archiver::PRESSURE_DIMENSION . ' AS SIGNED)', true);
+        parent::__construct(Archiver::PRESSURE_RECORD_NAME, 'CAST(' . Archiver::PRESSURE_DIMENSION . ' AS DECIMAL(10,2))', true, true);
     }
 }

@@ -15,6 +15,6 @@ class Cloud extends Base
 {
     public function __construct()
     {
-        parent::__construct(Archiver::CLOUD_RECORD_NAME, Archiver::CLOUD_DIMENSION, true);
+        parent::__construct(Archiver::CLOUD_RECORD_NAME, Archiver::CLOUD_DIMENSION, true, true);
     }
 }

@@ -1,0 +1,21 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(where php *)",
+      "Bash(node --check \"C:/wamp64/www/matomo/plugins/WeatherReports/Template/Tag/WeatherTag.web.js\")",
+      "Bash(node --check \"C:/wamp64/www/matomo/plugins/WeatherReports/tracker.js\")",
+      "Read(//c/wamp64/www/matomo/vendor/phpunit/**)",
+      "Read(//c/wamp64/www/matomo/vendor/bin/**)",
+      "Read(//c/wamp64/www/matomo/**)",
+      "Bash(./vendor/bin/phpunit --version)",
+      "Bash(./vendor/bin/phpunit -c plugins/WeatherReports/phpunit.xml --testsuite \"WeatherReports Unit\")",
+      "Bash(php -l VisitorDetails.php)",
+      "Bash(rm -rf \"C:/wamp64/www/matomo/tmp/templates_c/\"*)",
+      "Bash(rm -rf \"C:/wamp64/www/matomo/tmp/cache/twig/\"*)",
+      "Bash(mkdir -p \"C:/wamp64/www/matomo/tmp/templates_c/b5\")",
+      "Bash(chmod -R 777 \"C:/wamp64/www/matomo/tmp/templates_c/\")",
+      "Bash(curl -s \"http://matomo.local/js/container_PUjfngFO.js\" -o /tmp/container.js)",
+      "Read(//tmp/**)"
+    ]
+  }
+}

@@ -15,6 +15,6 @@ class Uv extends Base
 {
     public function __construct()
     {
-        parent::__construct(Archiver::UV_RECORD_NAME, Archiver::UV_DIMENSION, true);
+        parent::__construct(Archiver::UV_RECORD_NAME, Archiver::UV_DIMENSION, true, true);
     }
 }

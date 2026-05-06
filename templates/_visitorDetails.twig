@@ -1,68 +1,73 @@
-{% if visitInfo.getColumn('weather_condition') or visitInfo.getColumn('weather_cloud') or visitInfo.getColumn('weather_temperature') or visitInfo.getColumn('weather_felt_temperature') or visitInfo.getColumn('weather_precipitation') or visitInfo.getColumn('weather_humidity') or visitInfo.getColumn('weather_pressure') or visitInfo.getColumn('weather_uv') or visitInfo.getColumn('weather_visibility') or visitInfo.getColumn('weather_wind_direction') or visitInfo.getColumn('weather_wind_speed') %}
-    <div class="weather-reports-visitor-log-details" style="margin-top: .75rem;">
-        <span style="font-size: .875rem; font-weight: 500;">{{ 'WeatherReports_Weather'|translate }}</span>
-        <ul>
-            {% if visitInfo.getColumn('weather_condition') %}
-                <li>
-                    {{ 'WeatherReports_Condition'|translate }}:
-                    <span class="weather-reports-value">{{ visitInfo.getColumn('weather_condition') }}</span>
-                </li>
-            {% endif %}
-                <li>
-                    {{ 'WeatherReports_Cloud'|translate }}:
-                    <span class="weather-reports-value">{{ visitInfo.getColumn('weather_cloud') ?: '0' }}</span>
-                </li>
-            {% if visitInfo.getColumn('weather_temperature') %}
-                <li>
-                    {{ 'WeatherReports_Temperature'|translate }}:
-                    <span class="weather-reports-value">{{ visitInfo.getColumn('weather_temperature') }}</span>
-                </li>
-            {% endif %}
-            {% if visitInfo.getColumn('weather_felt_temperature') %}
-                <li>
-                    {{ 'WeatherReports_FeltTemperature'|translate }}:
-                    <span class="weather-reports-value">{{ visitInfo.getColumn('weather_felt_temperature') }}</span>
-                </li>
-            {% endif %}
-                <li>
-                    {{ 'WeatherReports_Precipitation'|translate }}:
-                    <span class="weather-reports-value">{{ visitInfo.getColumn('weather_precipitation') ?: '0' }}</span>
-                </li>
-            {% if visitInfo.getColumn('weather_humidity') %}
-                <li>
-                    {{ 'WeatherReports_Humidity'|translate }}:
-                    <span class="weather-reports-value">{{ visitInfo.getColumn('weather_humidity') }}</span>
-                </li>
-            {% endif %}
-            {% if visitInfo.getColumn('weather_pressure') %}
-                <li>
-                    {{ 'WeatherReports_Pressure'|translate }}:
-                    <span class="weather-reports-value">{{ visitInfo.getColumn('weather_pressure') }}</span>
-                </li>
-            {% endif %}
-            {% if visitInfo.getColumn('weather_uv') %}
-                <li>
-                    {{ 'WeatherReports_Uv'|translate }}:
-                    <span class="weather-reports-value">{{ visitInfo.getColumn('weather_uv') }}</span></li>
-            {% endif %}
-            {% if visitInfo.getColumn('weather_visibility') %}
-                <li>
-                    {{ 'WeatherReports_Visibility'|translate }}:
-                    <span class="weather-reports-value">{{ visitInfo.getColumn('weather_visibility') }}</span>
-                </li>
-            {% endif %}
-            {% if visitInfo.getColumn('weather_wind_direction') %}
-                <li>
-                    {{ 'WeatherReports_WindDirection'|translate }}:
-                    <span class="weather-reports-value">{{ visitInfo.getColumn('weather_wind_direction') }}</span>
-                </li>
-            {% endif %}
-            {% if visitInfo.getColumn('weather_wind_speed') %}
-                <li>
-                    {{ 'WeatherReports_WindSpeed'|translate }}:
-                    <span class="weather-reports-value">{{ visitInfo.getColumn('weather_wind_speed') }}</span>
-                </li>
-            {% endif %}
-        </ul>
+{# WeatherReports — visitor log details panel.
+   All `w*` and `unit*` variables are pre-normalized in VisitorDetails.php:
+   missing/false/'' values arrive as null, so `is not null` is enough. #}
+{# Inline styles use Matomo's CSS theme variables so the card adapts to
+   light/dark themes (DarkTheme, GoogleTheme, custom themes). Hex fallbacks
+   keep it readable on themes that don't expose every variable. #}
+<div class="weather-reports-visitor-log" style="margin-top:.75rem;padding:.75rem .875rem;border:1px solid var(--theme-color-border,#e1e4e8);border-radius:6px;background:var(--theme-color-background-contrast,#fff);color:var(--theme-color-text,#1f2937);font-size:.8125rem;line-height:1.4;">
+    <div style="display:flex;justify-content:space-between;align-items:baseline;gap:.5rem;margin-bottom:.5rem;padding-bottom:.5rem;border-bottom:1px solid var(--theme-color-border-light,var(--theme-color-border,#eef1f4));">
+        <span style="font-weight:600;color:var(--theme-color-text,#1f2937);">
+            {{- 'WeatherReports_Weather'|translate -}}
+            {%- if wCondition is not null %} · <span style="font-weight:500;color:var(--theme-color-text-light,#4b5563);">{{ wCondition }}</span>{% endif -%}
+        </span>
+        {% if wTemperature is not null %}
+            <span style="font-size:1rem;font-weight:600;color:var(--theme-color-text,#111827);">
+                {{- wTemperature }}{{ unitTemperature -}}
+                {%- if wFeltTemperature is not null %}
+                    <span style="font-size:.75rem;font-weight:400;color:var(--theme-color-text-light,#6b7280);">
+                        ({{- 'WeatherReports_FeltTemperature'|translate|lower }} {{ wFeltTemperature }}{{ unitTemperature -}})
+                    </span>
+                {% endif -%}
+            </span>
+        {% endif %}
     </div>
-{% endif %}
+
+    <div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.25rem .75rem;color:var(--theme-color-text,#374151);">
+        {% if wHumidity is not null %}
+            <div style="display:flex;justify-content:space-between;">
+                <span style="color:var(--theme-color-text-light,#6b7280);">{{ 'WeatherReports_Humidity'|translate }}</span>
+                <span style="font-weight:500;">{{ wHumidity }}%</span>
+            </div>
+        {% endif %}
+        {% if wCloud is not null %}
+            <div style="display:flex;justify-content:space-between;">
+                <span style="color:var(--theme-color-text-light,#6b7280);">{{ 'WeatherReports_Cloud'|translate }}</span>
+                <span style="font-weight:500;">{{ wCloud }}%</span>
+            </div>
+        {% endif %}
+        {% if wPressure is not null %}
+            <div style="display:flex;justify-content:space-between;">
+                <span style="color:var(--theme-color-text-light,#6b7280);">{{ 'WeatherReports_Pressure'|translate }}</span>
+                <span style="font-weight:500;">{{ wPressure }}{{ unitPressure }}</span>
+            </div>
+        {% endif %}
+        {% if wVisibility is not null %}
+            <div style="display:flex;justify-content:space-between;">
+                <span style="color:var(--theme-color-text-light,#6b7280);">{{ 'WeatherReports_Visibility'|translate }}</span>
+                <span style="font-weight:500;">{{ wVisibility }}{{ unitVisibility }}</span>
+            </div>
+        {% endif %}
+        {% if wPrecipitation is not null %}
+            <div style="display:flex;justify-content:space-between;">
+                <span style="color:var(--theme-color-text-light,#6b7280);">{{ 'WeatherReports_Precipitation'|translate }}</span>
+                <span style="font-weight:500;">{{ wPrecipitation }}{{ unitPrecipitation }}</span>
+            </div>
+        {% endif %}
+        {% if wUv is not null %}
+            <div style="display:flex;justify-content:space-between;">
+                <span style="color:var(--theme-color-text-light,#6b7280);">{{ 'WeatherReports_Uv'|translate }}</span>
+                <span style="font-weight:500;">{{ wUv }}</span>
+            </div>
+        {% endif %}
+        {% if wWindSpeed is not null or wWindDirection is not null %}
+            <div style="display:flex;justify-content:space-between;grid-column:span 2;">
+                <span style="color:var(--theme-color-text-light,#6b7280);">{{ 'WeatherReports_WindSpeed'|translate }}</span>
+                <span style="font-weight:500;">
+                    {%- if wWindDirection is not null %}{{ wWindDirection }}{% endif -%}
+                    {%- if wWindDirection is not null and wWindSpeed is not null %} · {% endif -%}
+                    {%- if wWindSpeed is not null %}{{ wWindSpeed }}{{ unitWind }}{% endif -%}
+                </span>
+            </div>
+        {% endif %}
+    </div>
+</div>

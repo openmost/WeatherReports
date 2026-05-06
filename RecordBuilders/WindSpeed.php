@@ -15,7 +15,6 @@ class WindSpeed extends Base
 {
     public function __construct()
     {
-        // Cast to DECIMAL for proper numeric sorting in SQL
-        parent::__construct(Archiver::WIND_SPEED_RECORD_NAME, 'CAST(' . Archiver::WIND_SPEED_DIMENSION . ' AS DECIMAL(10,2))', true);
+        parent::__construct(Archiver::WIND_SPEED_RECORD_NAME, 'CAST(' . Archiver::WIND_SPEED_DIMENSION . ' AS DECIMAL(10,2))', true, true);
     }
 }

@@ -15,6 +15,6 @@ class Precipitation extends Base
 {
     public function __construct()
     {
-        parent::__construct(Archiver::PRECIPITATION_RECORD_NAME, Archiver::PRECIPITATION_DIMENSION, true);
+        parent::__construct(Archiver::PRECIPITATION_RECORD_NAME, Archiver::PRECIPITATION_DIMENSION, true, true);
     }
 }

@@ -15,6 +15,6 @@ class Visibility extends Base
 {
     public function __construct()
     {
-        parent::__construct(Archiver::VISIBILITY_RECORD_NAME, Archiver::VISIBILITY_DIMENSION, true);
+        parent::__construct(Archiver::VISIBILITY_RECORD_NAME, 'CAST(' . Archiver::VISIBILITY_DIMENSION . ' AS DECIMAL(10,2))', true, true);
     }
 }
