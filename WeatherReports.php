@@ -39,6 +39,11 @@ class WeatherReports extends \Piwik\Plugin
         $translationKeys[] = 'WeatherReports_Uv';
         $translationKeys[] = 'WeatherReports_Visibility';
         $translationKeys[] = 'WeatherReports_Wind';
+        $translationKeys[] = 'WeatherReports_UnitsPageTitle';
+        $translationKeys[] = 'WeatherReports_UnitsPageIntro';
+        $translationKeys[] = 'WeatherReports_UnitsPageApiKey';
+        $translationKeys[] = 'WeatherReports_ApiKeySettingTitle';
+        $translationKeys[] = 'General_YourChangesHaveBeenSaved';
     }
 
     /**

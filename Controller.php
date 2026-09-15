@@ -12,11 +12,38 @@ namespace Piwik\Plugins\WeatherReports;
 use Piwik\Common;
 use Piwik\Http\JsonResponse;
 use Piwik\IP;
+use Piwik\Piwik;
 use Piwik\Plugins\UserCountry\LocationProvider;
+use Piwik\Plugins\WeatherReports\Settings\SiteUnitsStorage;
 use Piwik\Request;
+use Piwik\Url;
 
 class Controller extends \Piwik\Plugin\Controller
 {
+    /**
+     * Weather units of a site, in Administration > Websites > Weather.
+     */
+    public function manage(): string
+    {
+        $idSite = Request::fromRequest()->getIntegerParameter('idSite', 0);
+        Piwik::checkUserHasAdminAccess($idSite);
+
+        $apiKeyUrl = '';
+        if (Piwik::hasUserSuperUserAccess()) {
+            $apiKeyUrl = 'index.php' . Url::getCurrentQueryStringWithParametersModified([
+                'module' => 'CoreAdminHome',
+                'action' => 'generalSettings',
+            ]) . '#/WeatherReports';
+        }
+
+        return $this->renderTemplate('manage', [
+            'idSite' => $idSite,
+            'fields' => Units::getFieldsMetadata(),
+            'units' => Units::getUnitCodes(SiteUnitsStorage::read($idSite)),
+            'apiKeyUrl' => $apiKeyUrl,
+        ]);
+    }
+
     /**
      * Public endpoint that returns the visitor's IP as Matomo resolves it
      * (honouring proxy_client_headers / proxy_host_headers in config.ini.php).

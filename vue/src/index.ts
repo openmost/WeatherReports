@@ -6,3 +6,4 @@
  */
 
 export { default as VisitorWeather } from './VisitorWeather/VisitorWeather.vue';
+export { default as ManageUnits } from './ManageUnits/ManageUnits.vue';

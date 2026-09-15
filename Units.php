@@ -11,13 +11,13 @@ declare(strict_types=1);
 
 namespace Piwik\Plugins\WeatherReports;
 
-use Piwik\Container\StaticContainer;
-use Piwik\Plugin\SettingsProvider;
+use Piwik\Piwik;
+use Piwik\Plugins\WeatherReports\Settings\SiteUnitsStorage;
 
 /**
- * Units of the weather values, read from the per-site MeasurableSettings.
+ * Units of the weather values of a site, set on the Weather page of the Websites administration.
  *
- * Values are stored in the units of the site settings: the tracker converts values sent with a unit
+ * Values are stored in the units of the site: the tracker converts values sent with a unit
  * system marker, older tracking codes send values in the configured units.
  */
 class Units
@@ -45,12 +45,21 @@ class Units
         self::WIND => ['kph' => 'km/h', 'mph' => 'mph'],
     ];
 
-    private const SETTING_NAMES = [
-        self::TEMPERATURE => 'weatherTemperatureUnit',
-        self::PRECIPITATION => 'weatherPrecipitationUnit',
-        self::PRESSURE => 'weatherPressureUnit',
-        self::VISIBILITY => 'weatherVisibilityUnit',
-        self::WIND => 'weatherWindSpeed',
+    private const UNIT_TRANSLATION_KEYS = [
+        self::TEMPERATURE => ['c' => 'WeatherReports_Celsius', 'f' => 'WeatherReports_Fahrenheit'],
+        self::PRECIPITATION => ['mm' => 'WeatherReports_Millimeters', 'in' => 'WeatherReports_Inches'],
+        self::PRESSURE => ['mb' => 'WeatherReports_Millibars', 'in' => 'WeatherReports_Inches'],
+        self::VISIBILITY => ['km' => 'WeatherReports_Kilometers', 'miles' => 'WeatherReports_Miles'],
+        self::WIND => ['kph' => 'WeatherReports_KilometersPerHour', 'mph' => 'WeatherReports_MilesPerHour'],
+    ];
+
+    /** Prefix of the WeatherReports_*UnitTitle and WeatherReports_*UnitDescription translations */
+    private const FIELD_TRANSLATION_PREFIXES = [
+        self::TEMPERATURE => 'Temperature',
+        self::PRECIPITATION => 'Precipitation',
+        self::PRESSURE => 'Pressure',
+        self::VISIBILITY => 'Visibility',
+        self::WIND => 'WindSpeed',
     ];
 
     /** @var array<int, array<string, string>> */
@@ -62,7 +71,7 @@ class Units
     public static function getUnitCodesForSite(int $idSite): array
     {
         if (!isset(self::$unitCodesBySite[$idSite])) {
-            self::$unitCodesBySite[$idSite] = self::getUnitCodes(self::readSiteUnits($idSite));
+            self::$unitCodesBySite[$idSite] = self::getUnitCodes(SiteUnitsStorage::read($idSite));
         }
 
         return self::$unitCodesBySite[$idSite];
@@ -83,6 +92,11 @@ class Units
         }
 
         return self::getSymbolsForSite($idSite)[$quantity] ?? '';
+    }
+
+    public static function isKnownUnit(string $quantity, string $unit): bool
+    {
+        return isset(self::SYMBOLS[$quantity][$unit]);
     }
 
     /**
@@ -116,38 +130,37 @@ class Units
         return $symbols;
     }
 
+    /**
+     * Fields of the Weather units page.
+     *
+     * @return array<int, array{quantity: string, title: string, description: string, options: array<int, array{key: string, value: string}>}>
+     */
+    public static function getFieldsMetadata(): array
+    {
+        $fields = [];
+        foreach (self::UNIT_TRANSLATION_KEYS as $quantity => $translationKeys) {
+            $options = [];
+            foreach ($translationKeys as $unit => $translationKey) {
+                $options[] = [
+                    'key' => $unit,
+                    'value' => Piwik::translate($translationKey) . ' (' . self::SYMBOLS[$quantity][$unit] . ')',
+                ];
+            }
+
+            $prefix = self::FIELD_TRANSLATION_PREFIXES[$quantity];
+            $fields[] = [
+                'quantity' => $quantity,
+                'title' => Piwik::translate('WeatherReports_' . $prefix . 'UnitTitle'),
+                'description' => Piwik::translate('WeatherReports_' . $prefix . 'UnitDescription'),
+                'options' => $options,
+            ];
+        }
+
+        return $fields;
+    }
+
     public static function clearCache(): void
     {
         self::$unitCodesBySite = [];
-    }
-
-    /**
-     * @return array<string, string>
-     */
-    private static function readSiteUnits(int $idSite): array
-    {
-        if ($idSite <= 0) {
-            return [];
-        }
-
-        try {
-            $settings = StaticContainer::get(SettingsProvider::class)->getMeasurableSettings('WeatherReports', $idSite);
-        } catch (\Throwable $e) {
-            return [];
-        }
-
-        if (!$settings instanceof MeasurableSettings) {
-            return [];
-        }
-
-        $units = [];
-        foreach (self::SETTING_NAMES as $quantity => $settingName) {
-            $value = $settings->$settingName->getValue();
-            if (is_string($value) && $value !== '') {
-                $units[$quantity] = $value;
-            }
-        }
-
-        return $units;
     }
 }

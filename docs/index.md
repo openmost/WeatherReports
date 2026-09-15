@@ -26,8 +26,9 @@ Responses are cached for 30 minutes per location. WeatherAPI receives the coordi
 
 ### 3 - Configure the units of the website
 
-In *Administration → Websites → Manage*, edit the website and choose the Temperature (°C/°F), Precipitation (mm/in),
-Pressure (mb/inHg), Visibility (km/mi) and Wind speed (km/h/mph) units. Values are stored and displayed in these units:
+In *Administration → Websites → Weather*, choose the website with the site selector and set the Temperature (°C/°F),
+Precipitation (mm/in), Pressure (mb/inHg), Visibility (km/mi) and Wind speed (km/h/mph) units (admin access to the
+website needed). Values are stored and displayed in these units:
 the tracking code sends metric values and Matomo converts them when tracking. Reports show the unit in the column title
 and the visitor log next to each value.
 

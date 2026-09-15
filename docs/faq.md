@@ -67,7 +67,8 @@ and segments.
 
 ### Where are the per-site unit settings?
 
-In *Websites → Manage*, when editing a website. Set Temperature (°C/°F), Precipitation (mm/in), Pressure
+On the *Administration → Websites → Weather* page, for each website you have admin access to (they were in the
+website edit form before 6.2.0, saved units are kept). Set Temperature (°C/°F), Precipitation (mm/in), Pressure
 (mb/inHg), Visibility (km/mi) and Wind speed (km/h/mph). The Weather tag sends metric values and Matomo
 converts them to these units when tracking. Reports show the unit in the column title and the visitor
 log next to each value. Data tracked before a unit change is not converted.

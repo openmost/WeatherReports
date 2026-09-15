@@ -1,5 +1,13 @@
 ## Changelog
 
+### v6.2.0
+
+> **No action required.** Units already saved for your websites are kept.
+
+- Weather units moved from the website edit form to a dedicated *Administration → Websites → Weather* page (Vue), with a site selector and a link to the WeatherAPI key setting
+- New API methods `WeatherReports.getSiteUnits` and `WeatherReports.setSiteUnits` (admin access)
+- Units are still stored in the site settings table under the same names, values saved by any previous version are read
+
 ### v6.1.0
 
 > **No action required.** No database migration: existing data, settings, Tag Manager tags and tracking codes keep

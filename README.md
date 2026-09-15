@@ -17,8 +17,9 @@ and goal/conversion metrics.
 - **Segments** for every dimension (`weatherTemperature`, `weatherCondition`, …).
 - **Conditions in the language of each user**: condition texts are matched against the official WeatherAPI list
   and displayed in the Matomo user's language, the same condition tracked in several languages is merged.
-- **Units follow the website settings**: per-site units (°C/°F, mm/in, mb/inHg, km/mi, km/h/mph) in
-  *Websites → Manage*. The Weather tag sends metric values, Matomo converts them when tracking.
+- **Units follow the website settings**: per-site units (°C/°F, mm/in, mb/inHg, km/mi, km/h/mph) on a
+  dedicated *Administration → Websites → Weather* page. The Weather tag sends metric values, Matomo converts
+  them when tracking.
 - **WeatherAPI key kept on the server**: save the key in the plugin settings, the Weather tag gets the weather
   through Matomo and the key never appears in your website code.
 - **Bar-chart visualizations** for scale-based reports with logical numeric ordering on the x-axis

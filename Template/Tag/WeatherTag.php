@@ -11,7 +11,7 @@ namespace Piwik\Plugins\WeatherReports\Template\Tag;
 
 use Piwik\Piwik;
 use Piwik\Plugins\TagManager\Template\Tag\BaseTag;
-use Piwik\Plugins\WeatherReports\Settings\SingleValueMeasurableSetting;
+use Piwik\Plugins\WeatherReports\Settings\SingleValue;
 use Piwik\Settings\FieldConfig;
 use Piwik\SettingsPiwik;
 use Piwik\Validators\NotEmpty;
@@ -104,7 +104,7 @@ class WeatherTag extends BaseTag
                 $field->validators[] = new NotEmpty();
                 // tags saved before 6.1.0 hold the language as ["fr"]
                 $field->prepare = static function ($value) {
-                    return SingleValueMeasurableSetting::unwrap($value);
+                    return SingleValue::unwrap($value);
                 };
             }),
         ];
