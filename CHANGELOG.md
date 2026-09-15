@@ -1,5 +1,9 @@
 ## Changelog
 
+### v6.2.1
+
+- Update screenshots: Weather tag configuration and Weather units page
+
 ### v6.2.0
 
 > **No action required.** Units already saved for your websites are kept.
