@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Matomo - free/libre analytics platform
  *
@@ -18,6 +19,7 @@ class Temperature extends Base
 
     protected $paramName = 'weather_temperature';
     protected $paramType = 'float';
+    protected $unitQuantity = \Piwik\Plugins\WeatherReports\Units::TEMPERATURE;
 
     public function sanitize($value)
     {

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Matomo - free/libre analytics platform
  *
@@ -19,6 +20,7 @@ class Visibility extends Base
 
     protected $paramName = 'weather_visibility';
     protected $paramType = 'float';
+    protected $unitQuantity = \Piwik\Plugins\WeatherReports\Units::VISIBILITY;
 
     public function sanitize($value)
     {

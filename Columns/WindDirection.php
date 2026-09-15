@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Matomo - free/libre analytics platform
  *
@@ -15,17 +16,14 @@ class WindDirection extends Base
     protected $nameSingular = 'WeatherReports_WindDirection';
     protected $segmentName = 'weatherWindDirection';
     protected $acceptValues = '16-point compass: N NNE NE ENE E ESE SE SSE S SSW SW WSW W WNW NW NNW';
-
     protected $paramName = 'weather_wind_direction';
     protected $paramType = 'string';
-
     private const COMPASS = [
         'N', 'NNE', 'NE', 'ENE',
         'E', 'ESE', 'SE', 'SSE',
         'S', 'SSW', 'SW', 'WSW',
         'W', 'WNW', 'NW', 'NNW',
     ];
-
     public function sanitize($value)
     {
         $value = strtoupper(trim((string) $value));

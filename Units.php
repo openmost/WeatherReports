@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Matomo - free/libre analytics platform
  *
@@ -14,9 +15,10 @@ use Piwik\Container\StaticContainer;
 use Piwik\Plugin\SettingsProvider;
 
 /**
- * Unit symbols of the weather values, read from the per-site MeasurableSettings.
+ * Units of the weather values, read from the per-site MeasurableSettings.
  *
- * Values are stored in whatever unit the tracking code sent, the settings tell Matomo which unit that is.
+ * Values are stored in the units of the site settings: the tracker converts values sent with a unit
+ * system marker, older tracking codes send values in the configured units.
  */
 class Units
 {
@@ -27,7 +29,7 @@ class Units
     public const WIND = 'wind';
     public const PERCENT = 'percent';
 
-    private const DEFAULT_UNITS = [
+    public const DEFAULT_UNITS = [
         self::TEMPERATURE => 'c',
         self::PRECIPITATION => 'mm',
         self::PRESSURE => 'mb',
@@ -52,18 +54,26 @@ class Units
     ];
 
     /** @var array<int, array<string, string>> */
-    private static array $symbolsBySite = [];
+    private static array $unitCodesBySite = [];
+
+    /**
+     * @return array<string, string> quantity => unit code, e.g. ['temperature' => 'c', ...]
+     */
+    public static function getUnitCodesForSite(int $idSite): array
+    {
+        if (!isset(self::$unitCodesBySite[$idSite])) {
+            self::$unitCodesBySite[$idSite] = self::getUnitCodes(self::readSiteUnits($idSite));
+        }
+
+        return self::$unitCodesBySite[$idSite];
+    }
 
     /**
      * @return array<string, string> quantity => unit symbol, e.g. ['temperature' => '°C', ...]
      */
     public static function getSymbolsForSite(int $idSite): array
     {
-        if (!isset(self::$symbolsBySite[$idSite])) {
-            self::$symbolsBySite[$idSite] = self::getSymbols(self::readSiteUnits($idSite));
-        }
-
-        return self::$symbolsBySite[$idSite];
+        return self::getSymbols(self::getUnitCodesForSite($idSite));
     }
 
     public static function getSymbolForSite(int $idSite, string $quantity): string
@@ -76,15 +86,31 @@ class Units
     }
 
     /**
-     * @param array<string, string> $units quantity => unit code as stored in the settings, e.g. ['temperature' => 'f']
+     * Known unit codes merged with the defaults, unknown codes fall back to the default.
+     *
+     * @param array<string, mixed> $units quantity => unit code
+     * @return array<string, string>
+     */
+    public static function getUnitCodes(array $units): array
+    {
+        $codes = [];
+        foreach (self::SYMBOLS as $quantity => $symbolsByUnit) {
+            $unit = $units[$quantity] ?? null;
+            $codes[$quantity] = is_string($unit) && isset($symbolsByUnit[$unit]) ? $unit : self::DEFAULT_UNITS[$quantity];
+        }
+
+        return $codes;
+    }
+
+    /**
+     * @param array<string, mixed> $units quantity => unit code as stored in the settings, e.g. ['temperature' => 'f']
      * @return array<string, string>
      */
     public static function getSymbols(array $units): array
     {
         $symbols = [];
-        foreach (self::SYMBOLS as $quantity => $symbolsByUnit) {
-            $unit = $units[$quantity] ?? self::DEFAULT_UNITS[$quantity];
-            $symbols[$quantity] = $symbolsByUnit[$unit] ?? $symbolsByUnit[self::DEFAULT_UNITS[$quantity]];
+        foreach (self::getUnitCodes($units) as $quantity => $unit) {
+            $symbols[$quantity] = self::SYMBOLS[$quantity][$unit];
         }
 
         return $symbols;
@@ -92,7 +118,7 @@ class Units
 
     public static function clearCache(): void
     {
-        self::$symbolsBySite = [];
+        self::$unitCodesBySite = [];
     }
 
     /**
@@ -116,11 +142,7 @@ class Units
 
         $units = [];
         foreach (self::SETTING_NAMES as $quantity => $settingName) {
-            // single selects are declared as TYPE_ARRAY, the value may come back wrapped in an array
             $value = $settings->$settingName->getValue();
-            if (is_array($value)) {
-                $value = reset($value);
-            }
             if (is_string($value) && $value !== '') {
                 $units[$quantity] = $value;
             }

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Matomo - free/libre analytics platform
  *
@@ -9,104 +10,70 @@
 namespace Piwik\Plugins\WeatherReports;
 
 use Piwik\Piwik;
-use Piwik\Settings\Setting;
+use Piwik\Plugins\WeatherReports\Settings\SingleValueMeasurableSetting;
 use Piwik\Settings\FieldConfig;
 use Piwik\Validators\NotEmpty;
 
 /**
- * Per-site unit preferences for displaying weather metrics.
+ * Per-site units of the weather values: values are stored and displayed in these units.
  */
 class MeasurableSettings extends \Piwik\Settings\Measurable\MeasurableSettings
 {
-    /** @var \Piwik\Settings\Measurable\MeasurableSetting */
+    /** @var SingleValueMeasurableSetting */
     public $weatherTemperatureUnit;
-    /** @var \Piwik\Settings\Measurable\MeasurableSetting */
+    /** @var SingleValueMeasurableSetting */
     public $weatherPrecipitationUnit;
-    /** @var \Piwik\Settings\Measurable\MeasurableSetting */
+    /** @var SingleValueMeasurableSetting */
     public $weatherPressureUnit;
-    /** @var \Piwik\Settings\Measurable\MeasurableSetting */
+    /** @var SingleValueMeasurableSetting */
     public $weatherVisibilityUnit;
-    /** @var \Piwik\Settings\Measurable\MeasurableSetting */
+    /** @var SingleValueMeasurableSetting */
     public $weatherWindSpeed;
 
     protected function init()
     {
-        $this->weatherTemperatureUnit = $this->makeWeatherTemperatureUnitSetting();
-        $this->weatherPrecipitationUnit = $this->makeWeatherPrecipitationUnitSetting();
-        $this->weatherPressureUnit = $this->makeWeatherPressureUnitSetting();
-        $this->weatherVisibilityUnit = $this->makeWeatherVisibilityUnitSetting();
-        $this->weatherWindSpeed = $this->makeWeatherWindSpeedUnitSetting();
+        $this->weatherTemperatureUnit = $this->makeUnitSetting('weatherTemperatureUnit', 'c', 'Temperature', [
+            'c' => 'WeatherReports_Celsius',
+            'f' => 'WeatherReports_Fahrenheit',
+        ]);
+        $this->weatherPrecipitationUnit = $this->makeUnitSetting('weatherPrecipitationUnit', 'mm', 'Precipitation', [
+            'mm' => 'WeatherReports_Millimeters',
+            'in' => 'WeatherReports_Inches',
+        ]);
+        $this->weatherPressureUnit = $this->makeUnitSetting('weatherPressureUnit', 'mb', 'Pressure', [
+            'mb' => 'WeatherReports_Millibars',
+            'in' => 'WeatherReports_Inches',
+        ]);
+        $this->weatherVisibilityUnit = $this->makeUnitSetting('weatherVisibilityUnit', 'km', 'Visibility', [
+            'km' => 'WeatherReports_Kilometers',
+            'miles' => 'WeatherReports_Miles',
+        ]);
+        $this->weatherWindSpeed = $this->makeUnitSetting('weatherWindSpeed', 'kph', 'WindSpeed', [
+            'kph' => 'WeatherReports_KilometersPerHour',
+            'mph' => 'WeatherReports_MilesPerHour',
+        ]);
     }
 
-    public function makeWeatherTemperatureUnitSetting()
+    /**
+     * @param array<string, string> $unitTranslationKeys unit code => translation key
+     */
+    private function makeUnitSetting(string $name, string $defaultUnit, string $quantity, array $unitTranslationKeys): SingleValueMeasurableSetting
     {
-
-        return $this->makeSetting('weatherTemperatureUnit', 'c', FieldConfig::TYPE_ARRAY, function (FieldConfig $field) {
-            $field->title = Piwik::translate('WeatherReports_TemperatureUnitTitle');
-            $field->description = Piwik::translate('WeatherReports_TemperatureUnitDescription');
+        $setting = new SingleValueMeasurableSetting($name, $defaultUnit, $this->pluginName, $this->idSite);
+        $setting->setConfigureCallback(function (FieldConfig $field) use ($quantity, $unitTranslationKeys) {
+            $field->title = Piwik::translate('WeatherReports_' . $quantity . 'UnitTitle');
+            $field->description = Piwik::translate('WeatherReports_' . $quantity . 'UnitDescription');
             $field->uiControl = FieldConfig::UI_CONTROL_SINGLE_SELECT;
-            $field->availableValues = array(
-                'c' => Piwik::translate('WeatherReports_Celsius'),
-                'f' => Piwik::translate('WeatherReports_Fahrenheit'),
-            );
+            $field->availableValues = array_map([Piwik::class, 'translate'], $unitTranslationKeys);
             $field->validators[] = new NotEmpty();
+            // API clients may still send the legacy ["c"] format
+            $field->prepare = static function ($value) {
+                return SingleValueMeasurableSetting::unwrap($value);
+            };
         });
-    }
 
+        $this->addSetting($setting);
 
-    public function makeWeatherPrecipitationUnitSetting()
-    {
-        return $this->makeSetting('weatherPrecipitationUnit', 'mm', FieldConfig::TYPE_ARRAY, function (FieldConfig $field) {
-            $field->title = Piwik::translate('WeatherReports_PrecipitationUnitTitle');
-            $field->description = Piwik::translate('WeatherReports_PrecipitationUnitDescription');
-            $field->uiControl = FieldConfig::UI_CONTROL_SINGLE_SELECT;
-            $field->availableValues = array(
-                'mm' => Piwik::translate('WeatherReports_Millimeters'),
-                'in' => Piwik::translate('WeatherReports_Inches'),
-            );
-            $field->validators[] = new NotEmpty();
-        });
-    }
-
-    public function makeWeatherPressureUnitSetting()
-    {
-        return $this->makeSetting('weatherPressureUnit', 'mb', FieldConfig::TYPE_ARRAY, function (FieldConfig $field) {
-            $field->title = Piwik::translate('WeatherReports_PressureUnitTitle');
-            $field->description = Piwik::translate('WeatherReports_PressureUnitDescription');
-            $field->uiControl = FieldConfig::UI_CONTROL_SINGLE_SELECT;
-            $field->availableValues = array(
-                'mb' => Piwik::translate('WeatherReports_Millibars'),
-                'in' => Piwik::translate('WeatherReports_Inches'),
-            );
-            $field->validators[] = new NotEmpty();
-        });
-    }
-
-    public function makeWeatherVisibilityUnitSetting()
-    {
-        return $this->makeSetting('weatherVisibilityUnit', 'km', FieldConfig::TYPE_ARRAY, function (FieldConfig $field) {
-            $field->title = Piwik::translate('WeatherReports_VisibilityUnitTitle');
-            $field->description = Piwik::translate('WeatherReports_VisibilityUnitDescription');
-            $field->uiControl = FieldConfig::UI_CONTROL_SINGLE_SELECT;
-            $field->availableValues = array(
-                'km' => Piwik::translate('WeatherReports_Kilometers'),
-                'miles' => Piwik::translate('WeatherReports_Miles'),
-            );
-            $field->validators[] = new NotEmpty();
-        });
-    }
-
-    public function makeWeatherWindSpeedUnitSetting()
-    {
-        return $this->makeSetting('weatherWindSpeed', 'kph', FieldConfig::TYPE_ARRAY, function (FieldConfig $field) {
-            $field->title = Piwik::translate('WeatherReports_WindSpeedUnitTitle');
-            $field->description = Piwik::translate('WeatherReports_WindSpeedUnitDescription');
-            $field->uiControl = FieldConfig::UI_CONTROL_SINGLE_SELECT;
-            $field->availableValues = array(
-                'kph' => Piwik::translate('WeatherReports_KilometersPerHour'),
-                'mph' => Piwik::translate('WeatherReports_MilesPerHour'),
-            );
-            $field->validators[] = new NotEmpty();
-        });
+        return $setting;
     }
 }

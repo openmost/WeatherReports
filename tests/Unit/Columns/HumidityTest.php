@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Matomo - free/libre analytics platform
  *
@@ -18,7 +19,6 @@ class HumidityTest extends TestCase
 {
     /** @var Humidity */
     private $column;
-
     protected function setUp(): void
     {
         $this->column = new Humidity();

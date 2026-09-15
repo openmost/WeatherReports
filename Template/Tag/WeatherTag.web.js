@@ -20,34 +20,54 @@
       } catch (e) { /* storage may be full or disabled */ }
     }
 
-    this.fire = function () {
-      var apiKey = parameters.get('apiKey');
-      if (!apiKey) {
-        return;
+    function push(weather) {
+      window._paq = window._paq || [];
+      // metric values, Matomo converts them to the units of the website settings
+      window._paq.push(['WeatherReports.setWeather',
+        weather.cloud,
+        weather.condition && weather.condition.text,
+        weather.feelslike_c,
+        weather.humidity,
+        weather.precip_mm,
+        weather.pressure_mb,
+        weather.temp_c,
+        weather.uv,
+        weather.vis_km,
+        weather.wind_dir,
+        weather.wind_kph,
+        'metric'
+      ]);
+    }
+
+    function buildUrl(apiKey, matomoUrl, lang) {
+      if (apiKey) {
+        // WeatherAPI auto-detects the calling client IP, no third-party IP lookup needed.
+        return 'https://api.weatherapi.com/v1/current.json'
+          + '?key=' + encodeURIComponent(apiKey)
+          + '&q=auto:ip'
+          + '&aqi=no'
+          + '&lang=' + encodeURIComponent(lang);
       }
 
-      var lang = String(parameters.get('lang') || 'en');
-      var temperatureUnit = String(parameters.get('temperatureUnit') || 'c');
-      var precipitationUnit = String(parameters.get('precipitationUnit') || 'mm');
-      var pressureUnit = String(parameters.get('pressureUnit') || 'mb');
-      var visibilityUnit = String(parameters.get('visibilityUnit') || 'km');
-      var windSpeedUnit = String(parameters.get('windSpeedUnit') || 'kph');
+      if (!matomoUrl) {
+        return null;
+      }
 
-      function push(weather) {
-        window._paq = window._paq || [];
-        window._paq.push(['WeatherReports.setWeather',
-          weather.cloud,
-          weather.condition && weather.condition.text,
-          weather['feelslike_' + temperatureUnit],
-          weather.humidity,
-          weather['precip_' + precipitationUnit],
-          weather['pressure_' + pressureUnit],
-          weather['temp_' + temperatureUnit],
-          weather.uv,
-          weather['vis_' + visibilityUnit],
-          weather.wind_dir,
-          weather['wind_' + windSpeedUnit]
-        ]);
+      // Matomo calls WeatherAPI with the key of the plugin settings
+      if (matomoUrl.charAt(matomoUrl.length - 1) !== '/') {
+        matomoUrl += '/';
+      }
+      return matomoUrl + 'index.php?module=WeatherReports&action=getWeather&lang=' + encodeURIComponent(lang);
+    }
+
+    this.fire = function () {
+      var url = buildUrl(
+        String(parameters.get('apiKey') || ''),
+        String(parameters.get('matomoUrl') || ''),
+        String(parameters.get('lang') || 'en')
+      );
+      if (!url) {
+        return;
       }
 
       // Weather is sent on every page so a new visit in the same browser session gets it too
@@ -57,17 +77,10 @@
         return;
       }
 
-      // WeatherAPI auto-detects the calling client IP, no third-party IP lookup needed.
-      var url = 'https://api.weatherapi.com/v1/current.json'
-        + '?key=' + encodeURIComponent(apiKey)
-        + '&q=auto:ip'
-        + '&aqi=no'
-        + '&lang=' + encodeURIComponent(lang);
-
-      fetch(url)
+      fetch(url, {credentials: 'omit'})
         .then(function (response) {
           if (!response.ok) {
-            throw new Error('WeatherAPI HTTP ' + response.status);
+            throw new Error('Weather HTTP ' + response.status);
           }
           return response.json();
         })

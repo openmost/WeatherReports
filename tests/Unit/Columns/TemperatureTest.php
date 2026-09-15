@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Matomo - free/libre analytics platform
  *
@@ -18,7 +19,6 @@ class TemperatureTest extends TestCase
 {
     /** @var Temperature */
     private $column;
-
     protected function setUp(): void
     {
         $this->column = new Temperature();

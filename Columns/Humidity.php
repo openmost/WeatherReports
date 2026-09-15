@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Matomo - free/libre analytics platform
  *
@@ -15,10 +16,8 @@ class Humidity extends Base
     protected $nameSingular = 'WeatherReports_Humidity';
     protected $segmentName = 'weatherHumidity';
     protected $acceptValues = 'Integer between 0 and 100 (relative humidity %)';
-
     protected $paramName = 'weather_humidity';
     protected $paramType = 'int';
-
     public function sanitize($value)
     {
         if ($value < 0 || $value > 100) {

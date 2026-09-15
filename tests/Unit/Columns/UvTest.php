@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Matomo - free/libre analytics platform
  *
@@ -18,7 +19,6 @@ class UvTest extends TestCase
 {
     /** @var Uv */
     private $column;
-
     protected function setUp(): void
     {
         $this->column = new Uv();

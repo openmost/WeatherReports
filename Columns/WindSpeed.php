@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Matomo - free/libre analytics platform
  *
@@ -18,6 +19,7 @@ class WindSpeed extends Base
 
     protected $paramName = 'weather_wind_speed';
     protected $paramType = 'float';
+    protected $unitQuantity = \Piwik\Plugins\WeatherReports\Units::WIND;
 
     public function sanitize($value)
     {

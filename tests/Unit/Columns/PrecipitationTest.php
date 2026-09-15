@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Matomo - free/libre analytics platform
  *
@@ -19,7 +20,6 @@ class PrecipitationTest extends TestCase
     public function testAcceptsValidValues(): void
     {
         $column = new Precipitation();
-
         $this->assertSame(0.0, $column->sanitize(0.0));
         $this->assertSame(0.08, $column->sanitize(0.08));
         $this->assertSame(45.5, $column->sanitize(45.5));
@@ -29,7 +29,6 @@ class PrecipitationTest extends TestCase
     public function testRejectsNegativeAndExtremeValues(): void
     {
         $column = new Precipitation();
-
         $this->assertNull($column->sanitize(-0.1));
         $this->assertNull($column->sanitize(1001));
     }

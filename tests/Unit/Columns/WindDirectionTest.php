@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Matomo - free/libre analytics platform
  *
@@ -18,7 +19,6 @@ class WindDirectionTest extends TestCase
 {
     /** @var WindDirection */
     private $column;
-
     protected function setUp(): void
     {
         $this->column = new WindDirection();
@@ -34,10 +34,7 @@ class WindDirectionTest extends TestCase
 
     public function compassPoints(): array
     {
-        return array_map(
-            static fn ($v) => [$v],
-            ['N', 'NNE', 'NE', 'ENE', 'E', 'ESE', 'SE', 'SSE', 'S', 'SSW', 'SW', 'WSW', 'W', 'WNW', 'NW', 'NNW']
-        );
+        return array_map(static fn ($v) => [$v], ['N', 'NNE', 'NE', 'ENE', 'E', 'ESE', 'SE', 'SSE', 'S', 'SSW', 'SW', 'WSW', 'W', 'WNW', 'NW', 'NNW']);
     }
 
     public function testIsCaseInsensitive(): void

@@ -59,11 +59,18 @@
           uv,
           visibility,
           windDirection,
-          windSpeed
+          windSpeed,
+          units
         ) {
           var query = buildQuery(arguments);
           if (!query) {
             return;
+          }
+
+          // 'metric' or 'imperial': Matomo converts the values to the units of the website settings.
+          // Without it, values are stored as sent.
+          if (units === 'metric' || units === 'imperial') {
+            query += '&weather_units=' + units;
           }
 
           weatherQuery = query;

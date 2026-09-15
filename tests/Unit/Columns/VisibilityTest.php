@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Matomo - free/libre analytics platform
  *
@@ -19,16 +20,16 @@ class VisibilityTest extends TestCase
     public function testAcceptsValidDistances(): void
     {
         $column = new Visibility();
-
         $this->assertSame(0.0, $column->sanitize(0.0));
-        $this->assertSame(10.0, $column->sanitize(10.0));   // km
-        $this->assertSame(6.2, $column->sanitize(6.2));     // miles
+        $this->assertSame(10.0, $column->sanitize(10.0));
+// km
+        $this->assertSame(6.2, $column->sanitize(6.2));
+// miles
     }
 
     public function testRejectsNegativeAndExtreme(): void
     {
         $column = new Visibility();
-
         $this->assertNull($column->sanitize(-1));
         $this->assertNull($column->sanitize(1001));
     }

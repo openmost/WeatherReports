@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Matomo - free/libre analytics platform
  *
@@ -22,7 +23,6 @@ class Archiver extends \Piwik\Plugin\Archiver
     public const VISIBILITY_RECORD_NAME = 'WeatherReports_Visibility';
     public const WIND_SPEED_RECORD_NAME = 'WeatherReports_WindSpeed';
     public const WIND_DIRECTION_RECORD_NAME = 'WeatherReports_WindDirection';
-
     public const CONDITION_DIMENSION = "log_visit.weather_condition";
     public const CLOUD_DIMENSION = "log_visit.weather_cloud";
     public const FELT_TEMPERATURE_DIMENSION = "log_visit.weather_felt_temperature";

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Matomo - free/libre analytics platform
  *
@@ -54,7 +55,10 @@ class VisitorDetails extends VisitorDetailsAbstract
 
         if (isset($weather['weather_condition'])) {
             // stored sanitized by the tracker, Vue escapes it again when rendering
-            $weather['weather_condition'] = Common::unsanitizeInputValue((string) $weather['weather_condition']);
+            $weather['weather_condition'] = Conditions::translateText(
+                Common::unsanitizeInputValue((string) $weather['weather_condition']),
+                Conditions::getCurrentLanguage()
+            );
         }
 
         $props = [

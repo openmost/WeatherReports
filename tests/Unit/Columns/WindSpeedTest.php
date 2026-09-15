@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Matomo - free/libre analytics platform
  *
@@ -19,16 +20,16 @@ class WindSpeedTest extends TestCase
     public function testAcceptsValidSpeeds(): void
     {
         $column = new WindSpeed();
-
         $this->assertSame(0.0, $column->sanitize(0.0));
-        $this->assertSame(9.7, $column->sanitize(9.7));    // kph
-        $this->assertSame(120.0, $column->sanitize(120.0));// mph
+        $this->assertSame(9.7, $column->sanitize(9.7));
+// kph
+        $this->assertSame(120.0, $column->sanitize(120.0));
+// mph
     }
 
     public function testRejectsNegativeAndExtreme(): void
     {
         $column = new WindSpeed();
-
         $this->assertNull($column->sanitize(-1));
         $this->assertNull($column->sanitize(1001));
     }

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Matomo - free/libre analytics platform
  *
@@ -18,6 +19,7 @@ class Precipitation extends Base
 
     protected $paramName = 'weather_precipitation';
     protected $paramType = 'float';
+    protected $unitQuantity = \Piwik\Plugins\WeatherReports\Units::PRECIPITATION;
 
     public function sanitize($value)
     {

@@ -8,24 +8,44 @@ plugin:
 - Go to the administration panel.
 - Open *Marketplace → Plugins*.
 - Search for **WeatherReports**, then install and activate.
-- Follow the [setup documentation](index.md) to wire up the data-collection snippet.
+- Follow the [setup documentation](index.md) to save your WeatherAPI key and wire up the data collection.
 
 ### Which Matomo versions are supported?
 
 Version 6.x of the plugin requires Matomo 6, PHP 8.1+ and MySQL 8.0+ or MariaDB 10.6+. Use the 5.x
 versions of the plugin on Matomo 5.
 
+### Do I need to do anything after updating the plugin?
+
+No. Updates of the 6.x versions need no database migration: existing data, settings, Tag Manager tags
+and tracking codes keep working. Republish your Tag Manager container to benefit from the latest
+Weather tag.
+
+### Where do I save my WeatherAPI key?
+
+In *Administration → General settings → WeatherReports* (super user). Leave the API key of the Weather
+tag empty: the tag then gets the weather through Matomo and the key is never visible in your website
+code. A tag with its own API key keeps calling WeatherAPI directly.
+
 ### Can I use a weather API other than WeatherAPI?
 
 Yes. The plugin only cares about the values pushed via `_paq.push(['WeatherReports.setWeather', …])`.
 Any source that fits that contract works. We recommend [WeatherAPI](https://www.weatherapi.com/)
-because it has a free 1M-call tier and we test against its payload, but you're free to swap it.
+because it has a free 1M-call tier and we test against its payload. Condition translations only
+apply to WeatherAPI condition texts.
 
 ### How many WeatherAPI calls does it use?
 
-One per browser session per hour at most: the response is cached in `sessionStorage` and reused on
-the following pages. The weather is added to the tracking requests of each page, without extra
-requests, so a new visit in the same browser session keeps its weather data.
+At most one per browser session per hour: the weather is cached in `sessionStorage` and reused on the
+following pages. Through the Matomo endpoint, responses are also cached 30 minutes per location, so
+nearby visitors share the same call.
+
+### Why are conditions displayed in my language and not in the language of the tag?
+
+Condition texts are matched against the official WeatherAPI list of conditions in 40 languages and
+displayed in the language of each Matomo user. The same condition tracked in several languages (for
+example after changing the tag language) is merged in one row. Texts that are not WeatherAPI
+conditions are displayed as tracked.
 
 ### Do the reports support goals and conversions?
 
@@ -36,10 +56,9 @@ remain pinned to the weather they were tracked under.
 
 ### Do I need to republish my Matomo Tag Manager container after a plugin update?
 
-**Yes**, if the bundled Weather tag template changes. Matomo Tag Manager bakes the tag template
-into the published container JS file at publish time, so the older JS keeps serving until you
-publish a new version. v6.0.0, for example, changed the tag to send the cached weather on every
-page, which only takes effect after a republish.
+To use the new version of the Weather tag, yes. Matomo Tag Manager bakes the tag template into the
+published container JS file at publish time, so the previous tag keeps serving (and working) until
+you publish a new version.
 
 ### Is the plugin active for all Matomo users on my instance?
 
@@ -48,10 +67,10 @@ and segments.
 
 ### Where are the per-site unit settings?
 
-In *Websites → Manage → Measurable settings*. Set Temperature (°C/°F), Precipitation (mm/in), Pressure
-(mb/inHg), Visibility (km/mi) and Wind speed (km/h/mph) per site. Reports show the unit in the column
-title and the visitor log next to each value. Values are stored in whatever unit you tracked them
-with, so keep these settings in line with the units configured in the tag.
+In *Websites → Manage*, when editing a website. Set Temperature (°C/°F), Precipitation (mm/in), Pressure
+(mb/inHg), Visibility (km/mi) and Wind speed (km/h/mph). The Weather tag sends metric values and Matomo
+converts them to these units when tracking. Reports show the unit in the column title and the visitor
+log next to each value. Data tracked before a unit change is not converted.
 
 ### How do I run the test suite?
 

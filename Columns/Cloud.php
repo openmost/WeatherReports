@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Matomo - free/libre analytics platform
  *
@@ -15,10 +16,8 @@ class Cloud extends Base
     protected $nameSingular = 'WeatherReports_Cloud';
     protected $segmentName = 'weatherCloud';
     protected $acceptValues = 'Integer between 0 and 100 (cloud cover %)';
-
     protected $paramName = 'weather_cloud';
     protected $paramType = 'int';
-
     public function sanitize($value)
     {
         if ($value < 0 || $value > 100) {

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Matomo - free/libre analytics platform
  *
@@ -15,10 +16,8 @@ class Condition extends Base
     protected $nameSingular = 'WeatherReports_Condition';
     protected $segmentName = 'weatherCondition';
     protected $acceptValues = 'A text value for the current weather';
-
     protected $paramName = 'weather_condition';
     protected $paramType = 'string';
-
     public function sanitize($value)
     {
         $value = trim((string) $value);

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Matomo - free/libre analytics platform
  *
@@ -10,11 +11,15 @@ namespace Piwik\Plugins\WeatherReports;
 
 class WeatherReports extends \Piwik\Plugin
 {
+    /** Tracker cache site attribute holding the unit codes of the site settings */
+    public const SITE_UNITS_CACHE_KEY = 'weather_reports_units';
+
     public function registerEvents()
     {
         return [
             'AssetManager.getStylesheetFiles' => 'getStylesheetFiles',
             'Translate.getClientSideTranslationKeys' => 'getClientSideTranslationKeys',
+            'Tracker.Cache.getSiteAttributes' => 'addSiteUnitsToTrackerCache',
         ];
     }
 
@@ -34,5 +39,15 @@ class WeatherReports extends \Piwik\Plugin
         $translationKeys[] = 'WeatherReports_Uv';
         $translationKeys[] = 'WeatherReports_Visibility';
         $translationKeys[] = 'WeatherReports_Wind';
+    }
+
+    /**
+     * The tracker converts values to the site units without reading the settings for every request.
+     * Saving settings clears the tracker cache.
+     */
+    public function addSiteUnitsToTrackerCache(&$content, $idSite)
+    {
+        Units::clearCache();
+        $content[self::SITE_UNITS_CACHE_KEY] = Units::getUnitCodesForSite((int) $idSite);
     }
 }

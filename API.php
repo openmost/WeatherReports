@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Matomo - free/libre analytics platform
  *
@@ -17,9 +18,19 @@ use Piwik\Piwik;
  */
 class API extends \Piwik\Plugin\API
 {
+    /**
+     * Conditions are labelled in the language of the current user, the same condition tracked in several
+     * languages is merged in one row.
+     */
     public function getCondition($idSite, $period, $date, $segment = false)
     {
-        return $this->getDataTable('WeatherReports_Condition', $idSite, $period, $date, $segment);
+        $dataTable = $this->getDataTable('WeatherReports_Condition', $idSite, $period, $date, $segment);
+        $language = Conditions::getCurrentLanguage();
+        $dataTable->filter(static function (DataTable $table) use ($language) {
+
+            ConditionLabels::translateTable($table, $language);
+        });
+        return $dataTable;
     }
 
     public function getCloud($idSite, $period, $date, $segment = false)
@@ -90,6 +101,7 @@ class API extends \Piwik\Plugin\API
     {
         $table = $this->getDataTable($name, $idSite, $period, $date, $segment);
         $table->filter('GroupBy', ['label', static function ($label) {
+
             return is_numeric($label) ? (string) (int) round((float) $label) : $label;
         }]);
         return $table;

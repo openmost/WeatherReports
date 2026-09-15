@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Matomo - free/libre analytics platform
  *
@@ -20,26 +21,18 @@ abstract class Base extends RecordBuilder
     private $recordName;
     private $labelSql;
     private $enrichWithConversionMetrics;
-
-    /**
+/**
      * When true the report is sorted numerically by label (scale dimensions).
      * When false labels are kept as-is and rows are sorted by visit count.
      */
     private $isNumericScale;
-
-    public function __construct(
-        string $recordName,
-        string $labelSql,
-        bool $enrichWithConversionMetrics = false,
-        bool $isNumericScale = false
-    ) {
+    public function __construct(string $recordName, string $labelSql, bool $enrichWithConversionMetrics = false, bool $isNumericScale = false)
+    {
         parent::__construct();
-
         $this->recordName = $recordName;
         $this->labelSql = $labelSql;
         $this->enrichWithConversionMetrics = $enrichWithConversionMetrics;
         $this->isNumericScale = $isNumericScale;
-
         $this->maxRowsInTable = PiwikConfig::getInstance()->General['datatable_archiving_maximum_rows_standard'];
         $this->maxRowsInSubtable = $this->maxRowsInTable;
         $this->columnToSortByBeforeTruncation = Metrics::INDEX_NB_VISITS;
@@ -55,9 +48,7 @@ abstract class Base extends RecordBuilder
     protected function aggregate(ArchiveProcessor $archiveProcessor): array
     {
         $logAggregator = $archiveProcessor->getLogAggregator();
-
         $report = new DataTable();
-
         $query = $logAggregator->queryVisitsByDimension(['label' => $this->labelSql]);
         while ($row = $query->fetch()) {
             $columns = [
@@ -70,12 +61,11 @@ abstract class Base extends RecordBuilder
                 Metrics::INDEX_BOUNCE_COUNT        => $row[Metrics::INDEX_BOUNCE_COUNT],
                 Metrics::INDEX_NB_VISITS_CONVERTED => $row[Metrics::INDEX_NB_VISITS_CONVERTED],
             ];
-
             $report->sumRowWithLabel($this->normalizeLabel($row['label'] ?? ''), $columns);
         }
 
         if ($this->enrichWithConversionMetrics) {
-            // Join conversions to visits to read the weather column from log_visit
+// Join conversions to visits to read the weather column from log_visit
             $extraFrom = [
                 [
                     'table'      => 'log_visit',
@@ -83,14 +73,7 @@ abstract class Base extends RecordBuilder
                     'joinOn'     => 'log_conversion.idvisit = log_visit.idvisit',
                 ],
             ];
-
-            $query = $logAggregator->queryConversionsByDimension(
-                ['label' => $this->labelSql],
-                false,
-                [],
-                $extraFrom
-            );
-
+            $query = $logAggregator->queryConversionsByDimension(['label' => $this->labelSql], false, [], $extraFrom);
             while ($conversionRow = $query->fetch()) {
                 $idGoal = (int) $conversionRow['idgoal'];
                 $columns = [
@@ -98,7 +81,6 @@ abstract class Base extends RecordBuilder
                         $idGoal => Metrics::makeGoalColumnsRow($idGoal, $conversionRow),
                     ],
                 ];
-
                 $report->sumRowWithLabel($this->normalizeLabel($conversionRow['label'] ?? ''), $columns);
             }
 
@@ -128,6 +110,7 @@ abstract class Base extends RecordBuilder
     private function sortNumerically(DataTable $report): void
     {
         $report->filter('ColumnCallbackAddColumn', [['label'], '_sort_key', function ($label) {
+
             if ($label === '-') {
                 return PHP_FLOAT_MAX;
             }

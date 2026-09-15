@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Matomo - free/libre analytics platform
  *
@@ -19,17 +20,15 @@ class PressureTest extends TestCase
     public function testKeepsBothMillibarAndInchesValues(): void
     {
         $column = new Pressure();
-
-        // typical mb range
+// typical mb range
         $this->assertSame(1011.0, $column->sanitize(1011.0));
-        // typical inHg range
+// typical inHg range
         $this->assertSame(29.85, $column->sanitize(29.85));
     }
 
     public function testRejectsNegativeAndExtreme(): void
     {
         $column = new Pressure();
-
         $this->assertNull($column->sanitize(-1));
         $this->assertNull($column->sanitize(2001));
     }

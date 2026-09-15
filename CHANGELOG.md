@@ -1,5 +1,32 @@
 ## Changelog
 
+### v6.1.0
+
+> **No action required.** No database migration: existing data, settings, Tag Manager tags and tracking codes keep
+> working as before. Republish your Tag Manager container to use the new Weather tag.
+
+**Weather conditions in the language of each user**
+- Condition texts are matched against the official WeatherAPI list (60 conditions, 40 languages, day and night) and displayed in the language of the Matomo user, in the Condition report and in the visitor log
+- The same condition tracked in several languages is merged in one report row, including already tracked data
+- Condition report rows get a segment (every tracked text of the row) for the segmented visitor log
+- Texts WeatherAPI used to return ("Patchy rain possible", ...) are recognized, unknown texts are kept as tracked
+
+**Units follow the website settings**
+- The Weather tag sends metric values with a unit system marker (`weather_units=metric`), Matomo converts them to the units of the website settings when tracking, so stored values always match the displayed units
+- The tag unit parameters are removed: tags saved with them keep working, the values are ignored and dropped on the next save
+- `setWeather()` accepts a 12th argument `'metric'` or `'imperial'`, calls without it are stored as sent like before
+
+**WeatherAPI key kept on the server**
+- New `WeatherAPI key` plugin setting (*Administration → General settings → WeatherReports*)
+- New public endpoint `index.php?module=WeatherReports&action=getWeather&lang=fr`: Matomo calls WeatherAPI with this key and caches responses 30 minutes per location. WeatherAPI receives the coordinates found by Matomo geolocation rounded to about 10 km, or the visitor IP without its last byte
+- The Weather tag uses this endpoint when its own API key is left empty (new `Matomo URL` parameter, prefilled), tags with an API key keep calling WeatherAPI directly
+
+**Settings**
+- Unit settings and the tag language are single values (`TYPE_STRING`) instead of arrays. Values saved by previous versions (`["c"]`) are read as is, the next save stores a string
+
+**Tests**
+- add: PHPUnit tests for condition matching and translation, report row merging, unit conversion, the WeatherAPI client and legacy setting values
+
 ### v6.0.0
 
 > **Action required after upgrading**
