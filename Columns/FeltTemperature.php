@@ -21,7 +21,7 @@ class FeltTemperature extends Base
 
     public function sanitize($value)
     {
-        if ($value < -100 || $value > 100) {
+        if ($value < -100 || $value > 200) {
             return null;
         }
         return $value;

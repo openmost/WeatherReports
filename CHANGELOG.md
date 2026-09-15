@@ -1,5 +1,39 @@
 ## Changelog
 
+### v6.0.0
+
+> **Action required after upgrading**
+> 1. **Republish your Matomo Tag Manager container** so the updated `Weather` tag is served.
+> 2. **If you use the plain JS snippet** (no MTM), copy the updated snippet from `docs/index.md`.
+
+**Matomo 6**
+- Compatibility with Matomo 6.x (`>=6.0.0-b1,<7.0.0-b1`)
+- Requires PHP 8.1+, MySQL 8.0+ or MariaDB 10.6+
+- Update plugin homepage URL
+- Visitor log weather card rendered by a Vue component (`WeatherReports.VisitorWeather`) built with Vite, Twig template removed
+- `getUserIp` controller action declared with the `#[JsonResponse]` attribute
+- Remove the listener of the `CronArchive.getArchivingAPIMethodForPlugin` event, no longer triggered by Matomo
+
+**Tracking**
+- fix: weather is added to the tracking requests (page views, events, site searches, links, ecommerce) of every page, a `ping` is only sent when the page view of the page was already tracked. Before, a single ping per browser session was sent: Matomo ignores a ping that would start a new visit, so the weather was lost when the ping reached Matomo first, and visits started later in the same browser session (after 30 minutes of inactivity) had no weather.
+- fix: tracking parameters are URL encoded (conditions such as `Pluie & brouillard` were truncated) and missing values are no longer sent as `undefined`
+- fix: felt temperature accepts the same range as temperature (-100..200), heat indexes above 100 °F were dropped
+- Tag Manager: WeatherAPI response cached one hour in `sessionStorage` and reused on every page, `sessionStorage` errors handled, works when `_paq` is not defined yet
+- `getUserIp` endpoint readable from any origin (`Access-Control-Allow-Origin: *`), it only returns the caller's own IP
+
+**Reports**
+- Humidity, Pressure and Wind speed displayed as bar charts like the other scale reports
+- Unit of the website shown in the label column title, e.g. `Temperature (°C)`
+- Report classes share their configuration (category, goal metrics, label translation)
+
+**Visitor log**
+- New weather card: condition, temperature and felt temperature, measures grid, wind direction arrow, numbers formatted with the user locale, light and dark themes
+- Weather condition no longer displayed with HTML entities (`&amp;`, `&#039;`)
+
+**Tests**
+- add: Vitest specs for the card value formatting and wind arrow
+- add: PHPUnit tests for unit symbols and the felt temperature range
+
 ### v5.2.0
 
 > ⚠️ **Action required after upgrading**

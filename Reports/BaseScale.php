@@ -4,14 +4,14 @@
  *
  * @link https://matomo.org
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
- *
  */
+
 namespace Piwik\Plugins\WeatherReports\Reports;
 
 use Piwik\Plugin\ViewDataTable;
+use Piwik\Plugins\CoreVisualizations\Visualizations\Graph;
 use Piwik\Plugins\CoreVisualizations\Visualizations\JqplotGraph\Bar;
 use Piwik\Plugins\CoreVisualizations\Visualizations\JqplotGraph\Evolution;
-use Piwik\Plugins\CoreVisualizations\Visualizations\Graph;
 
 /**
  * Base class for scale-based reports (temperature, pressure, humidity, etc.)
@@ -25,28 +25,19 @@ abstract class BaseScale extends Base
      */
     protected $defaultSortColumn = '';
 
-    /**
-     * Returns Bar chart as the default visualization type
-     *
-     * @return string
-     */
     public function getDefaultTypeViewDataTable()
     {
         return Bar::ID;
     }
 
-    /**
-     * Configure view properties for scale-based reports
-     *
-     * @param ViewDataTable $view
-     */
-    protected function setBasicConfigViewProperties(ViewDataTable $view)
+    public function configureView(ViewDataTable $view)
     {
+        $this->addLabelTranslation($view);
+
         // Sort by label in ascending order for logical scale progression
         $view->requestConfig->filter_sort_column = 'label';
         $view->requestConfig->filter_sort_order = 'asc';
-
-        $view->requestConfig->addPropertiesThatShouldBeAvailableClientSide(array('filter_sort_column'));
+        $view->requestConfig->addPropertiesThatShouldBeAvailableClientSide(['filter_sort_column']);
 
         // Disable search and pagination for cleaner visualization
         $view->config->show_search = false;
@@ -57,31 +48,16 @@ abstract class BaseScale extends Base
         if (!$view->isViewDataTableId(Evolution::ID)) {
             $view->config->show_limit_control = false;
         }
-    }
-
-    /**
-     * Configure view for scale-based reports
-     *
-     * @param ViewDataTable $view
-     */
-    public function configureView(ViewDataTable $view)
-    {
-        $this->setBasicConfigViewProperties($view);
-
-        if (!empty($this->dimension)) {
-            $view->config->addTranslations(array('label' => $this->dimension->getName()));
-        }
 
         // For graph visualizations, show all data points
         if ($view->isViewDataTableId(Graph::ID)) {
             $view->config->max_graph_elements = false;
         }
 
-        // Hide undefined values (labeled as "-") in chart/graph modes only
-        // In table mode, users can still see all data including undefined values
+        // Hide undefined values (labeled as "-") in chart modes only, tables still show them
         if ($view->isViewDataTableId(Bar::ID) || $view->isViewDataTableId(Graph::ID)) {
             $view->config->filters[] = function ($dataTable) {
-                $dataTable->filter('Pattern', array('label', '^-$', true)); // true = inverted (exclude)
+                $dataTable->filter('Pattern', ['label', '^-$', true]); // true = inverted (exclude)
             };
         }
     }

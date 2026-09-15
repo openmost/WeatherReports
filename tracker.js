@@ -1,6 +1,50 @@
 (function () {
 
+  // Order of the setWeather() arguments
+  var PARAMETERS = [
+    'weather_cloud',
+    'weather_condition',
+    'weather_felt_temperature',
+    'weather_humidity',
+    'weather_precipitation',
+    'weather_pressure',
+    'weather_temperature',
+    'weather_uv',
+    'weather_visibility',
+    'weather_wind_direction',
+    'weather_wind_speed'
+  ];
+
+  // Query string of the last weather set on this page, appended to every following tracking request
+  var weatherQuery = '';
+
+  function buildQuery(values) {
+    var parts = [], i, value;
+
+    for (i = 0; i < PARAMETERS.length; i++) {
+      value = values[i];
+      if (value === undefined || value === null || value === '') {
+        continue;
+      }
+      parts.push(PARAMETERS[i] + '=' + encodeURIComponent(String(value)));
+    }
+
+    return parts.join('&');
+  }
+
+  function appendWeather() {
+    return weatherQuery ? '&' + weatherQuery : '';
+  }
+
   function init() {
+
+    Matomo.addPlugin('WeatherReports', {
+      log: appendWeather,
+      link: appendWeather,
+      sitesearch: appendWeather,
+      event: appendWeather,
+      ecommerce: appendWeather
+    });
 
     Matomo.on('TrackerSetup', function (tracker) {
       tracker.WeatherReports = {
@@ -17,22 +61,18 @@
           windDirection,
           windSpeed
         ) {
+          var query = buildQuery(arguments);
+          if (!query) {
+            return;
+          }
 
-          var request = "ping=1";
+          weatherQuery = query;
 
-          request += "&weather_cloud=" + cloud;
-          request += "&weather_condition=" + condition;
-          request += "&weather_felt_temperature=" + feltTemperature;
-          request += "&weather_humidity=" + humidity;
-          request += "&weather_precipitation=" + precipitation;
-          request += "&weather_pressure=" + pressure;
-          request += "&weather_temperature=" + temperature;
-          request += "&weather_uv=" + uv;
-          request += "&weather_visibility=" + visibility;
-          request += "&weather_wind_direction=" + windDirection;
-          request += "&weather_wind_speed=" + windSpeed;
-
-          tracker.trackRequest(request);
+          // Page views tracked from now on carry the weather. When the page view of this page was already sent,
+          // attach the weather to the visit with a ping (a ping never creates a visit on its own).
+          if (tracker.getNumTrackedPageViews() > 0) {
+            tracker.trackRequest('ping=1&' + query);
+          }
         }
       };
     });

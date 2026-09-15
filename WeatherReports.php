@@ -13,14 +13,26 @@ class WeatherReports extends \Piwik\Plugin
     public function registerEvents()
     {
         return [
-            'CronArchive.getArchivingAPIMethodForPlugin' => 'getArchivingAPIMethodForPlugin',
+            'AssetManager.getStylesheetFiles' => 'getStylesheetFiles',
+            'Translate.getClientSideTranslationKeys' => 'getClientSideTranslationKeys',
         ];
     }
 
-    public function getArchivingAPIMethodForPlugin(&$method, $plugin)
+    public function getStylesheetFiles(&$files)
     {
-        if ($plugin === 'WeatherReports') {
-            $method = 'WeatherReports.getCondition';
-        }
+        $files[] = 'plugins/WeatherReports/vue/src/VisitorWeather/VisitorWeather.less';
+    }
+
+    public function getClientSideTranslationKeys(&$translationKeys)
+    {
+        $translationKeys[] = 'WeatherReports_Weather';
+        $translationKeys[] = 'WeatherReports_FeelsLike';
+        $translationKeys[] = 'WeatherReports_Cloud';
+        $translationKeys[] = 'WeatherReports_Humidity';
+        $translationKeys[] = 'WeatherReports_Precipitation';
+        $translationKeys[] = 'WeatherReports_Pressure';
+        $translationKeys[] = 'WeatherReports_Uv';
+        $translationKeys[] = 'WeatherReports_Visibility';
+        $translationKeys[] = 'WeatherReports_Wind';
     }
 }

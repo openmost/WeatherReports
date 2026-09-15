@@ -9,6 +9,7 @@
 namespace Piwik\Plugins\WeatherReports;
 
 use Piwik\Common;
+use Piwik\Http\JsonResponse;
 use Piwik\IP;
 
 class Controller extends \Piwik\Plugin\Controller
@@ -19,16 +20,17 @@ class Controller extends \Piwik\Plugin\Controller
      *
      * URL: /index.php?module=WeatherReports&action=getUserIp
      *
-     * Intended as a self-hosted replacement for third-party IP lookups
-     * (ipapi.co etc.) when WeatherAPI's q=auto:ip cannot be used — for
-     * example behind a CDN where the client IP needs Matomo's proxy
-     * configuration to be resolved correctly.
+     * Intended as a self-hosted replacement for third-party IP lookups when
+     * WeatherAPI's q=auto:ip cannot be used, for example behind a CDN where the
+     * client IP needs Matomo's proxy configuration to be resolved correctly.
      */
-    public function getUserIp()
+    #[JsonResponse]
+    public function getUserIp(): string
     {
-        Common::sendHeader('Content-Type: application/json; charset=utf-8');
         Common::sendHeader('Cache-Control: no-store');
+        // Called from the tracked website, usually another origin. The response only holds the caller's own IP.
+        Common::sendHeader('Access-Control-Allow-Origin: *');
 
-        return json_encode(['ip' => IP::getIpFromHeader()]);
+        return json_encode(['ip' => IP::getIpFromHeader()], JSON_THROW_ON_ERROR);
     }
 }

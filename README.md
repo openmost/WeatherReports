@@ -9,24 +9,26 @@ and goal/conversion metrics.
 
 ## Highlights
 
-- **11 weather dimensions** — Condition, Cloud, Temperature, Felt temperature, Humidity, Pressure,
+- **11 weather dimensions**: Condition, Cloud, Temperature, Felt temperature, Humidity, Pressure,
   Precipitation, UV, Visibility, Wind direction, Wind speed.
-- **Goals & conversions on every dimension** — break down conversion rate, conversions and revenue by
+- **Goals & conversions on every dimension**: break down conversion rate, conversions and revenue by
   any weather metric. Weather is also persisted to `log_conversion`, so historical conversions stay
   pinned to the weather they were tracked under.
 - **Segments** for every dimension (`weatherTemperature`, `weatherCondition`, …).
 - **Bar-chart visualizations** for scale-based reports with logical numeric ordering on the x-axis
-  (1, 2, 10, 20 — not 1, 10, 2, 20).
+  (1, 2, 10, 20, not 1, 10, 2, 20), unit shown in the column title (`Temperature (°C)`).
 - **Top 15 + Others** on categorical reports by default (Condition, Wind direction).
-- **Per-site unit preferences** in *Site → Settings → Measurable settings*: °C/°F, mm/in, mb/inHg,
-  km/mi, km/h/mph. Units are now applied in the visitor log too.
-- **Visitor log card** that adapts to Matomo's light/dark themes via `--theme-color-*` variables.
+- **Per-site unit preferences** in *Websites → Manage → Measurable settings*: °C/°F, mm/in, mb/inHg,
+  km/mi, km/h/mph, applied to the reports and the visitor log.
+- **Visitor log weather card** (Vue component) following Matomo's light and dark themes, with a wind
+  direction arrow.
 - **Matomo Tag Manager template** included (Openmost category).
-- **No third-party IP-geolocation dependency** — uses WeatherAPI's own `q=auto:ip`. Optional
-  self-hosted `WeatherReports&action=getUserIp` Controller endpoint for CDN/proxy setups.
+- **Weather attached to every visit of a browser session**: the WeatherAPI response is cached for one
+  hour and added to the tracking requests, no extra request.
+- **No third-party IP-geolocation dependency**: uses WeatherAPI's own `q=auto:ip`. Optional
+  self-hosted `WeatherReports&action=getUserIp` endpoint for CDN/proxy setups.
 - **Tracking input is validated**: out-of-range or malformed values are dropped at ingest
   (Humidity 0-100, UV 0-20, Wind direction restricted to the 16-point compass, …).
-- **53 PHPUnit tests** cover the column validation logic.
 
 ## Installation
 
@@ -40,6 +42,15 @@ and [docs/faq.md](docs/faq.md) for FAQ.
 
 ```bash
 ./vendor/bin/phpunit -c plugins/WeatherReports/phpunit.xml --testsuite "WeatherReports Unit"
+TZ=UTC npx vitest run plugins/WeatherReports
+```
+
+## Build
+
+The visitor log card is a Vue component built with the Matomo Vite build (Node 24):
+
+```bash
+./console vue:build WeatherReports
 ```
 
 ## Privacy
@@ -50,14 +61,15 @@ other third-party service.
 
 ## Requirements
 
-- Matomo 5.x
-- PHP 7.4+ (the plugin runs on PHP 8.x)
+- Matomo 6.x
+- PHP 8.1+
+- MySQL 8.0+ or MariaDB 10.6+
 
 ## Links
 
 - Marketplace: <https://plugins.matomo.org/WeatherReports>
 - Issues: <https://github.com/openmost/WeatherReports/issues>
-- Homepage: <https://openmost.io/products/weather-reports/>
+- Homepage: <https://openmost.com/matomo/extensions/weather-reports>
 
 ## License
 

@@ -1,10 +1,11 @@
 {
     "name": "WeatherReports",
     "description": "Track weather data from your website visitors",
-    "version": "5.2.0",
+    "version": "6.0.0",
     "theme": false,
     "require": {
-        "matomo": ">=5.10.0,<6.0.0-b1"
+        "matomo": ">=6.0.0-b1,<7.0.0-b1",
+        "php": ">=8.1.0"
     },
     "authors": [
         {
@@ -18,12 +19,12 @@
         "issues": "https:\/\/github.com\/openmost\/WeatherReports\/issues",
         "source": "https:\/\/github.com\/openmost\/WeatherReports"
     },
-    "homepage": "https://openmost.io/products/weather-reports/",
+    "homepage": "https:\/\/openmost.com\/matomo\/extensions\/weather-reports",
     "license": "GPL v3+",
     "keywords": [
         "Weather",
         "Meteo",
-        "M\u00e9t\u00e9o",
+        "Météo",
         "Visits",
         "Reports",
         "Report",

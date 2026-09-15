@@ -10,15 +10,26 @@ plugin:
 - Search for **WeatherReports**, then install and activate.
 - Follow the [setup documentation](index.md) to wire up the data-collection snippet.
 
+### Which Matomo versions are supported?
+
+Version 6.x of the plugin requires Matomo 6, PHP 8.1+ and MySQL 8.0+ or MariaDB 10.6+. Use the 5.x
+versions of the plugin on Matomo 5.
+
 ### Can I use a weather API other than WeatherAPI?
 
-Yes — the plugin only cares about the values pushed via `_paq.push(['WeatherReports.setWeather', …])`.
+Yes. The plugin only cares about the values pushed via `_paq.push(['WeatherReports.setWeather', …])`.
 Any source that fits that contract works. We recommend [WeatherAPI](https://www.weatherapi.com/)
 because it has a free 1M-call tier and we test against its payload, but you're free to swap it.
 
+### How many WeatherAPI calls does it use?
+
+One per browser session per hour at most: the response is cached in `sessionStorage` and reused on
+the following pages. The weather is added to the tracking requests of each page, without extra
+requests, so a new visit in the same browser session keeps its weather data.
+
 ### Do the reports support goals and conversions?
 
-**Yes — every weather report supports goal metrics and ecommerce conversions.** When you select a
+**Yes, every weather report supports goal metrics and ecommerce conversions.** When you select a
 goal in the report's metric switcher, you get conversion rate, conversions and revenue broken down
 by the weather dimension. Weather is also persisted on `log_conversion`, so historical conversions
 remain pinned to the weather they were tracked under.
@@ -27,30 +38,32 @@ remain pinned to the weather they were tracked under.
 
 **Yes**, if the bundled Weather tag template changes. Matomo Tag Manager bakes the tag template
 into the published container JS file at publish time, so the older JS keeps serving until you
-publish a new version. v5.2.0, for example, removed the `ipapi.co` IP lookup — that change only
-takes effect after a republish.
+publish a new version. v6.0.0, for example, changed the tag to send the cached weather on every
+page, which only takes effect after a republish.
 
 ### Is the plugin active for all Matomo users on my instance?
 
-Yes — once you activate it, every user with access to the visitor reports can see Weather reports
+Yes. Once you activate it, every user with access to the visitor reports can see Weather reports
 and segments.
 
 ### Where are the per-site unit settings?
 
-In *Site → Manage → Measurable settings*. Set Temperature (°C/°F), Precipitation (mm/in), Pressure
-(mb/inHg), Visibility (km/mi) and Wind speed (km/h/mph) per site. The visitor log uses these units;
-report values are stored in whatever unit you tracked them with.
+In *Websites → Manage → Measurable settings*. Set Temperature (°C/°F), Precipitation (mm/in), Pressure
+(mb/inHg), Visibility (km/mi) and Wind speed (km/h/mph) per site. Reports show the unit in the column
+title and the visitor log next to each value. Values are stored in whatever unit you tracked them
+with, so keep these settings in line with the units configured in the tag.
 
 ### How do I run the test suite?
 
 ```bash
 ./vendor/bin/phpunit -c plugins/WeatherReports/phpunit.xml --testsuite "WeatherReports Unit"
+TZ=UTC npx vitest run plugins/WeatherReports
 ```
 
 ### How can I contribute to this plugin?
 
 Open an issue or pull request on
-[github.com/openmost/WeatherReports](https://github.com/openmost/WeatherReports). Any contribution is welcome —
+[github.com/openmost/WeatherReports](https://github.com/openmost/WeatherReports). Any contribution is welcome:
 bug reports, translations, doc improvements, or features.
 
 ### How long will this plugin be maintained?

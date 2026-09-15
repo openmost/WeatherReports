@@ -8,9 +8,8 @@
 
 namespace Piwik\Plugins\WeatherReports;
 
-use Piwik\Plugin\SettingsProvider;
+use Piwik\Common;
 use Piwik\Plugins\Live\VisitorDetailsAbstract;
-use Piwik\View;
 
 class VisitorDetails extends VisitorDetailsAbstract
 {
@@ -31,12 +30,6 @@ class VisitorDetails extends VisitorDetailsAbstract
         'weather_wind_speed',
     ];
 
-    private const TEMP_UNITS       = ['c' => '°C', 'f' => '°F'];
-    private const PRECIP_UNITS     = ['mm' => ' mm', 'in' => ' in'];
-    private const PRESSURE_UNITS   = ['mb' => ' mb', 'in' => ' inHg'];
-    private const VISIBILITY_UNITS = ['km' => ' km', 'miles' => ' mi'];
-    private const WIND_UNITS       = ['kph' => ' km/h', 'mph' => ' mph'];
-
     public function extendVisitorDetails(&$visitor)
     {
         foreach (self::COLUMNS as $column) {
@@ -46,55 +39,41 @@ class VisitorDetails extends VisitorDetailsAbstract
 
     public function renderVisitorDetails($visitorDetails)
     {
-        try {
-            $values = [];
-            foreach (self::COLUMNS as $column) {
-                $values[$column] = $this->normalize($this->readColumn($visitorDetails, $column));
+        $weather = [];
+        foreach (self::COLUMNS as $column) {
+            $value = $this->normalize($this->readColumn($visitorDetails, $column));
+            if ($value !== null) {
+                $weather[$column] = $value;
             }
+        }
 
-            // No data at all → render nothing (don't even show an empty card).
-            $hasAny = false;
-            foreach ($values as $v) {
-                if ($v !== null) {
-                    $hasAny = true;
-                    break;
-                }
-            }
-            if (!$hasAny) {
-                return [];
-            }
-
-            $units = $this->resolveUnits($this->extractIdSite($visitorDetails));
-
-            $view = new View('@WeatherReports/_visitorDetails.twig');
-            $view->wCondition       = $values['weather_condition'];
-            $view->wCloud           = $values['weather_cloud'];
-            $view->wPrecipitation   = $values['weather_precipitation'];
-            $view->wFeltTemperature = $values['weather_felt_temperature'];
-            $view->wHumidity        = $values['weather_humidity'];
-            $view->wPressure        = $values['weather_pressure'];
-            $view->wTemperature     = $values['weather_temperature'];
-            $view->wUv              = $values['weather_uv'];
-            $view->wVisibility      = $values['weather_visibility'];
-            $view->wWindDirection   = $values['weather_wind_direction'];
-            $view->wWindSpeed       = $values['weather_wind_speed'];
-            $view->unitTemperature   = $units['temperature'];
-            $view->unitPrecipitation = $units['precipitation'];
-            $view->unitPressure      = $units['pressure'];
-            $view->unitVisibility    = $units['visibility'];
-            $view->unitWind          = $units['wind'];
-
-            return [[self::DETAILS_ORDER, $view->render()]];
-        } catch (\Throwable $e) {
-            \Piwik\Log::warning('WeatherReports visitor log render failed: %s in %s:%s', $e->getMessage(), $e->getFile(), $e->getLine());
+        // No data at all: don't render an empty card
+        if (empty($weather)) {
             return [];
         }
+
+        if (isset($weather['weather_condition'])) {
+            // stored sanitized by the tracker, Vue escapes it again when rendering
+            $weather['weather_condition'] = Common::unsanitizeInputValue((string) $weather['weather_condition']);
+        }
+
+        $props = [
+            'weather' => $weather,
+            'units' => Units::getSymbolsForSite((int) $this->readColumn($visitorDetails, 'idSite')),
+        ];
+
+        $attributes = '';
+        foreach ($props as $name => $value) {
+            $json = json_encode($value, JSON_INVALID_UTF8_SUBSTITUTE | JSON_PRESERVE_ZERO_FRACTION);
+            $attributes .= sprintf(' %s="%s"', $name, htmlspecialchars((string) $json, ENT_QUOTES, 'UTF-8'));
+        }
+
+        return [[self::DETAILS_ORDER, '<div vue-entry="WeatherReports.VisitorWeather"' . $attributes . '></div>']];
     }
 
     /**
-     * Coerce empty / false / '' to null so the Twig "is not null" check
-     * means "there is a real recorded value". Numeric 0 is preserved
-     * (UV=0 on cloudy nights is a legitimate value).
+     * Coerce empty / false / '' to null so null means "no recorded value".
+     * Numeric 0 is preserved (UV=0 on cloudy nights is a legitimate value).
      */
     private function normalize($value)
     {
@@ -106,8 +85,9 @@ class VisitorDetails extends VisitorDetailsAbstract
 
     /**
      * Read a column from either an array (API path) or a DataTable\Row
-     * (visitor-log UI path). Row::getColumn returns false when missing,
-     * which the caller normalizes to null.
+     * (visitor-log UI path). Row::getColumn returns false when missing.
+     *
+     * @param array|\Piwik\DataTable\Row $visitorDetails
      */
     private function readColumn($visitorDetails, string $column)
     {
@@ -118,69 +98,5 @@ class VisitorDetails extends VisitorDetailsAbstract
             return $visitorDetails->getColumn($column);
         }
         return null;
-    }
-
-    /**
-     * @param array|\Piwik\DataTable\Row $visitorDetails
-     */
-    private function extractIdSite($visitorDetails): int
-    {
-        if (is_array($visitorDetails)) {
-            return (int) ($visitorDetails['idSite'] ?? 0);
-        }
-        if (is_object($visitorDetails) && method_exists($visitorDetails, 'getColumn')) {
-            return (int) ($visitorDetails->getColumn('idSite') ?: 0);
-        }
-        return 0;
-    }
-
-    private function resolveUnits(int $idSite): array
-    {
-        $temp       = 'c';
-        $precip     = 'mm';
-        $pressure   = 'mb';
-        $visibility = 'km';
-        $wind       = 'kph';
-
-        if ($idSite > 0) {
-            try {
-                /** @var SettingsProvider $provider */
-                $provider = \Piwik\Container\StaticContainer::get(SettingsProvider::class);
-                /** @var MeasurableSettings $settings */
-                $settings = $provider->getMeasurableSettings('WeatherReports', $idSite);
-                if ($settings) {
-                    $temp       = $this->stringValue($settings->weatherTemperatureUnit, $temp);
-                    $precip     = $this->stringValue($settings->weatherPrecipitationUnit, $precip);
-                    $pressure   = $this->stringValue($settings->weatherPressureUnit, $pressure);
-                    $visibility = $this->stringValue($settings->weatherVisibilityUnit, $visibility);
-                    $wind       = $this->stringValue($settings->weatherWindSpeed, $wind);
-                }
-            } catch (\Throwable $e) {
-                // Fall back silently.
-            }
-        }
-
-        return [
-            'temperature'   => self::TEMP_UNITS[$temp] ?? '',
-            'precipitation' => self::PRECIP_UNITS[$precip] ?? '',
-            'pressure'      => self::PRESSURE_UNITS[$pressure] ?? '',
-            'visibility'    => self::VISIBILITY_UNITS[$visibility] ?? '',
-            'wind'          => self::WIND_UNITS[$wind] ?? '',
-        ];
-    }
-
-    private function stringValue($setting, string $default): string
-    {
-        if (!$setting) {
-            return $default;
-        }
-        $value = $setting->getValue();
-        if (is_array($value)) {
-            $value = $value[0] ?? null;
-        }
-        if (!is_string($value) || $value === '') {
-            return $default;
-        }
-        return $value;
     }
 }

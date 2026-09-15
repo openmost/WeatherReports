@@ -22,9 +22,17 @@ class FeltTemperatureTest extends TestCase
 
         $this->assertSame(-100.0, $column->sanitize(-100.0));
         $this->assertSame(0.0, $column->sanitize(0.0));
-        $this->assertSame(100.0, $column->sanitize(100.0));
+        $this->assertSame(200.0, $column->sanitize(200.0));
 
         $this->assertNull($column->sanitize(-101));
-        $this->assertNull($column->sanitize(101));
+        $this->assertNull($column->sanitize(201));
+    }
+
+    public function testFahrenheitHeatIndexIsAccepted(): void
+    {
+        // Same range as Temperature: a heat index above 100 °F is a legitimate value
+        $column = new FeltTemperature();
+
+        $this->assertSame(112.5, $column->sanitize(112.5));
     }
 }

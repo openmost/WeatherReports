@@ -1,0 +1,6 @@
+node_modules
+.idea
+.claude/
+.phpunit.result.cache
+/vue/dist/*.umd.js
+/vue/dist/*.common.js
