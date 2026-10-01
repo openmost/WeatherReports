@@ -1,7 +1,9 @@
 {
     "WeatherReports": {
         "ApiKey": "Clave API",
-        "ApiKeyDescription": "Obtenga su clave API de https://www.weatherapi.com/",
+        "ApiKeyDescription": "Opcional. Déjelo vacío (recomendado) para obtener el tiempo a través de Matomo con la clave de WeatherAPI guardada en la configuración del complemento WeatherReports; así la clave no es visible en el código de su sitio web. Si se define, el navegador llama directamente a WeatherAPI con esta clave.",
+        "ApiKeySettingDescription": "La usa la etiqueta Weather de Matomo Tag Manager cuando la etiqueta no tiene clave de API propia, mediante el punto de acceso index.php?module=WeatherReports&action=getWeather. La clave permanece en el servidor. Obtenga una clave gratuita en https://www.weatherapi.com/",
+        "ApiKeySettingTitle": "Clave de WeatherAPI",
         "Celsius": "Celsius",
         "Cloud": "Nubes",
         "CloudDescription": "Porcentaje de cobertura de nubes durante las visitas",
@@ -14,10 +16,13 @@
         "Humidity": "Humedad",
         "HumidityDescription": "Porcentaje de humedad relativa durante las visitas",
         "Inches": "Pulgadas",
+        "InvalidUnit": "La unidad \"%1$s\" no está disponible para %2$s.",
         "Kilometers": "Kilómetros",
         "KilometersPerHour": "Kilómetros por hora",
         "LanguageDescription": "Establezca un idioma para el valor \"Condición\"",
         "LanguageTitle": "Idioma de informes meteorológicos",
+        "MatomoUrlDescription": "URL de este Matomo, usada para obtener el tiempo cuando no hay ninguna clave de API definida en la etiqueta.",
+        "MatomoUrlTitle": "URL de Matomo",
         "Miles": "Millas",
         "MilesPerHour": "Millas por hora",
         "Millibars": "Milibares",
@@ -34,6 +39,9 @@
         "TemperatureDescription": "Temperatura ambiente durante las visitas",
         "TemperatureUnitDescription": "Unidades disponibles: Celsius o Fahrenheit",
         "TemperatureUnitTitle": "Unidad de temperatura",
+        "UnitsPageApiKey": "La clave de WeatherAPI que usa la etiqueta Weather se define en la configuración general:",
+        "UnitsPageIntro": "Unidades en las que se almacenan y muestran los valores meteorológicos de este sitio web. Los valores enviados por la etiqueta Weather se convierten a estas unidades durante el seguimiento; los datos medidos antes de un cambio no se convierten.",
+        "UnitsPageTitle": "Unidades meteorológicas",
         "Uv": "UV",
         "UvDescription": "Nivel de índice UV durante las visitas",
         "Visibility": "Visibilidad",
@@ -42,7 +50,7 @@
         "VisibilityUnitTitle": "Unidad de visibilidad",
         "Weather": "Clima",
         "WeatherTagDescription": "Obtenga información meteorológica de sus visitantes.",
-        "WeatherTagHelp": "",
+        "WeatherTagHelp": "Obtiene el tiempo actual en la ubicación del visitante y lo envía a Matomo. Sin clave de API en la etiqueta, el tiempo se obtiene a través de Matomo y la clave permanece en el servidor. El resultado se reutiliza durante una hora en la sesión del navegador.",
         "WeatherTagName": "Clima",
         "Wind": "Viento",
         "WindDirection": "Dirección del viento",
@@ -51,5 +59,16 @@
         "WindSpeedDescription": "Velocidad del viento durante las visitas",
         "WindSpeedUnitDescription": "Unidades disponibles: Kilómetros/h o Millas/h",
         "WindSpeedUnitTitle": "Unidad de velocidad del viento"
+    },
+    "OpenmostCommunication": {
+        "Dismiss": "Descartar",
+        "WidgetName": "Openmost: configuración del seguimiento de chatbots de IA",
+        "AIChatbotsTitle": "¿Necesita ayuda para configurar el seguimiento de chatbots de IA?",
+        "AIChatbotsBody": "Como Implementation Partner oficial de Matomo, Openmost puede configurar el seguimiento de chatbots de IA por usted, en Matomo On-Premise o Cloud.",
+        "AIChatbotsCta": "Solicitar la configuración",
+        "TrackingPlanTitle": "Los eventos deben configurarse manualmente",
+        "TrackingPlanBody": "Los eventos miden clics, descargas, envíos de formularios o reproducciones de vídeo, siempre que se registren. Como Implementation Partner oficial de Matomo, Openmost diseña e implementa un plan de etiquetado adaptado a su sitio.",
+        "TrackingPlanCta": "Crear mi plan de etiquetado",
+        "EventsEnhancedLink": "Saque más partido a sus eventos con Events Enhanced"
     }
 }

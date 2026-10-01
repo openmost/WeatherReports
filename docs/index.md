@@ -11,7 +11,7 @@ Upon activation, this plugin will automatically update the structure of your dat
 ### 2 - Save your WeatherAPI key in Matomo (recommended)
 
 This plugin retrieves weather data from [WeatherAPI](https://www.weatherapi.com). Generate your own API key (the free
-plan is up to 1 million calls per month), then save it as super user in *Administration → General settings →
+plan is up to 1 million calls per month), then save it as super user in *Administration → System → General settings →
 WeatherReports*.
 
 Matomo then calls WeatherAPI itself through a small public endpoint, so the key never appears in your website code:

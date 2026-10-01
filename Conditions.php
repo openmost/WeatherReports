@@ -24,7 +24,7 @@ use Piwik\Translation\Translator;
 final class Conditions
 {
     /**
-     * Texts WeatherAPI used to return before renaming them, lower case.
+     * Texts WeatherAPI returns, or used to return, that differ from its published condition list, lower case.
      */
     private const LEGACY_ALIASES = [
         'patchy rain possible' => '1063',
@@ -32,6 +32,11 @@ final class Conditions
         'patchy sleet possible' => '1069',
         'patchy freezing drizzle possible' => '1072',
         'thundery outbreaks possible' => '1087',
+        // the API still sends these without the "in area" of the published list
+        'patchy light rain with thunder' => '1273',
+        'moderate or heavy rain with thunder' => '1276',
+        'patchy light snow with thunder' => '1279',
+        'moderate or heavy snow with thunder' => '1282',
     ];
 
     private const NIGHT_SUFFIX = '-night';

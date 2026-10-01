@@ -43,6 +43,58 @@ class ConditionsTest extends TestCase
         $this->assertSame('1063', Conditions::findKey('Patchy rain nearby'));
     }
 
+    public function testFindsThunderTextsTheApiSendsWithoutInArea(): void
+    {
+        $this->assertSame('1273', Conditions::findKey('Patchy light rain with thunder'));
+        $this->assertSame('1276', Conditions::findKey('Moderate or heavy rain with thunder'));
+        $this->assertSame('1279', Conditions::findKey('Patchy light snow with thunder'));
+        $this->assertSame('1282', Conditions::findKey('Moderate or heavy snow with thunder'));
+        $this->assertSame('1276', Conditions::findKey('Moderate or heavy rain in area with thunder'));
+        $this->assertSame(
+            Conditions::translate('1276', 'fr'),
+            Conditions::translateText('Moderate or heavy rain with thunder', 'fr')
+        );
+        $this->assertNotSame(
+            'Moderate or heavy rain with thunder',
+            Conditions::translateText('Moderate or heavy rain with thunder', 'de')
+        );
+    }
+
+    /**
+     * Two conditions with the same text in a language would be merged in one row of the Condition report.
+     */
+    public function testEveryConditionHasItsOwnTextInEachPluginLanguage(): void
+    {
+        $keys = [];
+        foreach ([1000, 1003, 1006, 1009, 1012, 1015, 1018, 1021, 1024, 1027, 1030, 1033, 1036, 1039, 1042, 1045, 1048,
+            1063, 1066, 1069, 1072, 1087, 1114, 1117, 1135, 1147, 1150, 1153, 1168, 1171, 1180, 1183, 1186, 1189,
+            1192, 1195, 1198, 1201, 1204, 1207, 1210, 1213, 1216, 1219, 1222, 1225, 1237, 1240, 1243, 1246, 1249,
+            1252, 1255, 1258, 1261, 1264, 1273, 1276, 1279, 1282] as $code) {
+            $keys[] = (string) $code;
+        }
+
+        $languages = ['en', 'fr', 'de', 'es', 'it', 'nl', 'pt', 'pl', 'ar', 'ja', 'zh-cn', 'zh-tw', 'sv'];
+        foreach ($languages as $language) {
+            $codesByText = [];
+            foreach ($keys as $key) {
+                $texts = [Conditions::translate($key, $language), Conditions::translate($key . '-night', $language)];
+                foreach (array_unique($texts) as $text) {
+                    $this->assertNotNull($text, "$key in $language");
+                    $codesByText[mb_strtolower($text)][$key] = true;
+                }
+            }
+            foreach ($codesByText as $text => $codes) {
+                $this->assertCount(1, $codes, "$language uses \"$text\" for " . implode(', ', array_keys($codes)));
+            }
+        }
+
+        $this->assertSame('Leichter Nebel', Conditions::translate('1030', 'de'));
+        $this->assertSame('Nebel', Conditions::translate('1135', 'de'));
+        $this->assertNotSame(Conditions::translate('1030', 'ja'), Conditions::translate('1135', 'ja'));
+        $this->assertNotSame(Conditions::translate('1030', 'zh-cn'), Conditions::translate('1135', 'zh-cn'));
+        $this->assertNotSame(Conditions::translate('1030', 'zh-tw'), Conditions::translate('1135', 'zh-tw'));
+    }
+
     public function testUnknownTexts(): void
     {
         $this->assertNull(Conditions::findKey('Raining cats and dogs'));

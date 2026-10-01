@@ -42,7 +42,7 @@
         "VisibilityUnitTitle": "Siktenhet",
         "Weather": "Väder",
         "WeatherTagDescription": "Få väderinformation från dina besökare.",
-        "WeatherTagHelp": "",
+        "WeatherTagHelp": "Hämtar det aktuella vädret på besökarens plats och skickar det till Matomo. Utan API-nyckel i taggen hämtas vädret via Matomo och nyckeln stannar på servern. Resultatet återanvänds i en timme under webbläsarsessionen.",
         "WeatherTagName": "Väder",
         "Wind": "Vind",
         "WindDirection": "Vindriktning",
@@ -50,6 +50,14 @@
         "WindSpeed": "Vindhastighet",
         "WindSpeedDescription": "Vindhastighet under besök",
         "WindSpeedUnitDescription": "Tillgängliga enheter: Kilometer/h eller Mil/h",
-        "WindSpeedUnitTitle": "Vindhastighetsenhet"
+        "WindSpeedUnitTitle": "Vindhastighetsenhet",
+        "ApiKeySettingTitle": "WeatherAPI-nyckel",
+        "ApiKeySettingDescription": "Används av Väder-taggen i Matomo Tag Manager när taggen inte har någon egen API-nyckel, via slutpunkten index.php?module=WeatherReports&action=getWeather. Nyckeln stannar på servern. Skaffa en gratis nyckel på https://www.weatherapi.com/",
+        "InvalidUnit": "Enheten \"%1$s\" är inte tillgänglig för %2$s.",
+        "MatomoUrlTitle": "Matomo-URL",
+        "MatomoUrlDescription": "URL till denna Matomo, används för att hämta vädret när ingen API-nyckel är angiven i taggen.",
+        "UnitsPageApiKey": "WeatherAPI-nyckeln som används av Väder-taggen anges i de allmänna inställningarna:",
+        "UnitsPageIntro": "Enheter som väderdata för den här webbplatsen lagras och visas i. Värden som skickas av Väder-taggen konverteras till dessa enheter vid spårning, data som spårats före en ändring konverteras inte.",
+        "UnitsPageTitle": "Vädrets enheter"
     }
 }

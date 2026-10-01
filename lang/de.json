@@ -1,7 +1,9 @@
 {
     "WeatherReports": {
         "ApiKey": "API-Schlüssel",
-        "ApiKeyDescription": "Erhalten Sie Ihren API-Schlüssel von https://www.weatherapi.com/",
+        "ApiKeyDescription": "Optional. Leer lassen (empfohlen), um das Wetter über Matomo mit dem in den Einstellungen des Plugins WeatherReports gespeicherten WeatherAPI-Schlüssel abzurufen; der Schlüssel ist dann im Code Ihrer Webseite nicht sichtbar. Wenn gesetzt, ruft der Browser WeatherAPI direkt mit diesem Schlüssel auf.",
+        "ApiKeySettingDescription": "Wird vom Tag Wetter des Matomo Tag Manager verwendet, wenn der Tag keinen eigenen API-Schlüssel hat, über den Endpunkt index.php?module=WeatherReports&action=getWeather. Der Schlüssel bleibt auf dem Server. Einen kostenlosen Schlüssel erhalten Sie unter https://www.weatherapi.com/",
+        "ApiKeySettingTitle": "WeatherAPI-Schlüssel",
         "Celsius": "Celsius",
         "Cloud": "Wolken",
         "CloudDescription": "Wolkenbedeckung in Prozent während der Besuche",
@@ -14,10 +16,13 @@
         "Humidity": "Luftfeuchtigkeit",
         "HumidityDescription": "Relative Luftfeuchtigkeit in Prozent während der Besuche",
         "Inches": "Zoll",
+        "InvalidUnit": "Die Einheit „%1$s“ ist für %2$s nicht verfügbar.",
         "Kilometers": "Kilometer",
         "KilometersPerHour": "Kilometer pro Stunde",
         "LanguageDescription": "Legen Sie eine Sprache für den \"Bedingung\"-Wert fest",
         "LanguageTitle": "Wetterberichtssprache",
+        "MatomoUrlDescription": "URL dieses Matomo, wird zum Abrufen des Wetters verwendet, wenn im Tag kein API-Schlüssel gesetzt ist.",
+        "MatomoUrlTitle": "Matomo-URL",
         "Miles": "Meilen",
         "MilesPerHour": "Meilen pro Stunde",
         "Millibars": "Millibar",
@@ -34,6 +39,9 @@
         "TemperatureDescription": "Umgebungstemperatur während der Besuche",
         "TemperatureUnitDescription": "Verfügbare Einheiten: Celsius oder Fahrenheit",
         "TemperatureUnitTitle": "Temperatureinheit",
+        "UnitsPageApiKey": "Der vom Tag Wetter verwendete WeatherAPI-Schlüssel wird in den allgemeinen Einstellungen festgelegt:",
+        "UnitsPageIntro": "Einheiten, in denen die Wetterwerte dieser Webseite gespeichert und angezeigt werden. Vom Tag Wetter gesendete Werte werden beim Tracking in diese Einheiten umgerechnet; vor einer Änderung erfasste Daten werden nicht umgerechnet.",
+        "UnitsPageTitle": "Wettereinheiten",
         "Uv": "UV",
         "UvDescription": "UV-Index während der Besuche",
         "Visibility": "Sichtweite",
@@ -42,7 +50,7 @@
         "VisibilityUnitTitle": "Sichtweiteeinheit",
         "Weather": "Wetter",
         "WeatherTagDescription": "Erhalten Sie Wetterinformationen von Ihren Besuchern.",
-        "WeatherTagHelp": "",
+        "WeatherTagHelp": "Ruft das aktuelle Wetter am Standort des Besuchers ab und sendet es an Matomo. Ohne API-Schlüssel im Tag wird das Wetter über Matomo abgerufen und der Schlüssel bleibt auf dem Server. Das Ergebnis wird eine Stunde lang in der Browsersitzung wiederverwendet.",
         "WeatherTagName": "Wetter",
         "Wind": "Wind",
         "WindDirection": "Windrichtung",
@@ -51,5 +59,16 @@
         "WindSpeedDescription": "Windgeschwindigkeit während der Besuche",
         "WindSpeedUnitDescription": "Verfügbare Einheiten: Kilometer/h oder Meilen/h",
         "WindSpeedUnitTitle": "Windgeschwindigkeitseinheit"
+    },
+    "OpenmostCommunication": {
+        "Dismiss": "Ausblenden",
+        "WidgetName": "Openmost: Einrichtung des KI-Chatbot-Trackings",
+        "AIChatbotsTitle": "Brauchen Sie Hilfe beim Einrichten des KI-Chatbot-Trackings?",
+        "AIChatbotsBody": "Als offizieller Matomo Implementation Partner richtet Openmost das KI-Chatbot-Tracking für Sie ein, auf Matomo On-Premise oder Cloud.",
+        "AIChatbotsCta": "Tracking einrichten lassen",
+        "TrackingPlanTitle": "Ereignisse müssen manuell eingerichtet werden",
+        "TrackingPlanBody": "Ereignisse messen Klicks, Downloads, Formularübermittlungen oder Videowiedergaben, sobald sie erfasst werden. Als offizieller Matomo Implementation Partner konzipiert und setzt Openmost einen Tracking-Plan um, der zu Ihrer Website passt.",
+        "TrackingPlanCta": "Meinen Tracking-Plan erstellen",
+        "EventsEnhancedLink": "Holen Sie mit Events Enhanced mehr aus Ihren Ereignissen heraus"
     }
 }

@@ -50,7 +50,7 @@
         "VisibilityUnitTitle": "Visibility unit",
         "Weather": "Weather",
         "WeatherTagDescription": "Get weather informations from your visitors.",
-        "WeatherTagHelp": "",
+        "WeatherTagHelp": "Gets the current weather for the visitor's location and sends it to Matomo. Without an API key in the tag, the weather is fetched through Matomo and the key stays on the server. The result is reused for one hour in the browser session.",
         "WeatherTagName": "Weather",
         "Wind": "Wind",
         "WindDirection": "Wind direction",
@@ -59,5 +59,16 @@
         "WindSpeedDescription": "Wind speed during visits",
         "WindSpeedUnitDescription": "Kilometers per hour or Miles per hour. Values sent by the Weather tag are converted to this unit.",
         "WindSpeedUnitTitle": "Wind speed unit"
+    },
+    "OpenmostCommunication": {
+        "Dismiss": "Dismiss",
+        "WidgetName": "Openmost: AI chatbot tracking setup",
+        "AIChatbotsTitle": "Need help setting up AI chatbot tracking?",
+        "AIChatbotsBody": "As an official Matomo Implementation Partner, Openmost can configure AI chatbot tracking for you, on Matomo On-Premise or Cloud.",
+        "AIChatbotsCta": "Get it set up for me",
+        "TrackingPlanTitle": "Events need to be set up manually",
+        "TrackingPlanBody": "Events measure clicks, downloads, form submissions or video plays, once they are tracked. As an official Matomo Implementation Partner, Openmost designs and implements a tracking plan that fits your site.",
+        "TrackingPlanCta": "Build my tracking plan",
+        "EventsEnhancedLink": "Get more out of your events with Events Enhanced"
     }
 }

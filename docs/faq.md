@@ -23,7 +23,7 @@ Weather tag.
 
 ### Where do I save my WeatherAPI key?
 
-In *Administration → General settings → WeatherReports* (super user). Leave the API key of the Weather
+In *Administration → System → General settings → WeatherReports* (super user). Leave the API key of the Weather
 tag empty: the tag then gets the weather through Matomo and the key is never visible in your website
 code. A tag with its own API key keeps calling WeatherAPI directly.
 
@@ -46,6 +46,16 @@ Condition texts are matched against the official WeatherAPI list of conditions i
 displayed in the language of each Matomo user. The same condition tracked in several languages (for
 example after changing the tag language) is merged in one row. Texts that are not WeatherAPI
 conditions are displayed as tracked.
+
+### Why do Mist and Fog have separate rows?
+
+They are two WeatherAPI conditions (codes 1030 and 1135). In some languages WeatherAPI uses the same
+word for both, for example "Nebel" in German, so the plugin displays its own text for Mist ("Leichter
+Nebel" in German) to keep one row per condition. The same applies to a few other pairs (Haze and Mist
+in Dutch and Bulgarian, drizzle and rain in Japanese, sleet and ice pellet showers in French). A
+condition tracked with one of these shared words cannot be told apart and is counted under the
+condition that keeps the word. Keep the Language of the Weather tag on English (the default) to track
+every condition exactly, reports are still displayed in the language of each Matomo user.
 
 ### Do the reports support goals and conversions?
 

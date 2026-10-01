@@ -50,7 +50,7 @@
         "VisibilityUnitTitle": "Unité de visibilité",
         "Weather": "Météo",
         "WeatherTagDescription": "Obtenez des informations météo de vos visiteurs.",
-        "WeatherTagHelp": "",
+        "WeatherTagHelp": "Récupère la météo actuelle à l'emplacement du visiteur et l'envoie à Matomo. Sans clé API dans la balise, la météo est obtenue via Matomo et la clé reste sur le serveur. Le résultat est réutilisé pendant une heure dans la session du navigateur.",
         "WeatherTagName": "Météo",
         "Wind": "Vent",
         "WindDirection": "Direction du vent",
@@ -59,5 +59,16 @@
         "WindSpeedDescription": "Vitesse du vent pendant les visites",
         "WindSpeedUnitDescription": "Kilomètres par heure ou Miles par heure. Les valeurs envoyées par le tag Météo sont converties dans cette unité.",
         "WindSpeedUnitTitle": "Unité de vitesse du vent"
+    },
+    "OpenmostCommunication": {
+        "Dismiss": "Masquer",
+        "WidgetName": "Openmost : configuration du suivi des chatbots IA",
+        "AIChatbotsTitle": "Besoin d'aide pour configurer le suivi des chatbots IA ?",
+        "AIChatbotsBody": "Implementation Partner officiel de Matomo, Openmost peut configurer le suivi des chatbots IA pour vous, sur Matomo On-Premise ou Cloud.",
+        "AIChatbotsCta": "Faire configurer le suivi",
+        "TrackingPlanTitle": "Les événements doivent être configurés manuellement",
+        "TrackingPlanBody": "Les événements mesurent les clics, téléchargements, envois de formulaires ou lectures vidéo, à condition d'être suivis. Implementation Partner officiel de Matomo, Openmost conçoit et met en place un plan de marquage adapté à votre site.",
+        "TrackingPlanCta": "Construire mon plan de marquage",
+        "EventsEnhancedLink": "Tirez davantage de vos événements avec Events Enhanced"
     }
 }
