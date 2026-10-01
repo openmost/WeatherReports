@@ -12,13 +12,13 @@ plugin:
 
 ### Can I use a weather API other than WeatherAPI?
 
-Yes — the plugin only cares about the values pushed via `_paq.push(['WeatherReports.setWeather', …])`.
+Yes, the plugin only cares about the values pushed via `_paq.push(['WeatherReports.setWeather', …])`.
 Any source that fits that contract works. We recommend [WeatherAPI](https://www.weatherapi.com/)
 because it has a free 1M-call tier and we test against its payload, but you're free to swap it.
 
 ### Do the reports support goals and conversions?
 
-**Yes — every weather report supports goal metrics and ecommerce conversions.** When you select a
+**Yes, every weather report supports goal metrics and ecommerce conversions.** When you select a
 goal in the report's metric switcher, you get conversion rate, conversions and revenue broken down
 by the weather dimension. Weather is also persisted on `log_conversion`, so historical conversions
 remain pinned to the weather they were tracked under.
@@ -27,18 +27,19 @@ remain pinned to the weather they were tracked under.
 
 **Yes**, if the bundled Weather tag template changes. Matomo Tag Manager bakes the tag template
 into the published container JS file at publish time, so the older JS keeps serving until you
-publish a new version. v5.2.0, for example, removed the `ipapi.co` IP lookup — that change only
+publish a new version. v5.2.0, for example, removed the `ipapi.co` IP lookup, that change only
 takes effect after a republish.
 
 ### Is the plugin active for all Matomo users on my instance?
 
-Yes — once you activate it, every user with access to the visitor reports can see Weather reports
+Yes, once you activate it, every user with access to the visitor reports can see Weather reports
 and segments.
 
 ### Where are the per-site unit settings?
 
-In *Site → Manage → Measurable settings*. Set Temperature (°C/°F), Precipitation (mm/in), Pressure
-(mb/inHg), Visibility (km/mi) and Wind speed (km/h/mph) per site. The visitor log uses these units;
+In *Administration → Websites → Weather* (website admin access), choose the website with the site
+selector. Set Temperature (°C/°F), Precipitation (mm/in), Pressure (mb/inHg), Visibility (km/mi) and
+Wind speed (km/h/mph) per site. The visitor log uses these units;
 report values are stored in whatever unit you tracked them with.
 
 ### How do I run the test suite?
@@ -50,8 +51,7 @@ report values are stored in whatever unit you tracked them with.
 ### How can I contribute to this plugin?
 
 Open an issue or pull request on
-[github.com/openmost/WeatherReports](https://github.com/openmost/WeatherReports). Any contribution is welcome —
-bug reports, translations, doc improvements, or features.
+[github.com/openmost/WeatherReports](https://github.com/openmost/WeatherReports). Any contribution is welcome, bug reports, translations, doc improvements, or features.
 
 ### How long will this plugin be maintained?
 

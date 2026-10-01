@@ -13,6 +13,7 @@
         "Humidity": "Humidity",
         "HumidityDescription": "Relative humidity percentage during visits",
         "Inches": "Inches",
+        "InvalidUnit": "The unit \"%1$s\" is not available for %2$s.",
         "Kilometers": "Kilometers",
         "KilometersPerHour": "Kilometers per hour",
         "LanguageDescription": "Set a language for the \"Condition\" value",
@@ -33,6 +34,8 @@
         "TemperatureDescription": "Ambient temperature during visits",
         "TemperatureUnitDescription": "Available units : Celsius or Fahrenheit",
         "TemperatureUnitTitle": "Temperature unit",
+        "UnitsPageIntro": "Units in which the weather values of this website are displayed. Values are not converted: the Weather tag must send them in these units.",
+        "UnitsPageTitle": "Weather units",
         "Uv": "UV",
         "UvDescription": "UV index level during visits",
         "Visibility": "Visibility",
@@ -41,7 +44,7 @@
         "VisibilityUnitTitle": "Visibility unit",
         "Weather": "Weather",
         "WeatherTagDescription": "Get weather informations from your visitors.",
-        "WeatherTagHelp": "",
+        "WeatherTagHelp": "Gets the current weather for the visitor's location from WeatherAPI with your API key and sends it to Matomo. The weather is fetched once per browser session.",
         "WeatherTagName": "Weather",
         "WindDirection": "Wind direction",
         "WindDirectionDescription": "Wind direction (N, S, E, W, etc.) during visits",
@@ -49,5 +52,19 @@
         "WindSpeedDescription": "Wind speed during visits",
         "WindSpeedUnitDescription": "Available units : Kilometers/h or Miles/h",
         "WindSpeedUnitTitle": "Wind speed unit"
+    },
+    "OpenmostCommunication": {
+        "Dismiss": "Dismiss",
+        "Matomo6Title": "Matomo 6 is here",
+        "Matomo6Body": "Openmost is an official Matomo Implementation Partner, working with Matomo since 2016. Upgrading now is simpler than catching up in a few months: new features and security improvements land on Matomo 6 first, and we move you there with your reports and tracking intact.",
+        "Matomo6Cta": "Plan my Matomo 6 upgrade",
+        "WidgetName": "Openmost: AI chatbot tracking setup",
+        "AIChatbotsTitle": "Need help setting up AI chatbot tracking?",
+        "AIChatbotsBody": "As an official Matomo Implementation Partner, Openmost can configure AI chatbot tracking for you, on Matomo On-Premise or Cloud.",
+        "AIChatbotsCta": "Get it set up for me",
+        "TrackingPlanTitle": "Events need to be set up manually",
+        "TrackingPlanBody": "Events measure clicks, downloads, form submissions or video plays, once they are tracked. As an official Matomo Implementation Partner, Openmost designs and implements a tracking plan that fits your site.",
+        "TrackingPlanCta": "Build my tracking plan",
+        "EventsEnhancedLink": "Get more out of your events with Events Enhanced"
     }
 }

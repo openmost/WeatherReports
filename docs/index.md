@@ -5,8 +5,11 @@
 Install this plugin from the Marketplace as super user or download the plugin and install it on your server from FTP in
 the `/plugins` folder.
 
-Upon activation, this plugin will automatically update the structure of your database's `log_visit` table by adding 11
-new columns prefixed `weather_` for the new dimensions.
+Upon activation, this plugin will automatically update the structure of your database's `log_visit` and
+`log_conversion` tables by adding 11 new columns prefixed `weather_` for the new dimensions.
+
+Then set the units of each website in *Administration → Websites → Weather* (admin access to the website needed). Use
+the same units in the Weather tag or in your snippet: values are stored as sent, they are not converted.
 
 ### 2 - Fetch data on your website
 
@@ -28,14 +31,14 @@ and language, and publish a new container version.
 > **Upgrading from a previous version of the plugin?** The published container is a static JS file
 > built at publish time, so any improvements to the bundled tag template (the `Weather` tag) only
 > take effect once you **republish** your container. If you skip this step the older tag JS keeps
-> serving — for example, the `ipapi.co` lookup that was removed in v5.2.0 will keep firing until
+> serving, for example, the `ipapi.co` lookup that was removed in v5.2.0 will keep firing until
 > you republish.
 
 ### 2 - 2 OR with Matomo classic code (only if you don't use Matomo Tag Manager)
 
 Implement the `_paq.push(['WeatherReports.setWeather'])` method on your website using the following snippet.
 
-> **Upgrading from a previous version?** This snippet has been simplified — `ipapi.co` is no longer
+> **Upgrading from a previous version?** This snippet has been simplified, `ipapi.co` is no longer
 > needed (WeatherAPI auto-detects the IP via `q=auto:ip`). Replace the old snippet on your site
 > with the one below to drop the third-party lookup.
 

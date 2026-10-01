@@ -8,8 +8,8 @@
 
 namespace Piwik\Plugins\WeatherReports;
 
-use Piwik\Plugin\SettingsProvider;
 use Piwik\Plugins\Live\VisitorDetailsAbstract;
+use Piwik\Plugins\WeatherReports\Settings\SiteUnitsStorage;
 use Piwik\View;
 
 class VisitorDetails extends VisitorDetailsAbstract
@@ -136,51 +136,14 @@ class VisitorDetails extends VisitorDetailsAbstract
 
     private function resolveUnits(int $idSite): array
     {
-        $temp       = 'c';
-        $precip     = 'mm';
-        $pressure   = 'mb';
-        $visibility = 'km';
-        $wind       = 'kph';
-
-        if ($idSite > 0) {
-            try {
-                /** @var SettingsProvider $provider */
-                $provider = \Piwik\Container\StaticContainer::get(SettingsProvider::class);
-                /** @var MeasurableSettings $settings */
-                $settings = $provider->getMeasurableSettings('WeatherReports', $idSite);
-                if ($settings) {
-                    $temp       = $this->stringValue($settings->weatherTemperatureUnit, $temp);
-                    $precip     = $this->stringValue($settings->weatherPrecipitationUnit, $precip);
-                    $pressure   = $this->stringValue($settings->weatherPressureUnit, $pressure);
-                    $visibility = $this->stringValue($settings->weatherVisibilityUnit, $visibility);
-                    $wind       = $this->stringValue($settings->weatherWindSpeed, $wind);
-                }
-            } catch (\Throwable $e) {
-                // Fall back silently.
-            }
-        }
+        $units = SiteUnitsStorage::getUnitCodes(SiteUnitsStorage::read($idSite));
 
         return [
-            'temperature'   => self::TEMP_UNITS[$temp] ?? '',
-            'precipitation' => self::PRECIP_UNITS[$precip] ?? '',
-            'pressure'      => self::PRESSURE_UNITS[$pressure] ?? '',
-            'visibility'    => self::VISIBILITY_UNITS[$visibility] ?? '',
-            'wind'          => self::WIND_UNITS[$wind] ?? '',
+            'temperature'   => self::TEMP_UNITS[$units[SiteUnitsStorage::TEMPERATURE]] ?? '',
+            'precipitation' => self::PRECIP_UNITS[$units[SiteUnitsStorage::PRECIPITATION]] ?? '',
+            'pressure'      => self::PRESSURE_UNITS[$units[SiteUnitsStorage::PRESSURE]] ?? '',
+            'visibility'    => self::VISIBILITY_UNITS[$units[SiteUnitsStorage::VISIBILITY]] ?? '',
+            'wind'          => self::WIND_UNITS[$units[SiteUnitsStorage::WIND]] ?? '',
         ];
-    }
-
-    private function stringValue($setting, string $default): string
-    {
-        if (!$setting) {
-            return $default;
-        }
-        $value = $setting->getValue();
-        if (is_array($value)) {
-            $value = $value[0] ?? null;
-        }
-        if (!is_string($value) || $value === '') {
-            return $default;
-        }
-        return $value;
     }
 }

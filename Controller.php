@@ -10,9 +10,27 @@ namespace Piwik\Plugins\WeatherReports;
 
 use Piwik\Common;
 use Piwik\IP;
+use Piwik\Piwik;
+use Piwik\Plugins\WeatherReports\Settings\SiteUnitsStorage;
+use Piwik\Request;
 
 class Controller extends \Piwik\Plugin\Controller
 {
+    /**
+     * Weather units of a site, in Administration > Websites > Weather.
+     */
+    public function manage(): string
+    {
+        $idSite = Request::fromRequest()->getIntegerParameter('idSite', 0);
+        Piwik::checkUserHasAdminAccess($idSite);
+
+        return $this->renderTemplate('manage', [
+            'idSite' => $idSite,
+            'fields' => SiteUnitsStorage::getFieldsMetadata(),
+            'units' => SiteUnitsStorage::getUnitCodes(SiteUnitsStorage::read($idSite)),
+        ]);
+    }
+
     /**
      * Public endpoint that returns the visitor's IP as Matomo resolves it
      * (honouring proxy_client_headers / proxy_host_headers in config.ini.php).

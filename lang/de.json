@@ -13,6 +13,7 @@
         "Humidity": "Luftfeuchtigkeit",
         "HumidityDescription": "Relative Luftfeuchtigkeit in Prozent während der Besuche",
         "Inches": "Zoll",
+        "InvalidUnit": "Die Einheit „%1$s“ ist für %2$s nicht verfügbar.",
         "Kilometers": "Kilometer",
         "KilometersPerHour": "Kilometer pro Stunde",
         "LanguageDescription": "Legen Sie eine Sprache für den \"Bedingung\"-Wert fest",
@@ -33,6 +34,8 @@
         "TemperatureDescription": "Umgebungstemperatur während der Besuche",
         "TemperatureUnitDescription": "Verfügbare Einheiten: Celsius oder Fahrenheit",
         "TemperatureUnitTitle": "Temperatureinheit",
+        "UnitsPageIntro": "Einheiten, in denen die Wetterwerte dieser Website angezeigt werden. Die Werte werden nicht umgerechnet: Das Wetter-Tag muss sie in diesen Einheiten senden.",
+        "UnitsPageTitle": "Wettereinheiten",
         "Uv": "UV",
         "UvDescription": "UV-Index während der Besuche",
         "Visibility": "Sichtweite",
@@ -41,7 +44,7 @@
         "VisibilityUnitTitle": "Sichtweiteeinheit",
         "Weather": "Wetter",
         "WeatherTagDescription": "Erhalten Sie Wetterinformationen von Ihren Besuchern.",
-        "WeatherTagHelp": "",
+        "WeatherTagHelp": "Ruft mit Ihrem API-Schlüssel das aktuelle Wetter am Standort des Besuchers bei WeatherAPI ab und sendet es an Matomo. Das Wetter wird einmal pro Browsersitzung abgerufen.",
         "WeatherTagName": "Wetter",
         "WindDirection": "Windrichtung",
         "WindDirectionDescription": "Windrichtung (N, S, O, W usw.) während der Besuche",
@@ -49,5 +52,19 @@
         "WindSpeedDescription": "Windgeschwindigkeit während der Besuche",
         "WindSpeedUnitDescription": "Verfügbare Einheiten: Kilometer/h oder Meilen/h",
         "WindSpeedUnitTitle": "Windgeschwindigkeitseinheit"
+    },
+    "OpenmostCommunication": {
+        "Dismiss": "Ausblenden",
+        "Matomo6Title": "Matomo 6 ist da",
+        "Matomo6Body": "Openmost ist offizieller Matomo Implementation Partner und arbeitet seit 2016 mit Matomo. Jetzt zu aktualisieren ist einfacher, als in einigen Monaten aufzuholen: Neue Funktionen und Sicherheitsverbesserungen erscheinen zuerst in Matomo 6, und wir bringen Sie dorthin, ohne dass Berichte oder Tracking verloren gehen.",
+        "Matomo6Cta": "Mein Matomo-6-Upgrade planen",
+        "WidgetName": "Openmost: Einrichtung des KI-Chatbot-Trackings",
+        "AIChatbotsTitle": "Brauchen Sie Hilfe beim Einrichten des KI-Chatbot-Trackings?",
+        "AIChatbotsBody": "Als offizieller Matomo Implementation Partner richtet Openmost das KI-Chatbot-Tracking für Sie ein, auf Matomo On-Premise oder Cloud.",
+        "AIChatbotsCta": "Tracking einrichten lassen",
+        "TrackingPlanTitle": "Ereignisse müssen manuell eingerichtet werden",
+        "TrackingPlanBody": "Ereignisse messen Klicks, Downloads, Formularübermittlungen oder Videowiedergaben, sobald sie erfasst werden. Als offizieller Matomo Implementation Partner konzipiert und setzt Openmost einen Tracking-Plan um, der zu Ihrer Website passt.",
+        "TrackingPlanCta": "Meinen Tracking-Plan erstellen",
+        "EventsEnhancedLink": "Holen Sie mit Events Enhanced mehr aus Ihren Ereignissen heraus"
     }
 }

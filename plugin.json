@@ -1,7 +1,7 @@
 {
     "name": "WeatherReports",
-    "description": "Track weather data from your website visitors",
-    "version": "5.2.0",
+    "description": "Track the weather of each visit and see how temperature, rain or wind affect traffic and conversions.",
+    "version": "5.3.0",
     "theme": false,
     "require": {
         "matomo": ">=5.10.0,<6.0.0-b1"
@@ -10,25 +10,27 @@
         {
             "name": "Openmost",
             "email": "ronan@openmost.com",
-            "homepage": "https:\/\/openmost.com"
+            "homepage": "https://openmost.com"
         }
     ],
     "support": {
         "email": "ronan@openmost.com",
-        "issues": "https:\/\/github.com\/openmost\/WeatherReports\/issues",
-        "source": "https:\/\/github.com\/openmost\/WeatherReports"
+        "issues": "https://github.com/openmost/WeatherReports/issues",
+        "source": "https://github.com/openmost/WeatherReports"
     },
-    "homepage": "https://openmost.io/products/weather-reports/",
+    "homepage": "https://openmost.com/matomo/extensions/weather-reports",
+    "preview": {
+        "video_url": "https://www.youtube-nocookie.com/embed/Ut3gFnzCizw"
+    },
     "license": "GPL v3+",
     "keywords": [
-        "Weather",
-        "Meteo",
-        "M\u00e9t\u00e9o",
-        "Visits",
-        "Reports",
-        "Report",
-        "Reporting",
-        "Openmost"
+        "weather",
+        "meteo",
+        "visits",
+        "reports",
+        "report",
+        "reporting",
+        "openmost"
     ],
     "category": "integration"
 }

@@ -11,6 +11,7 @@ namespace Piwik\Plugins\WeatherReports;
 use Piwik\Archive;
 use Piwik\DataTable;
 use Piwik\Piwik;
+use Piwik\Plugins\WeatherReports\Settings\SiteUnitsStorage;
 
 /**
  * @method static \Piwik\Plugins\WeatherReports\API getInstance()
@@ -70,6 +71,52 @@ class API extends \Piwik\Plugin\API
     public function getWindDirection($idSite, $period, $date, $segment = false)
     {
         return $this->getDataTable('WeatherReports_WindDirection', $idSite, $period, $date, $segment);
+    }
+
+    /**
+     * Units in which the weather values of a site are displayed.
+     *
+     * @return array<string, string> quantity => unit code
+     */
+    public function getSiteUnits($idSite)
+    {
+        Piwik::checkUserHasAdminAccess($idSite);
+
+        return SiteUnitsStorage::getUnitCodes(SiteUnitsStorage::read((int) $idSite));
+    }
+
+    /**
+     * Sets the units in which the weather values of a site are displayed. Tracked values are not converted.
+     *
+     * @param int $idSite
+     * @param string $temperature c or f
+     * @param string $precipitation mm or in
+     * @param string $pressure mb or in
+     * @param string $visibility km or miles
+     * @param string $windSpeed kph or mph
+     * @return bool
+     */
+    public function setSiteUnits($idSite, $temperature, $precipitation, $pressure, $visibility, $windSpeed)
+    {
+        Piwik::checkUserHasAdminAccess($idSite);
+
+        $units = [
+            SiteUnitsStorage::TEMPERATURE => (string) $temperature,
+            SiteUnitsStorage::PRECIPITATION => (string) $precipitation,
+            SiteUnitsStorage::PRESSURE => (string) $pressure,
+            SiteUnitsStorage::VISIBILITY => (string) $visibility,
+            SiteUnitsStorage::WIND => (string) $windSpeed,
+        ];
+
+        foreach ($units as $quantity => $unit) {
+            if (!SiteUnitsStorage::isKnownUnit($quantity, $unit)) {
+                throw new \Exception(Piwik::translate('WeatherReports_InvalidUnit', [$unit, $quantity]));
+            }
+        }
+
+        SiteUnitsStorage::save((int) $idSite, $units);
+
+        return true;
     }
 
     protected function getDataTable($name, $idSite, $period, $date, $segment)
