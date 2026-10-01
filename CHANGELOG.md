@@ -10,6 +10,7 @@
 - Translations: Arabic, Chinese (simplified and traditional), Japanese, Polish and Portuguese added, the plugin is now available in 13 languages
 - Shorter Marketplace description that fits the plugin cards, and campaign parameters on the Openmost links of the README.
 - Weather tag help text added in all languages
+- Smaller package: the Vue build artifacts that Matomo does not load (source maps, CommonJS bundle) and a PHPUnit cache file are no longer shipped.
 
 ### v5.2.0
 
