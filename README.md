@@ -16,7 +16,7 @@ Track the weather during your visitors' sessions and see how temperature, rain o
 
 ## Requirements
 
-- Matomo 5.10.0 or later, below 6.0.0
+- Matomo 5.0.0 or later, below 6.0.0
 - A [WeatherAPI](https://www.weatherapi.com/) API key (the free plan includes 1 million calls per month)
 - Matomo Tag Manager (optional, recommended)
 

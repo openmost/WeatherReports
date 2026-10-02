@@ -4,6 +4,7 @@
 
 > **No action required.** Units already saved for your websites are kept.
 
+- Requires Matomo 5.0.0 or higher again (`>=5.0.0,<6.0.0-b1`), instead of 5.10.0: nothing in the plugin needs Matomo 5.10, and the Openmost banner styles fall back to the Matomo light theme colors when the theme color variables are not available.
 - Weather units moved from the website edit form to a dedicated *Administration → Websites → Weather* page (Vue), with a site selector
 - New API methods `WeatherReports.getSiteUnits` and `WeatherReports.setSiteUnits` (admin access)
 - Units are still stored in the site settings table under the same names, values saved by previous versions are read
