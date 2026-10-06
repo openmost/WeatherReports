@@ -1,8 +1,10 @@
 # Weather Reports for Matomo
 
+## Description
+
 Track the weather during your visitors' sessions and see how temperature, rain or wind influence traffic, behaviour and conversions.
 
-## Features
+### Features
 
 - **11 weather dimensions**: Condition, Cloud, Temperature, Felt temperature, Humidity, Pressure, Precipitation, UV, Visibility, Wind direction and Wind speed, each with its own report, segment and API method, in the **Visitors > Weather** section.
 - **Goals and ecommerce on every dimension**: conversion rate, conversions and revenue broken down by weather. Weather is also stored with each conversion.
@@ -16,14 +18,14 @@ Track the weather during your visitors' sessions and see how temperature, rain o
 - **Classic tracking code supported**: push the values yourself with `_paq.push(['WeatherReports.setWeather', ...])` if you do not use Tag Manager.
 - Available in 13 languages.
 
-## Requirements
+### Requirements
 
 - Matomo 6.0.0 or later, below 7.0.0
 - PHP 8.1 or later
 - A [WeatherAPI](https://www.weatherapi.com/) API key (the free plan includes 1 million calls per month)
 - Matomo Tag Manager (optional, recommended)
 
-## Installation / Configuration
+### Installation / Configuration
 
 1. Install the plugin from the Matomo Marketplace, or upload it to `plugins/WeatherReports`, then activate it. Matomo adds the `weather_*` columns to the visit and conversion tables.
 2. Save your WeatherAPI key in **Administration > System > General settings > WeatherReports** (super user).
@@ -34,14 +36,14 @@ After a plugin update, republish your Tag Manager container to serve the latest 
 
 Before you deactivate or uninstall the plugin, delete the Weather tags of your containers, or keep the TagManagerExtended plugin active. Matomo Tag Manager cannot display a tag whose template comes from a disabled plugin, the tags list of the container then stays on "Loading data".
 
-## Privacy and data
+### Privacy and data
 
 - The weather is looked up from the visitor's location. Through the Matomo endpoint (recommended), WeatherAPI receives the coordinates found by Matomo geolocation rounded to about 10 km, or the visitor IP without its last byte.
 - When the Weather tag or your own code calls WeatherAPI directly with its own key, WeatherAPI receives the visitor IP.
 - No other third-party service is contacted. Mention WeatherAPI in your privacy policy.
 - The WeatherAPI key is stored in the Matomo plugin settings.
 
-## Need help with Matomo?
+### Need help with Matomo?
 
 Openmost is an official Matomo Implementation Partner. We connect Matomo to external data sources and the rest of your stack with [Matomo integrations](https://openmost.com/matomo/services/integration?utm_source=matomo_marketplace&utm_medium=referral&utm_campaign=services&utm_content=weatherreports) built on official APIs, with documented and privacy-checked data flows.
 

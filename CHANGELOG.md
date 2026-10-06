@@ -6,6 +6,7 @@
 - Shorter Marketplace description that fits the plugin cards, and campaign parameters on the Openmost links of the README.
 - Weather tag help text added in all languages, missing Swedish texts of the units page and settings added
 - Condition report: "Moderate or heavy rain with thunder" and the other thunder texts the API sends are recognised and translated, Mist and Fog (and a few other conditions that shared one word in some languages) keep separate rows
+- README: the plugin description now shows in the Description tab of the Matomo Marketplace.
 
 ### v6.2.1
 
