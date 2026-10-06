@@ -12,6 +12,7 @@
 - Shorter Marketplace description that fits the plugin cards, and campaign parameters on the Openmost links of the README.
 - Weather tag help text added in all languages
 - Smaller package: the Vue build artifacts that Matomo does not load (source maps, CommonJS bundle) and a PHPUnit cache file are no longer shipped.
+- README: the plugin description now shows in the Description tab of the Matomo Marketplace.
 
 ### v5.2.0
 
