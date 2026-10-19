@@ -22,7 +22,7 @@ abstract class Base extends VisitDimension
     protected $paramName = '';
 
     /**
-     * Type passed to Common::getRequestVar: 'string', 'int', 'float'.
+     * Type the parameter is read as: 'string', 'int', 'float'.
      */
     protected $paramType = 'string';
 
@@ -54,10 +54,37 @@ abstract class Base extends VisitDimension
             return null;
         }
 
-        $default = $this->paramType === 'string' ? '' : 0;
-        $value = Common::getRequestVar($this->paramName, $default, $this->paramType, $params);
+        $value = $this->readTypedValue(new \Piwik\Request($params));
 
         return $this->sanitize($value);
+    }
+
+    /**
+     * Invalid numbers read as 0. Texts are stored HTML-escaped, as Matomo stores tracking parameters: reports,
+     * segments and the visitor log decode them on display.
+     */
+    private function readTypedValue(\Piwik\Request $parameters)
+    {
+        if ($this->paramType === 'int') {
+            // Request::getIntegerParameter() would reject whole numbers written "50.0", "050" or "1e1"
+            $value = $parameters->getParameter($this->paramName);
+
+            return is_numeric($value) && (int) $value == $value ? (int) $value : 0;
+        }
+
+        if ($this->paramType === 'float') {
+            // Request::getFloatParameter() would reject a comma as decimal separator, and "21.50" before Matomo 5.10
+            $value = $parameters->getParameter($this->paramName);
+            if (is_int($value) || is_float($value)) {
+                return (float) $value;
+            }
+
+            $value = is_string($value) ? str_replace(',', '.', $value) : '';
+
+            return is_numeric($value) && trim($value) === $value ? (float) $value : 0.0;
+        }
+
+        return Common::sanitizeInputValues($parameters->getStringParameter($this->paramName, ''));
     }
 
     /**
