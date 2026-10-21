@@ -1,7 +1,7 @@
 {
     "name": "WeatherReports",
     "description": "Track the weather of each visit and see how temperature, rain or wind affect traffic and conversions.",
-    "version": "6.2.2",
+    "version": "6.2.3",
     "theme": false,
     "require": {
         "matomo": ">=6.0.0-b1,<7.0.0-b1",
