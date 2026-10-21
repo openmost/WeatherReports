@@ -1,5 +1,9 @@
 ## Changelog
 
+### v5.3.1
+
+- Request parameters are read with `Piwik\Request` instead of the deprecated `Common::getRequestVar`, ready for the next Matomo versions.
+
 ### v5.3.0
 
 > **No action required.** Units already saved for your websites are kept.
